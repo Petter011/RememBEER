@@ -1,0 +1,14 @@
+{
+  "images" : [
+    {
+      "filename" : "spiegelau_craft_beer_barrel_aged_beer_olglas.jpg",
+      "idiom" : "universal",
+      "platform" : "ios",
+      "size" : "1024x1024"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

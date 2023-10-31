@@ -13,7 +13,7 @@ struct PlingStatisticsView: View {
     @State private var plings:[PlingStatistics] = []
     @State private var isButtonTapped = false
     @AppStorage("isBlurOn") private var isBlurOn = false
-    @AppStorage("blurRadius") private var blurRadius = 10.0
+    @AppStorage("blurRadius") private var blurRadius = 1.0
     @State private var isFirstStatisticAdded = UserDefaults.standard.bool(forKey: "isFirstStatisticAdded")
 
 
@@ -38,28 +38,30 @@ struct PlingStatisticsView: View {
                 
                 VStack(spacing: 20) {
                     ScrollView {
-                        ForEach(plings.reversed()) { stat in
-                            VStack {
-                                Text(stat.selectedDate, formatter: dateFormatter)
-                                    .font(.title2)
-                                    .foregroundColor(.orange)
-                                Spacer()
-                                Text(stat.house)
-                                    .font(.title3)
-                                    .foregroundColor(.orange)
-                                Text("Pling: \(stat.amount)")
-                                    .font(.title3)
-                                    .foregroundColor(.orange)
-                                Text("Saldo: \(stat.saldo) kr")
-                                    .font(.title3)
-                                    .foregroundColor(.orange)
+                        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 20){
+                            ForEach(plings.reversed()) { stat in
+                                VStack {
+                                    Text(stat.selectedDate, formatter: dateFormatter)
+                                        .font(.title2)
+                                        .foregroundColor(.orange)
+                                    Spacer()
+                                    Text(stat.house)
+                                        .font(.title3)
+                                        .foregroundColor(.orange)
+                                    Text("Pling: \(stat.amount)")
+                                        .font(.title3)
+                                        .foregroundColor(.orange)
+                                    Text("Saldo: \(stat.saldo) kr")
+                                        .font(.title3)
+                                        .foregroundColor(.orange)
+                                }
+                                .padding()
+                                .frame(maxWidth: 250)
+                                .foregroundColor(.white)
+                                .background(Color.black)
+                                .cornerRadius(25)
+                                .shadow(radius: 5)
                             }
-                            .padding()
-                            .frame(maxWidth: 250)
-                            .foregroundColor(.white)
-                            .background(Color.black)
-                            .cornerRadius(25)
-                            .shadow(radius: 5)
                         }
                     }
                     .padding(.top, 20)
@@ -79,13 +81,13 @@ struct PlingStatisticsView: View {
                             .font(.title3)
                             .shadow(radius: 40)
                     }
-                    .offset(x: isButtonTapped ? -5 : 0, y: 0)
+                    /*.offset(x: isButtonTapped ? -5 : 0, y: 0)
                     .onAppear {
                         withAnimation(.easeInOut(duration: 0.4).repeatForever(autoreverses: true)) {
                             isButtonTapped.toggle()
                         }
-                    }
-                    .padding(.bottom, 20)
+                    }*/
+                    .padding(.bottom, 30)
                     
                     .sheet(isPresented: $showingAddPlingStatisticsView) {
                         AddPlingStatisticsView(onSave: { newStat in

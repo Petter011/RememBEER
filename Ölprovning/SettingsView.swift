@@ -10,17 +10,17 @@ import SwiftUI
 struct SettingsView: View {
     @AppStorage("isDarkModeOn") private var isDarkModeOn = false
     @AppStorage("isBlurOn") private var isBlurOn = false
-    @AppStorage("blurRadius") private var blurRadius = 10.0
+    @AppStorage("blurRadius") private var blurRadius = 5.0
 
     var body: some View {
         NavigationStack {
             Form {
-                Section(header: Text("Utseende")) {
+                Section(header: Text("Appearance")) {
                     Toggle(isOn: $isDarkModeOn, label: {
-                        Text("Mörkt läge")
+                        Text("Dark Mode")
                     })
                     Toggle(isOn: $isBlurOn, label: {
-                        Text("Blur-effekt")
+                        Text("Blur-effect")
                     })
                     if isBlurOn {
                         HStack {
@@ -30,7 +30,7 @@ struct SettingsView: View {
                     }
                 }
             }
-            .navigationTitle("Inställingar")
+            .navigationTitle("Settings")
         }
     }
 }

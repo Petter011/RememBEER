@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-var globalParticipantNames: [String] = UserDefaults.standard.stringArray(forKey: "participantNames") ?? []
+//var globalParticipantNames: [String] = UserDefaults.standard.stringArray(forKey: "participantNames") ?? []
 
 
 @main
@@ -27,23 +27,16 @@ struct O_lprovningApp: App {
 
     var body: some Scene {
         WindowGroup {
-            if #available(iOS 16.0, *) {
+            
                 ContentView()
                     .environmentObject(beerManager)
                     .environmentObject(viewModel)
                     .environment(\.managedObjectContext, dataController.container.viewContext)
                     .preferredColorScheme(isDarkModeOn ? .dark : .light)
-            } else {
-                ContentView15()
-                    .environmentObject(beerManager)
-                    .environmentObject(viewModel)
-                    .environment(\.managedObjectContext, dataController.container.viewContext)
-                    .preferredColorScheme(isDarkModeOn ? .dark : .light)
-            }
         }
     }
     
-    init() {
+    /*init() {
            loadParticipantNames()
        }
 
@@ -51,7 +44,7 @@ struct O_lprovningApp: App {
            if let savedNames = UserDefaults.standard.array(forKey: "participantNames") as? [String] {
                globalParticipantNames = savedNames
            }
-       }
+       }*/
    }
 
 

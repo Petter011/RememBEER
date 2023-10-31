@@ -23,7 +23,7 @@ struct BeerWithImage: Identifiable {
     var beerPoints: Int16
     var beerName: String
     let beerImageData: Data?
-    //var participatens: String
+    var beerNote: String
     
     // Method to convert beerImageData to UIImage
     func getBeerImage() -> UIImage? {

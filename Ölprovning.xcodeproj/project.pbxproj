@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1500AC672AF0F4470007A244 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 1500AC662AF0F4460007A244 /* Localizable.xcstrings */; };
 		151859FA2AA0A3390028E0DC /* ArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151859F92AA0A3390028E0DC /* ArrowView.swift */; };
-		151859FC2AA2363A0028E0DC /* ContentView15.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151859FB2AA2363A0028E0DC /* ContentView15.swift */; };
 		15185A032AA478530028E0DC /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 15185A012AA478530028E0DC /* Model.xcdatamodeld */; };
 		15185A052AA47D530028E0DC /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15185A042AA47D520028E0DC /* DataController.swift */; };
 		151A48272AA739A700E29821 /* ParticipantManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151A48262AA739A700E29821 /* ParticipantManager.swift */; };
@@ -17,6 +17,7 @@
 		152C57CB2A9D2DD9006FD102 /* CreateGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152C57CA2A9D2DD9006FD102 /* CreateGroupView.swift */; };
 		152C57CD2A9D2F5A006FD102 /* JoinGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152C57CC2A9D2F5A006FD102 /* JoinGroupView.swift */; };
 		152C57D02A9DCCBC006FD102 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 152C57CF2A9DCCBC006FD102 /* CodeScanner */; };
+		15901B312AEA341100249A93 /* EditBeerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15901B302AEA341100249A93 /* EditBeerView.swift */; };
 		15A8F6D32A8D1BB700EB3ABE /* O_lprovningApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A8F6D22A8D1BB700EB3ABE /* O_lprovningApp.swift */; };
 		15A8F6D72A8D1BB900EB3ABE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 15A8F6D62A8D1BB900EB3ABE /* Assets.xcassets */; };
 		15A8F6DA2A8D1BB900EB3ABE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 15A8F6D92A8D1BB900EB3ABE /* Preview Assets.xcassets */; };
@@ -59,8 +60,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1500AC662AF0F4460007A244 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		151859F92AA0A3390028E0DC /* ArrowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowView.swift; sourceTree = "<group>"; };
-		151859FB2AA2363A0028E0DC /* ContentView15.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView15.swift; sourceTree = "<group>"; };
 		15185A022AA478530028E0DC /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		15185A042AA47D520028E0DC /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		151A48262AA739A700E29821 /* ParticipantManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantManager.swift; sourceTree = "<group>"; };
@@ -68,6 +69,7 @@
 		152C57C82A9D24CE006FD102 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		152C57CA2A9D2DD9006FD102 /* CreateGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupView.swift; sourceTree = "<group>"; };
 		152C57CC2A9D2F5A006FD102 /* JoinGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinGroupView.swift; sourceTree = "<group>"; };
+		15901B302AEA341100249A93 /* EditBeerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBeerView.swift; sourceTree = "<group>"; };
 		15A8F6CF2A8D1BB700EB3ABE /* Ölprovning.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ölprovning.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		15A8F6D22A8D1BB700EB3ABE /* O_lprovningApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = O_lprovningApp.swift; sourceTree = "<group>"; };
 		15A8F6D62A8D1BB900EB3ABE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -127,8 +129,52 @@
 				15A8F7022A8D1C5F00EB3ABE /* BeerView.swift */,
 				15A8F6FC2A8D1C3300EB3ABE /* AddBeerView.swift */,
 				15A8F70E2A8D383E00EB3ABE /* BeerDetailView.swift */,
+				15901B302AEA341100249A93 /* EditBeerView.swift */,
 			);
 			path = BeerView;
+			sourceTree = "<group>";
+		};
+		15901B2A2AE9385200249A93 /* Statistics */ = {
+			isa = PBXGroup;
+			children = (
+				15A8F7182A93363500EB3ABE /* PlingStatisticsView.swift */,
+				15C7AD522A933E4100DA4D3F /* AddPlingStatisticsView.swift */,
+			);
+			path = Statistics;
+			sourceTree = "<group>";
+		};
+		15901B2B2AE9388200249A93 /* Manager_ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				15A8F7122A8DEA1100EB3ABE /* EnvironmentKeys.swift */,
+				15C7AD542A93F2A100DA4D3F /* PlingStatistics.swift */,
+				151A48262AA739A700E29821 /* ParticipantManager.swift */,
+				15A8F70A2A8D1C7900EB3ABE /* ImagePicker.swift */,
+				15A8F7162A8F4BAC00EB3ABE /* BeerViewModel.swift */,
+				15A8F7142A8F41AD00EB3ABE /* BeerManager.swift */,
+				15A8F7042A8D1C6500EB3ABE /* BeerWithImage.swift */,
+			);
+			path = Manager_ViewModel;
+			sourceTree = "<group>";
+		};
+		15901B2C2AE9392F00249A93 /* MaybeLater */ = {
+			isa = PBXGroup;
+			children = (
+				15A8F7062A8D1C6D00EB3ABE /* CashRegisterView.swift */,
+				151859F92AA0A3390028E0DC /* ArrowView.swift */,
+			);
+			path = MaybeLater;
+			sourceTree = "<group>";
+		};
+		15901B2D2AE9398900249A93 /* GroupView */ = {
+			isa = PBXGroup;
+			children = (
+				152C57C62A9D1415006FD102 /* GroupView.swift */,
+				152C57CA2A9D2DD9006FD102 /* CreateGroupView.swift */,
+				15E394D72AA6182800B418EF /* ParticipatensView.swift */,
+				152C57CC2A9D2F5A006FD102 /* JoinGroupView.swift */,
+			);
+			path = GroupView;
 			sourceTree = "<group>";
 		};
 		15A8F6C62A8D1BB700EB3ABE = {
@@ -159,25 +205,14 @@
 				15A8F6D22A8D1BB700EB3ABE /* O_lprovningApp.swift */,
 				15185A042AA47D520028E0DC /* DataController.swift */,
 				15A8F7082A8D1C7300EB3ABE /* ContentView.swift */,
-				151859FB2AA2363A0028E0DC /* ContentView15.swift */,
+				1500AC662AF0F4460007A244 /* Localizable.xcstrings */,
 				152C57C52A9D12F9006FD102 /* BeerView */,
-				15A8F7122A8DEA1100EB3ABE /* EnvironmentKeys.swift */,
-				151859F92AA0A3390028E0DC /* ArrowView.swift */,
-				15A8F7042A8D1C6500EB3ABE /* BeerWithImage.swift */,
-				15A8F7142A8F41AD00EB3ABE /* BeerManager.swift */,
-				15A8F7162A8F4BAC00EB3ABE /* BeerViewModel.swift */,
-				15A8F70A2A8D1C7900EB3ABE /* ImagePicker.swift */,
-				15A8F7062A8D1C6D00EB3ABE /* CashRegisterView.swift */,
-				15A8F7182A93363500EB3ABE /* PlingStatisticsView.swift */,
-				15C7AD522A933E4100DA4D3F /* AddPlingStatisticsView.swift */,
-				15C7AD542A93F2A100DA4D3F /* PlingStatistics.swift */,
-				15A8F70C2A8D1C8000EB3ABE /* PicturesView.swift */,
-				152C57C62A9D1415006FD102 /* GroupView.swift */,
-				15E394D72AA6182800B418EF /* ParticipatensView.swift */,
-				151A48262AA739A700E29821 /* ParticipantManager.swift */,
-				152C57CC2A9D2F5A006FD102 /* JoinGroupView.swift */,
-				152C57CA2A9D2DD9006FD102 /* CreateGroupView.swift */,
+				15901B2B2AE9388200249A93 /* Manager_ViewModel */,
+				15901B2C2AE9392F00249A93 /* MaybeLater */,
+				15901B2D2AE9398900249A93 /* GroupView */,
+				15901B2A2AE9385200249A93 /* Statistics */,
 				152C57C82A9D24CE006FD102 /* SettingsView.swift */,
+				15A8F70C2A8D1C8000EB3ABE /* PicturesView.swift */,
 				15A8F6D62A8D1BB900EB3ABE /* Assets.xcassets */,
 				15A8F6D82A8D1BB900EB3ABE /* Preview Content */,
 			);
@@ -276,7 +311,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					15A8F6CE2A8D1BB700EB3ABE = {
 						CreatedOnToolsVersion = 14.3.1;
@@ -298,6 +333,7 @@
 			knownRegions = (
 				en,
 				Base,
+				sv,
 			);
 			mainGroup = 15A8F6C62A8D1BB700EB3ABE;
 			packageReferences = (
@@ -321,6 +357,7 @@
 			files = (
 				15F4D2BA2AB3874F00D3B519 /* Launch Screen.storyboard in Resources */,
 				15A8F6DA2A8D1BB900EB3ABE /* Preview Assets.xcassets in Resources */,
+				1500AC672AF0F4470007A244 /* Localizable.xcstrings in Resources */,
 				15A8F6D72A8D1BB900EB3ABE /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -347,7 +384,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				152C57CD2A9D2F5A006FD102 /* JoinGroupView.swift in Sources */,
-				151859FC2AA2363A0028E0DC /* ContentView15.swift in Sources */,
 				15A8F6FD2A8D1C3300EB3ABE /* AddBeerView.swift in Sources */,
 				15C7AD532A933E4100DA4D3F /* AddPlingStatisticsView.swift in Sources */,
 				152C57CB2A9D2DD9006FD102 /* CreateGroupView.swift in Sources */,
@@ -360,6 +396,7 @@
 				15A8F6D32A8D1BB700EB3ABE /* O_lprovningApp.swift in Sources */,
 				15A8F7172A8F4BAC00EB3ABE /* BeerViewModel.swift in Sources */,
 				15C7AD552A93F2A100DA4D3F /* PlingStatistics.swift in Sources */,
+				15901B312AEA341100249A93 /* EditBeerView.swift in Sources */,
 				15E394D82AA6182800B418EF /* ParticipatensView.swift in Sources */,
 				15A8F7052A8D1C6500EB3ABE /* BeerWithImage.swift in Sources */,
 				151859FA2AA0A3390028E0DC /* ArrowView.swift in Sources */,
@@ -411,6 +448,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -443,6 +481,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -471,6 +510,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -503,6 +543,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -537,6 +578,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -552,7 +594,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -572,6 +614,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -587,7 +630,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

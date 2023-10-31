@@ -14,27 +14,30 @@ struct ParticipantsView: View {
     
     var body: some View {
         NavigationStack {
-            VStack {
+            HStack {
                 TextField("Namn", text: $newParticipantName)
                     .textFieldStyle(.roundedBorder)
                     .padding(.top, 20)
-
+                    .padding(.horizontal, 10)
+                
                 Button("Lägg till") {
                     addParticipant()
                 }
                 .padding()
-                .foregroundColor(.white)
-                .background(Color.orange)
-                .frame(maxWidth: 100, maxHeight: 40)
-                .cornerRadius(15)
-                .shadow(radius: 5)
-
+                .padding(.top, 12)
+                .foregroundColor(.orange)
+                /*.background(Color.orange)
+                 .frame(maxWidth: 100, maxHeight: 40)
+                 .cornerRadius(15)
+                 .shadow(radius: 5)*/
+                
                 if !errorMessage.isEmpty {
                     Text(errorMessage)
                         .foregroundColor(.red)
                         .padding(.top, 10)
                 }
-
+            }
+                VStack{
                 List {
                     ForEach(globalParticipantNames, id: \.self) { participant in
                         Text(participant)

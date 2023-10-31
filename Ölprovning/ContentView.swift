@@ -14,9 +14,9 @@ struct ContentView: View {
             Group{
                 BeerView()
                     .tabItem {
-                        Label("ÖL", systemImage: "mug.fill")
+                        Label("Beer", systemImage: "mug.fill")
                     }
-                PicturesView()
+                /*PicturesView()
                     .tabItem{
                         Label("Bilder", systemImage: "photo")
                     }
@@ -27,10 +27,10 @@ struct ContentView: View {
                 GroupView()
                     .tabItem{
                         Label("Lägg Till", systemImage: "person.3.fill")
-                    }
+                    }*/
                 SettingsView()
                     .tabItem{
-                        Label("Inställingar", systemImage: "slider.horizontal.3")
+                        Label("Settings", systemImage: "slider.horizontal.3")
                     }
             }
             .toolbarBackground(.black, for: .tabBar)

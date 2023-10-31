@@ -11,20 +11,20 @@ struct BeerView: View {
     @EnvironmentObject var beerManager: BeerManager
     @EnvironmentObject var viewModel: BeerViewModel
     @Environment(\.managedObjectContext) var moc
-
+    
     @State private var showingAddBeerView = false
     @State private var selectedBeerType: String? = nil
-    @State private var isButtonTapped = false
-
-
+    //@State private var isButtonTapped = false
+    
+    
     @AppStorage("isBlurOn") private var isBlurOn = false
-    @AppStorage("blurRadius") private var blurRadius = 10.0
+    @AppStorage("blurRadius") private var blurRadius = 2.0
     @State private var isFirstBeerAdded = UserDefaults.standard.bool(forKey: "isFirstBeerAdded")
-
-
-
+    
+    
+    
     @FetchRequest(sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)]) var beerTypes: FetchedResults<BeerType>
-
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -32,7 +32,7 @@ struct BeerView: View {
                     .resizable()
                     .edgesIgnoringSafeArea(.top)
                     .blur(radius: isBlurOn ? CGFloat(blurRadius) : 0)
-
+                
                 VStack(spacing: 20) {
                     ScrollView {
                         LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 20) {
@@ -54,33 +54,33 @@ struct BeerView: View {
                         }
                     }
                     .padding(.top, 20)
-
+                    
                     Spacer()
-
+                    
                     Button(action: {
                         showingAddBeerView.toggle()
                     }) {
-                        Text("Lägg till")
+                        Text("Add beer")
                             .padding()
-                            .frame(maxWidth: 120, maxHeight: 40)
+                            .frame(maxWidth: 140, maxHeight: 50)
                             .foregroundColor(.black)
                             .background(Color.orange)
                             .cornerRadius(15)
                             .font(.title3)
                             .shadow(radius: 40)
                     }
-                    .offset(x: isButtonTapped ? -5 : 0, y: 0)
-                    .onAppear {
-                        withAnimation(.easeInOut(duration: 0.4).repeatForever(autoreverses: true)) {
-                            isButtonTapped.toggle()
-                        }
-                    }
-                    .padding(.bottom, 20)
+                    /* .offset(x: isButtonTapped ? -5 : 0, y: 0)
+                     .onAppear {
+                     withAnimation(.easeInOut(duration: 0.4).repeatForever(autoreverses: true)) {
+                     isButtonTapped.toggle()
+                     }
+                     }*/
+                    .padding(.bottom, 30)
                     .sheet(isPresented: $showingAddBeerView) {
                         AddBeerView(
                             onSave: { newBeer, beerType in
                                 beerManager.addBeer(newBeer, for: beerType)
-
+                                
                                 let fetchRequest: NSFetchRequest<BeerType>
                                 fetchRequest = BeerType.fetchRequest()
                                 fetchRequest.predicate = NSPredicate(format: "name LIKE %@", beerType)
@@ -95,23 +95,24 @@ struct BeerView: View {
                                     t.name = beerType
                                     t.beers = []
                                 }
-
+                                
                                 let beer = Beer(context: moc)
                                 beer.id = UUID()
                                 beer.image = newBeer.beerImageData!
                                 beer.name = newBeer.beerName
                                 beer.who = newBeer.beerWho
                                 beer.score = newBeer.beerPoints
+                                beer.note = newBeer.beerNote
                                 beer.beerType = t
                                 try? moc.save()
                                 
-
+                                
                                 // Set isFirstBeerAdded to true
-                                    isFirstBeerAdded = true
-                                    UserDefaults.standard.set(isFirstBeerAdded, forKey: "isFirstBeerAdded")
-
-                                    // Apply blur when the first beer is added
-                                    isBlurOn = true
+                                isFirstBeerAdded = true
+                                UserDefaults.standard.set(isFirstBeerAdded, forKey: "isFirstBeerAdded")
+                                
+                                // Apply blur when the first beer is added
+                                isBlurOn = true
                             },
                             selectedBeerType: $selectedBeerType,
                             isPresented: $showingAddBeerView
@@ -119,11 +120,11 @@ struct BeerView: View {
                     }
                 }
             }
-            .navigationTitle("ÖL")
+            .navigationTitle("Beer")
             
         }
     }
-
+    
     init() {
         UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.orange]
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.orange]

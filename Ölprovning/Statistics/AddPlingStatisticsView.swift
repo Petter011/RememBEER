@@ -7,6 +7,12 @@
 
 import SwiftUI
 
+extension View {
+    func endEditing() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+
 struct AddPlingStatisticsView: View {
     @State private var selectedDate = Date()
     @State private var amount: Int = 0
@@ -16,6 +22,8 @@ struct AddPlingStatisticsView: View {
    
     var onSave: (PlingStatistics) -> Void
     @Binding var isPresented: Bool
+    
+    
     
     
     var body: some View {
@@ -43,7 +51,7 @@ struct AddPlingStatisticsView: View {
                                     Text("\(value)")
                                 }
                             }
-                            .pickerStyle(.wheel) // You can change the style to .menu if you prefer
+                            .pickerStyle(.wheel) 
                         }
                     }
                         
@@ -67,11 +75,10 @@ struct AddPlingStatisticsView: View {
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .keyboardType(.numberPad)
                     
-                        
-                    .padding(.horizontal)
+                        .padding(.horizontal)
                     
-                   
-                  
+                    
+                    
                     Button("Spara") {
                         let newStat = PlingStatistics(house: house, amount: amount, selectedDate: selectedDate, saldo: saldo)
                         onSave(newStat)
@@ -89,6 +96,9 @@ struct AddPlingStatisticsView: View {
                 }
                 .padding()
             }
+        .onTapGesture {
+            self.endEditing()
+        }
             //.navigationBarTitle("Plingstatistik", displayMode: .inline)
         }
     

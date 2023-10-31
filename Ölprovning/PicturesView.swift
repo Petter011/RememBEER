@@ -20,7 +20,7 @@ struct PicturesView: View {
     @State private var isLoadingImages = false
     
     @AppStorage("isBlurOn") private var isBlurOn = false
-    @AppStorage("blurRadius") private var blurRadius = 10.0
+    @AppStorage("blurRadius") private var blurRadius = 1.0
     @State private var isFirstPictureAdded = UserDefaults.standard.bool(forKey: "isFirstPictureAdded")
 
     
@@ -51,6 +51,7 @@ struct PicturesView: View {
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 80, height: 80)
+                                    .cornerRadius(10)
                                     .onTapGesture {
                                         selectedImageIndex = index
                                         isShowingFullScreenImage = true
@@ -76,12 +77,12 @@ struct PicturesView: View {
                     .cornerRadius(15)
                     .font(.title3)
                     .shadow(radius: 40)
-                    .offset(x: isButtonTapped ? -5 : 0, y: 0)
+                    /*.offset(x: isButtonTapped ? -5 : 0, y: 0)
                     .onAppear {
                         withAnimation(.easeInOut(duration: 0.4).repeatForever(autoreverses: true)) {
                             isButtonTapped.toggle()
                         }
-                    }
+                    }*/
                     .sheet(isPresented: $isShowingImagePicker) {
                         ImagePicker(selectedImages: $selectedImages, sourceType: .photoLibrary)
                             .onDisappear {
@@ -98,7 +99,7 @@ struct PicturesView: View {
                                 
                             }
                     }
-                    .padding(.bottom, 20)
+                    .padding(.bottom, 30)
                 }
                 .navigationTitle("Bilder")
             }

@@ -7,6 +7,12 @@ import SwiftUI
 import PhotosUI
 import Foundation
 
+extension View {
+    func endEditing() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+
 struct AddBeerView: View {
     @State private var beerNote: String = ""
     @State private var beerType: String = ""
@@ -137,6 +143,10 @@ struct AddBeerView: View {
             }
             .ignoresSafeArea(.keyboard)
             .navigationBarTitle("Add new beer", displayMode: .inline)
+            .onTapGesture {
+                self.endEditing()
+            }
+            
         }
         
     }

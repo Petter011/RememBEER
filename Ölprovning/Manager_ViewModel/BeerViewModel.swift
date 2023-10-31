@@ -23,4 +23,6 @@ class BeerViewModel: ObservableObject {
     func setSelectedBeer(_ beer: Beer?) {
         selectedBeer = beer
     }
+    
+    
 }

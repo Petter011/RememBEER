@@ -154,17 +154,6 @@
     "Lägg till statistik" : {
 
     },
-    "Name" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Namn"
-          }
-        }
-      }
-    },
     "Name of the beer" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -183,14 +172,7 @@
 
     },
     "Note" : {
-      "localizations" : {
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Anteckning"
-          }
-        }
-      }
+
     },
     "Ny grupp" : {
 

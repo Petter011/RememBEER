@@ -5,7 +5,7 @@
 //  Created by Petter Gustafsson on 2023-08-21.
 //
 
-import SwiftUI
+/*import SwiftUI
 
 struct PlingStatisticsView: View {
     
@@ -107,4 +107,4 @@ struct PlingStatistics_Previews: PreviewProvider {
     static var previews: some View {
         PlingStatisticsView()
     }
-}
+}*/

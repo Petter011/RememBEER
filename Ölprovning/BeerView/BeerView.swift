@@ -14,7 +14,6 @@ struct BeerView: View {
     
     @State private var showingAddBeerView = false
     @State private var selectedBeerType: String? = nil
-    //@State private var isButtonTapped = false
     
     
     @AppStorage("isBlurOn") private var isBlurOn = false
@@ -53,7 +52,23 @@ struct BeerView: View {
                             }
                         }
                     }
-                    .padding(.top, 20)
+                    .safeAreaInset(edge: .top) {
+                        VStack(alignment: .leading, spacing: 8) {
+                            HStack() {
+                                Text("Beer")
+                                    .font(.largeTitle.weight(.bold))
+                                    .foregroundStyle(Color.orange)
+                                Spacer()
+                            }
+                        }
+                        .padding()
+                        .background(LinearGradient(colors: [.black.opacity(0.1), .orange.opacity(0.3)],
+                                                   startPoint: .topLeading, endPoint: .bottomTrailing)
+                            .overlay(.ultraThinMaterial)
+                        )
+                    }
+                    .navigationBarHidden(true)
+                    .tint(.orange)
                     
                     Spacer()
                     
@@ -69,12 +84,6 @@ struct BeerView: View {
                             .font(.title3)
                             .shadow(radius: 40)
                     }
-                    /* .offset(x: isButtonTapped ? -5 : 0, y: 0)
-                     .onAppear {
-                     withAnimation(.easeInOut(duration: 0.4).repeatForever(autoreverses: true)) {
-                     isButtonTapped.toggle()
-                     }
-                     }*/
                     .padding(.bottom, 30)
                     .sheet(isPresented: $showingAddBeerView) {
                         AddBeerView(
@@ -120,16 +129,10 @@ struct BeerView: View {
                     }
                 }
             }
-            .navigationTitle("Beer")
-            
         }
     }
-    
-    init() {
-        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.orange]
-        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.orange]
-    }
 }
+
 
 struct BeerView_Previews: PreviewProvider {
     static var previews: some View {

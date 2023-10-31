@@ -5,7 +5,7 @@
 //  Created by Petter Gustafsson on 2023-08-21.
 //
 
-import SwiftUI
+/*import SwiftUI
 
 extension View {
     func endEditing() {
@@ -105,7 +105,7 @@ struct AddPlingStatisticsView: View {
 }
 
                                
-                    
+              */
                     
                     
 

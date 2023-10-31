@@ -37,7 +37,7 @@ struct BeerDetailView: View {
                         .font(.title)
                         .underline()
                         .foregroundColor(Color.orange)
-                        .padding()
+                        //.padding()
                     
                     ScrollView {
                         LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 20) {
@@ -98,8 +98,7 @@ struct BeerDetailView: View {
                             }
                         }
                     }
-                    
-                    .padding()
+                    Spacer()
                 }
             }
             .onAppear {
@@ -115,33 +114,40 @@ struct BeerDetailView: View {
                         .foregroundColor(Color.orange)
                         .padding(.top)
                         .underline()
+                        .padding(15)
+                    HStack{
+                        Text("Name: \(beer.name!)")
+                            //.font(.title2)
+                            .bold()
+                        //.foregroundColor(Color.orange)
+                            .padding(10)
+                        
+                        Text(" Points: \(beer.score)")
+                            .bold()
+                        //.foregroundColor(Color.orange)
+                            .padding(10)
+                    }
+                    Text("Note")
+                        .underline()
+                    Text(beer.note!)
+                        //.bold()
+                        //.foregroundColor(Color.orange)
+                        .padding(.bottom)
                         .padding(10)
                     
-                    Text(beer.name!)
-                        .font(.title2)
-                        .bold()
-                        .foregroundColor(Color.orange)
-                        
-                    
-                    Text(beer.note!)
-                        .bold()
-                        .foregroundColor(Color.orange)
-                    
-                    Text("\(beer.score) Points")
-                        .bold()
-                        .foregroundColor(Color.orange)
-                        .padding(.bottom)
                     
                     if let image = beer.getBeerImage() {
                         Image(uiImage: image)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .edgesIgnoringSafeArea(.top)
+                            .cornerRadius(15)
                     }
                 }
             }
         }
     }
 }
+
 
 

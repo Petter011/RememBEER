@@ -55,6 +55,7 @@ struct BeerView: View {
                     .safeAreaInset(edge: .top) {
                         VStack(alignment: .leading, spacing: 8) {
                             HStack() {
+                                Spacer()
                                 Text("Beer")
                                     .font(.largeTitle.weight(.bold))
                                     .foregroundStyle(Color.orange)
@@ -68,9 +69,6 @@ struct BeerView: View {
                         )
                     }
                     .navigationBarHidden(true)
-                    .tint(.orange)
-                    
-                    Spacer()
                     
                     Button(action: {
                         showingAddBeerView.toggle()

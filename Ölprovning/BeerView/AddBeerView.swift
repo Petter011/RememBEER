@@ -19,11 +19,12 @@ struct AddBeerView: View {
     @State private var beerWho: String = ""
     @State private var beerName: String = ""
     @State private var beerPoints: Int16 = 0
-    @State private var beerPointsOptions: [Int16] = Array(0...100)
+    @State private var beerPointsOptions: [Int16] = Array(0...10)
     @State private var beerImageData: Data?
     @State private var selectedImages: [UIImage] = []
     @State private var showingImagePicker = false
-    @State private var globalParticipantNames: [String] = UserDefaults.standard.stringArray(forKey: "participantNames") ?? []
+    @State private var showError = false
+
     
     let onSave: (BeerWithImage, String) -> Void
     
@@ -34,13 +35,10 @@ struct AddBeerView: View {
         NavigationStack {
             VStack(spacing: 20) {
                 Group {
-                    
-                    
                     TextField("Which type of beer", text: $beerType)
                         .textFieldStyle(.roundedBorder)
                         .keyboardType(.default)
                         .onSubmit {
-                            
                             beerType = beerType.trimmingCharacters(in: .whitespacesAndNewlines)
                         }
                     
@@ -53,47 +51,22 @@ struct AddBeerView: View {
                         .keyboardType(.default)
                         .lineLimit(3, reservesSpace: true)
                     
-                    
-                    /*VStack{
-                        VStack(alignment: .center) {
-                            Text("Vems öl")
-                                .bold()
-                                .foregroundColor(Color.black)
-                                .underline()
-                            
-                            
-                            Picker("Vems öl", selection: $beerWho) {
-                                ForEach(globalParticipantNames, id: \.self) {
-                                    Text($0)
-                                }
-                            }
-                            .pickerStyle(.wheel)
-                            
-                        }
-                    }*/
-                    
-                    
                     VStack{
                         VStack(alignment: .center) {
-                            Text("Points (0-100)")
+                            Text("Points (0-10)")
                                 .bold()
                                 .foregroundColor(Color.black)
                                 .underline()
-                            Picker("Points (0-100)", selection: $beerPoints) {
+                            Picker("Points (0-10)", selection: $beerPoints) {
                                 ForEach(beerPointsOptions, id: \.self) {
-                                    
                                         Text("\($0)")
-                                    
                                 }
                             }
-                            
                             .pickerStyle(.wheel) 
                             .onAppear {
-                                // Set the initial value to 51
-                                beerPoints = 50
+                                beerPoints = 5
                             }
                         }
-                        
                     }
                 }
                 .padding(.horizontal)
@@ -105,7 +78,7 @@ struct AddBeerView: View {
                                 .resizable()
                                 .scaledToFit()
                                 .frame(maxWidth: .infinity, alignment: .center)
-                            
+                                .cornerRadius(10)
                         }
                     }
                 }
@@ -121,16 +94,20 @@ struct AddBeerView: View {
                 .cornerRadius(20)
                 .shadow(radius: 40)
                 .sheet(isPresented: $showingImagePicker) {
-                    ImagePicker(selectedImages: $selectedImages, sourceType: .camera) // Pass the array binding
+                    ImagePicker(selectedImages: $selectedImages, sourceType: .camera)
                 }
                 
                 Button("Save") {
-                    if let firstImage = selectedImages.first,
-                       let imageData = firstImage.jpegData(compressionQuality: 1.0) {
-                        let newBeer = BeerWithImage(beerType: beerType, beerWho: beerWho, beerPoints: beerPoints, beerName: beerName, beerImageData: imageData, beerNote: beerNote)
-                        
-                        onSave(newBeer, beerType) // Call the onSave closure to save the new beer
-                        isPresented = false
+                    if selectedImages.isEmpty {
+                        showError = true
+                    } else {
+                        if let firstImage = selectedImages.first,
+                           let imageData = firstImage.jpegData(compressionQuality: 1.0) {
+                            let newBeer = BeerWithImage(beerType: beerType, beerWho: beerWho, beerPoints: beerPoints, beerName: beerName, beerImageData: imageData, beerNote: beerNote)
+                            
+                            onSave(newBeer, beerType)
+                            isPresented = false
+                        }
                     }
                 }
                 .font(.headline)
@@ -146,11 +123,15 @@ struct AddBeerView: View {
             .onTapGesture {
                 self.endEditing()
             }
-            
+            .alert(isPresented: $showError) {
+                Alert(
+                    title: Text("Error"),
+                    message: Text("Please take a picture before saving."),
+                    dismissButton: .default(Text("OK"))
+                )
+            }
         }
-        
     }
-    
 }
 
 

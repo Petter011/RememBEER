@@ -37,7 +37,6 @@ struct BeerDetailView: View {
                         .font(.title)
                         .underline()
                         .foregroundColor(Color.orange)
-                        //.padding()
                     
                     ScrollView {
                         LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 20) {
@@ -64,36 +63,37 @@ struct BeerDetailView: View {
                                                 }
                                                       )
                                     )
-                                    .contextMenu { 
-                                        Button {
-                                            print("Edit button pressed")
-                                            viewModel.setSelectedBeer(beer) 
-                                            isShowingEditView = true // Present the edit view
-                                            selectedBeer = beer
-                                        } label:{
-                                            Label("Edit", systemImage: "pencil.and.scribble")
-                                        }
-                                        .sheet(isPresented: $isShowingEditView) {
-                                            // Present the edit view here
-                                            EditBeerView(isShowingEditView: $isShowingEditView, viewModel: viewModel, beer: beer)
-                                        }
-                                        Button(role: .destructive) {
-                                            // Check if a beer is selected
-                                            guard let beer = selectedBeer else {
-                                                print("No beer selected, do nothing")
-                                                return
+                                    .contextMenu {
+                                        NavigationStack{
+                                            Button {
+                                                viewModel.setSelectedBeer(nil)
+                                                isShowingEditView = true // Present the edit view
+                                                //selectedBeer = beer
+                                                print("Edit button pressed")
+                                            } label:{
+                                                Label("Edit", systemImage: "pencil.and.scribble")
                                             }
-                                            
-                                            
-                                            do {
-                                                moc.delete(beer)
-                                                try? moc.save()
-                                                selectedBeer = nil
-                                            } 
-                                            
-                                        } label:{
-                                            Label("Delete", systemImage: "trash")
+                                            .sheet(isPresented: $isShowingEditView) {
+                                                // Present the edit view here
+                                                EditBeerView(isShowingEditView: $isShowingEditView, viewModel: viewModel, beer: beer)
+                                            }
+                                            Button(role: .destructive) {
+                                                // Check if a beer is selected
+                                                guard let beer = selectedBeer else {
+                                                    print("No beer selected, do nothing")
+                                                    return
+                                                }
+                                                do {
+                                                    moc.delete(beer)
+                                                    try? moc.save()
+                                                    selectedBeer = nil
+                                                }
+                                                
+                                            } label:{
+                                                Label("Delete", systemImage: "trash")
+                                            }
                                         }
+                                        
                                     }
                             }
                         }
@@ -108,33 +108,62 @@ struct BeerDetailView: View {
         .sheet(isPresented: $isShowingFullScreenImage) {
             if let beer = selectedBeer {
                 VStack {
+                    Capsule()
+                            .fill(Color.secondary)
+                            .opacity(0.5)
+                            .frame(width: 35, height: 5)
+                            .padding(6)
                     Text(beer.beerType!.name!)
                         .font(.title)
                         .bold()
                         .foregroundColor(Color.orange)
                         .padding(.top)
                         .underline()
-                        .padding(15)
+                        //.padding(15)
                     HStack{
-                        Text("Name: \(beer.name!)")
-                            //.font(.title2)
-                            .bold()
-                        //.foregroundColor(Color.orange)
-                            .padding(10)
-                        
-                        Text(" Points: \(beer.score)")
-                            .bold()
-                        //.foregroundColor(Color.orange)
-                            .padding(10)
+                        Image(systemName: "mug.fill")
+                            .symbolRenderingMode(.palette)
+                                .foregroundStyle(
+                                    .linearGradient(colors: [.orange, .black], startPoint: .top, endPoint: .bottomTrailing)
+                                )
+                                .font(.system(size: 40))
+                        Text("\(beer.name!)")
+                        .bold()
+                        .font(.title2)
                     }
-                    Text("Note")
-                        .underline()
-                    Text(beer.note!)
-                        //.bold()
-                        //.foregroundColor(Color.orange)
-                        .padding(.bottom)
-                        .padding(10)
-                    
+                    .padding(.top,10)
+                    HStack{
+                        Image(systemName: "medal.fill")
+                            .symbolRenderingMode(.palette)
+                                .foregroundStyle(
+                                    .linearGradient(colors: [.orange, .black], startPoint: .top, endPoint: .bottomTrailing)
+                                )
+                                .font(.system(size: 40))
+                        Text("\(beer.score)")
+                            .bold()
+                            .font(.title2)
+                    }
+                    .padding(.top,10)
+                    /*HStack{
+                        Image(systemName: "list.clipboard.fill")
+                            .symbolRenderingMode(.palette)
+                                .foregroundStyle(
+                                    .linearGradient(colors: [.orange, .black], startPoint: .top, endPoint: .bottomTrailing)
+                                )
+                                .font(.system(size: 30))
+                        Text("Note")
+                            .underline()
+                    }
+                    .padding(.top,10)*/
+                    VStack{
+                        Text(beer.note!)
+                            .padding(.bottom)
+                    }
+                    .frame(width: 250, height: 100)
+                    .shadow(radius: 10)
+                    .border(Color.black, width: 3)
+                    .cornerRadius(15)
+                    .padding(10)
                     
                     if let image = beer.getBeerImage() {
                         Image(uiImage: image)

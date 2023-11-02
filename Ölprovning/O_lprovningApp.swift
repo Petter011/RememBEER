@@ -7,9 +7,6 @@
 
 import SwiftUI
 
-//var globalParticipantNames: [String] = UserDefaults.standard.stringArray(forKey: "participantNames") ?? []
-
-
 @main
 struct O_lprovningApp: App {
 
@@ -24,27 +21,17 @@ struct O_lprovningApp: App {
 
     
    
-
+    
     var body: some Scene {
         WindowGroup {
             
-                ContentView()
-                    .environmentObject(beerManager)
-                    .environmentObject(viewModel)
-                    .environment(\.managedObjectContext, dataController.container.viewContext)
-                    .preferredColorScheme(isDarkModeOn ? .dark : .light)
+            ContentView()
+                .environmentObject(beerManager)
+                .environmentObject(viewModel)
+                .environment(\.managedObjectContext, dataController.container.viewContext)
+                .preferredColorScheme(isDarkModeOn ? .dark : .light)
         }
     }
-    
-    /*init() {
-           loadParticipantNames()
-       }
-
-       func loadParticipantNames() {
-           if let savedNames = UserDefaults.standard.array(forKey: "participantNames") as? [String] {
-               globalParticipantNames = savedNames
-           }
-       }*/
-   }
+}
 
 

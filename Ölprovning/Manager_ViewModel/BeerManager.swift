@@ -11,7 +11,7 @@ import CoreData
 
 class BeerManager: ObservableObject {
     @Published var beers: [String: [BeerWithImage]] = [:]
-    //@Published var selectedBeer: Beer? = nil
+    @Published var selectedBeer: Beer? = nil
 
     func addBeer(_ beer: BeerWithImage, for type: String) {
         if beers[type] == nil {
@@ -20,8 +20,8 @@ class BeerManager: ObservableObject {
         beers[type]?.append(beer)
     }
     
-    // Function to set the selected beer
-    /*func setSelectedBeer(_ beer: Beer?) {
+   /* // Function to set the selected beer
+    func setSelectedBeer(_ beer: Beer?) {
         selectedBeer = beer
     }
     // Function to delete a beer
@@ -31,7 +31,7 @@ class BeerManager: ObservableObject {
                beers[type]?.remove(at: index)
 
                // Delete the beer from Core Data
-               context.delete(beer)
+               //context.delete(beer)
            }
        }*/
 }

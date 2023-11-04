@@ -11,18 +11,28 @@ struct EditBeerView: View {
     
     @Binding var isShowingEditView: Bool
     @Environment(\.managedObjectContext) private var moc
-    
+    @EnvironmentObject var beerManager: BeerManager
     @ObservedObject var viewModel: BeerViewModel
     var beer: Beer // Pass the selected beer to edit
     @State private var beerPointsOptions: [Int16] = Array(0...10)
     @State private var showingImagePicker = false
-    @State private var beerImageData: Data?
-    @State private var selectedImages: [UIImage] = []
+    @State private var editedBeerImageData: Data?
+    @State private var editedselectedImages: [UIImage] = []
     @State private var editedBeerName: String = ""
-    @State private var editedWho: String = ""
-    @State private var editedPoints: Int16 = 0
+    @State private var editedBeerPoints: Int16 = 0
     @State private var editedBeerNote: String = ""
     @State private var editedBeerType: String = ""
+    @State private var showError = false
+    
+    init(isShowingEditView: Binding<Bool>, viewModel: BeerViewModel, beer: Beer) {
+        _isShowingEditView = isShowingEditView
+        self.viewModel = viewModel
+        self.beer = beer
+        _editedBeerName = State(initialValue: beer.name!) // Initialize with current value
+        _editedBeerPoints = State(initialValue: beer.score) // Initialize with current value
+        _editedBeerNote = State(initialValue: beer.note!)
+    }
+
     
     
     var body: some View {
@@ -31,14 +41,13 @@ struct EditBeerView: View {
                 Group {
                     
                     
-                    /*TextField("Vilken sort", text: $editedBeerType)
+                    /*TextField("Which type of beer", text: $editedBeerType)
                         .textFieldStyle(.roundedBorder)
                         .keyboardType(.default)*/
                     
-                    TextField("Name of the beer", text: $editedBeerName)
+                    TextField("Name of the beer?", text: $editedBeerName)
                         .textFieldStyle(.roundedBorder)
                         .keyboardType(.default)
-                    
                     TextField("Add a Note", text: $editedBeerNote, axis: .vertical)
                         .textFieldStyle(.roundedBorder)
                         .keyboardType(.default)
@@ -50,7 +59,7 @@ struct EditBeerView: View {
                                 .bold()
                                 .foregroundColor(Color.black)
                                 .underline()
-                            Picker("Points (0-10)", selection: $editedPoints) {
+                            Picker("Points (0-10)", selection: $editedBeerPoints) {
                                 ForEach(beerPointsOptions, id: \.self) {
                                     Text("\($0)")
                                     
@@ -59,7 +68,7 @@ struct EditBeerView: View {
                             
                             .pickerStyle(.wheel)
                             .onAppear {
-                                editedPoints = 5
+                                editedBeerPoints = beer.score
                             }
                         }
                         
@@ -67,17 +76,18 @@ struct EditBeerView: View {
                 }
                 .padding(.horizontal)
                 
-                if !selectedImages.isEmpty {
+                /*if !editedselectedImages.isEmpty {
                     VStack(spacing: 100) {
-                        ForEach(selectedImages, id: \.self) { image in
+                        ForEach(editedselectedImages, id: \.self) { image in
                             Image(uiImage: image)
                                 .resizable()
                                 .scaledToFit()
+                                .cornerRadius(10)
                                 .frame(maxWidth: .infinity, alignment: .center)
                             
                         }
                     }
-                }
+                }*/
                 
                 /*Button("Take a picture") {
                     showingImagePicker.toggle()
@@ -90,13 +100,13 @@ struct EditBeerView: View {
                 .cornerRadius(20)
                 .shadow(radius: 40)
                 .sheet(isPresented: $showingImagePicker) {
-                    ImagePicker(selectedImages: $selectedImages, sourceType: .camera) // Pass the array binding
+                    ImagePicker(selectedImages: $editedselectedImages, sourceType: .camera) // Pass the array binding
                 }*/
                 
                 Button("Save") {
                     // Update the selected beer's attributes with the edited values
                     beer.name = editedBeerName
-                    beer.score = editedPoints
+                    beer.score = editedBeerPoints
                     beer.note = editedBeerNote
 
                     // Save the changes
@@ -120,6 +130,13 @@ struct EditBeerView: View {
             .navigationBarTitle("Edit beer", displayMode: .inline)
             .onTapGesture {
                 self.endEditing()
+            }
+            .alert(isPresented: $showError) {
+                Alert(
+                    title: Text("Error"),
+                    message: Text("Please take a picture before saving."),
+                    dismissButton: .default(Text("OK"))
+                )
             }
         }
     }

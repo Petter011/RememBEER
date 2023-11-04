@@ -9,8 +9,6 @@ import SwiftUI
 
 @main
 struct O_lprovningApp: App {
-
-
     @StateObject private var dataController = DataController()
     @StateObject private var beerManager = BeerManager()
     @StateObject private var viewModel = BeerViewModel()
@@ -19,12 +17,8 @@ struct O_lprovningApp: App {
     @AppStorage("blurRadius") private var blurRadius = 10.0
     @AppStorage("isFirstBeerAdded") private var isFirstBeerAdded = false
 
-    
-   
-    
     var body: some Scene {
         WindowGroup {
-            
             ContentView()
                 .environmentObject(beerManager)
                 .environmentObject(viewModel)

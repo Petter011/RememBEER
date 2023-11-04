@@ -141,17 +141,7 @@
         }
       }
     },
-    "Hello, World!" : {
-      "localizations" : {
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "hej"
-          }
-        }
-      }
-    },
-    "Name of the beer" : {
+    "Name of the beer?" : {
       "localizations" : {
         "sv" : {
           "stringUnit" : {
@@ -201,6 +191,12 @@
         }
       }
     },
+    "Searching for %@" : {
+
+    },
+    "Searching: %@" : {
+
+    },
     "Settings" : {
       "localizations" : {
         "sv" : {
@@ -221,12 +217,22 @@
         }
       }
     },
-    "Which type of beer" : {
+    "Which type of beer? e.g. IPA, APA" : {
       "localizations" : {
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vilken sorts öl"
+            "value" : "Vilken öl sort? t.ex IPA, APA"
+          }
+        }
+      }
+    },
+    "You need to enter both beer type and take a picture before saving." : {
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Du måste fylla i öl typen och ta ett kort innan du sparar."
           }
         }
       }

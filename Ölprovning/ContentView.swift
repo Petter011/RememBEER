@@ -16,20 +16,12 @@ struct ContentView: View {
                     .tabItem {
                         Label("Beer", systemImage: "mug.fill")
                     }
-                /*PicturesView()
-                    .tabItem{
-                        Label("Bilder", systemImage: "photo")
-                    }
-                PlingStatisticsView()
-                    .tabItem{
-                        Label("Statistik", systemImage: "rectangle.and.pencil.and.ellipsis")
-                    }
-                GroupView()
-                    .tabItem{
-                        Label("Lägg Till", systemImage: "person.3.fill")
+                /*TheBestView()
+                    .tabItem {
+                        Label("The Best", systemImage: "medal.fill")
                     }*/
                 SettingsView()
-                    .tabItem{
+                    .tabItem {
                         Label("Settings", systemImage: "slider.horizontal.3")
                     }
             }

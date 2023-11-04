@@ -41,7 +41,6 @@ struct BeerDetailView: View {
                     ScrollView {
                         LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 20) {
                             ForEach(beerType.beers?.allObjects as? [Beer] ?? []) { beer in
-                                // Use a combined gesture for both tap and long-press
                                 Image(uiImage: beer.getBeerImage() ?? UIImage(systemName: "photo")!)
                                     .resizable()
                                     .scaledToFit()
@@ -64,18 +63,13 @@ struct BeerDetailView: View {
                                                       )
                                     )
                                     .contextMenu {
-                                        NavigationStack{
                                             Button {
-                                                viewModel.setSelectedBeer(nil)
-                                                isShowingEditView = true // Present the edit view
-                                                //selectedBeer = beer
+                                                viewModel.setSelectedBeer(beer)
+                                                isShowingEditView = true 
+                                                selectedBeer = beer
                                                 print("Edit button pressed")
                                             } label:{
                                                 Label("Edit", systemImage: "pencil.and.scribble")
-                                            }
-                                            .sheet(isPresented: $isShowingEditView) {
-                                                // Present the edit view here
-                                                EditBeerView(isShowingEditView: $isShowingEditView, viewModel: viewModel, beer: beer)
                                             }
                                             Button(role: .destructive) {
                                                 // Check if a beer is selected
@@ -93,7 +87,10 @@ struct BeerDetailView: View {
                                                 Label("Delete", systemImage: "trash")
                                             }
                                         }
-                                        
+                                    .sheet(isPresented: $isShowingEditView) {
+                                        if let beer = selectedBeer {
+                                            EditBeerView(isShowingEditView: $isShowingEditView, viewModel: viewModel, beer: selectedBeer!)
+                                        }
                                     }
                             }
                         }

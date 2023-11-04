@@ -16,7 +16,6 @@ extension View {
 struct AddBeerView: View {
     @State private var beerNote: String = ""
     @State private var beerType: String = ""
-    @State private var beerWho: String = ""
     @State private var beerName: String = ""
     @State private var beerPoints: Int16 = 0
     @State private var beerPointsOptions: [Int16] = Array(0...10)
@@ -35,14 +34,14 @@ struct AddBeerView: View {
         NavigationStack {
             VStack(spacing: 20) {
                 Group {
-                    TextField("Which type of beer", text: $beerType)
+                    TextField("Which type of beer? e.g. IPA, APA", text: $beerType)
                         .textFieldStyle(.roundedBorder)
                         .keyboardType(.default)
-                        .onSubmit {
+                        .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardDidHideNotification)) { _ in                            
                             beerType = beerType.trimmingCharacters(in: .whitespacesAndNewlines)
                         }
                     
-                    TextField("Name of the beer", text: $beerName)
+                    TextField("Name of the beer?", text: $beerName)
                         .textFieldStyle(.roundedBorder)
                         .keyboardType(.default)
                     
@@ -71,16 +70,12 @@ struct AddBeerView: View {
                 }
                 .padding(.horizontal)
                 
-                if !selectedImages.isEmpty {
-                    VStack(spacing: 100) {
-                        ForEach(selectedImages, id: \.self) { image in
-                            Image(uiImage: image)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(maxWidth: .infinity, alignment: .center)
-                                .cornerRadius(10)
-                        }
-                    }
+                if let selectedImage = selectedImages.last {
+                    Image(uiImage: selectedImage)
+                        .resizable()
+                        .scaledToFit()
+                        .cornerRadius(10)
+                        .frame(maxWidth: .infinity, alignment: .center)
                 }
                 
                 Button("Take a picture") {
@@ -88,22 +83,25 @@ struct AddBeerView: View {
                 }
                 .font(.headline)
                 .foregroundColor(.white)
-                .frame(maxWidth: 140)
-                .padding()
-                .background(Color.orange)
+                .frame(maxWidth: 150, maxHeight: 50)
+                .background(.linearGradient(colors: [.orange, .black], startPoint: .top, endPoint: .bottomTrailing))
                 .cornerRadius(20)
-                .shadow(radius: 40)
+                .shadow(color: .orange , radius: 5, y: 3)
                 .sheet(isPresented: $showingImagePicker) {
                     ImagePicker(selectedImages: $selectedImages, sourceType: .camera)
                 }
+                Spacer()
                 
                 Button("Save") {
                     if selectedImages.isEmpty {
                         showError = true
+                    } 
+                    if beerType.isEmpty {
+                        showError = true
                     } else {
-                        if let firstImage = selectedImages.first,
-                           let imageData = firstImage.jpegData(compressionQuality: 1.0) {
-                            let newBeer = BeerWithImage(beerType: beerType, beerWho: beerWho, beerPoints: beerPoints, beerName: beerName, beerImageData: imageData, beerNote: beerNote)
+                        if let lastImage = selectedImages.last,
+                           let imageData = lastImage.jpegData(compressionQuality: 1.0) {
+                            let newBeer = BeerWithImage(beerType: beerType, beerPoints: beerPoints, beerName: beerName, beerImageData: imageData, beerNote: beerNote)
                             
                             onSave(newBeer, beerType)
                             isPresented = false
@@ -112,11 +110,10 @@ struct AddBeerView: View {
                 }
                 .font(.headline)
                 .foregroundColor(.black)
-                .frame(maxWidth: 140)
-                .padding()
+                .frame(maxWidth: 150, maxHeight: 60)
                 .background(Color.orange)
-                .cornerRadius(20)
-                .shadow(radius: 40)
+                .cornerRadius(40)
+                .shadow(color: .orange , radius: 5, y: 3)
             }
             .ignoresSafeArea(.keyboard)
             .navigationBarTitle("Add new beer", displayMode: .inline)
@@ -126,7 +123,7 @@ struct AddBeerView: View {
             .alert(isPresented: $showError) {
                 Alert(
                     title: Text("Error"),
-                    message: Text("Please take a picture before saving."),
+                    message: Text("You need to enter both beer type and take a picture before saving."),
                     dismissButton: .default(Text("OK"))
                 )
             }

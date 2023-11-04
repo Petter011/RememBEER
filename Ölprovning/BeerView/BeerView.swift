@@ -15,12 +15,9 @@ struct BeerView: View {
     @State private var showingAddBeerView = false
     @State private var selectedBeerType: String? = nil
     
-    
     @AppStorage("isBlurOn") private var isBlurOn = false
     @AppStorage("blurRadius") private var blurRadius = 2.0
     @State private var isFirstBeerAdded = UserDefaults.standard.bool(forKey: "isFirstBeerAdded")
-    
-    
     
     @FetchRequest(sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)]) var beerTypes: FetchedResults<BeerType>
     
@@ -53,7 +50,7 @@ struct BeerView: View {
                         }
                     }
                     .safeAreaInset(edge: .top) {
-                        VStack(alignment: .leading, spacing: 8) {
+                        VStack() {
                             HStack() {
                                 Spacer()
                                 Text("Beer")
@@ -63,7 +60,7 @@ struct BeerView: View {
                             }
                         }
                         .padding()
-                        .background(LinearGradient(colors: [.black.opacity(0.1), .orange.opacity(0.3)],
+                        .background(LinearGradient(colors: [.black.opacity(0.1), .orange.opacity(0.6)],
                                                    startPoint: .topLeading, endPoint: .bottomTrailing)
                             .overlay(.ultraThinMaterial)
                         )
@@ -76,12 +73,12 @@ struct BeerView: View {
                         Text("Add beer")
                             .padding()
                             .frame(maxWidth: 140, maxHeight: 50)
-                            .foregroundColor(.black)
-                            .background(Color.orange)
+                            .foregroundColor(.white)
+                            .background(.linearGradient(colors: [.orange, .black], startPoint: .top, endPoint: .bottomTrailing))
                             .cornerRadius(15)
                             .font(.title3)
-                            .shadow(radius: 40)
                     }
+                    .shadow(color: .orange , radius: 25, y: 5)
                     .padding(.bottom, 30)
                     .sheet(isPresented: $showingAddBeerView) {
                         AddBeerView(
@@ -107,7 +104,6 @@ struct BeerView: View {
                                 beer.id = UUID()
                                 beer.image = newBeer.beerImageData!
                                 beer.name = newBeer.beerName
-                                beer.who = newBeer.beerWho
                                 beer.score = newBeer.beerPoints
                                 beer.note = newBeer.beerNote
                                 beer.beerType = t
@@ -118,7 +114,6 @@ struct BeerView: View {
                                 isFirstBeerAdded = true
                                 UserDefaults.standard.set(isFirstBeerAdded, forKey: "isFirstBeerAdded")
                                 
-                                // Apply blur when the first beer is added
                                 isBlurOn = true
                             },
                             selectedBeerType: $selectedBeerType,
@@ -128,12 +123,5 @@ struct BeerView: View {
                 }
             }
         }
-    }
-}
-
-
-struct BeerView_Previews: PreviewProvider {
-    static var previews: some View {
-        BeerView()
     }
 }

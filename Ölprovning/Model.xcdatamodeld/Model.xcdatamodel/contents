@@ -12,7 +12,7 @@
     <entity name="BeerType" representedClassName="BeerType" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="beers" toMany="YES" deletionRule="Nullify" destinationEntity="Beer" inverseName="beerType" inverseEntity="Beer"/>
+        <relationship name="beers" toMany="YES" deletionRule="Cascade" destinationEntity="Beer" inverseName="beerType" inverseEntity="Beer"/>
     </entity>
     <entity name="Picture" representedClassName="Picture" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>

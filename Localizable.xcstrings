@@ -61,6 +61,16 @@
         }
       }
     },
+    "Are you sure you want to delete this beer?" : {
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Är du säker på att du vill radera ölen?"
+          }
+        }
+      }
+    },
     "Beer" : {
       "localizations" : {
         "sv" : {
@@ -87,6 +97,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Blur-radie:"
+          }
+        }
+      }
+    },
+    "Confirm Delete" : {
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bekräfta"
           }
         }
       }
@@ -141,12 +161,23 @@
         }
       }
     },
+    "Give RememBEER permission to open your camera" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ge RememBEER tillåtelse att öppna din kamera"
+          }
+        }
+      }
+    },
     "Name of the beer?" : {
       "localizations" : {
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Namn på ölen"
+            "value" : "Namn på ölen?"
           }
         }
       }
@@ -157,16 +188,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "OK"
-          }
-        }
-      }
-    },
-    "Please take a picture before saving." : {
-      "localizations" : {
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Var god ta ett kort på ölen innan du sparar!"
           }
         }
       }
@@ -190,12 +211,6 @@
           }
         }
       }
-    },
-    "Searching for %@" : {
-
-    },
-    "Searching: %@" : {
-
     },
     "Settings" : {
       "localizations" : {
@@ -222,12 +237,12 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vilken öl sort? t.ex IPA, APA"
+            "value" : "Vilken sorts öl? t.ex IPA, APA"
           }
         }
       }
     },
-    "You need to enter both beer type and take a picture before saving." : {
+    "You need to enter beer type and take a picture before saving." : {
       "localizations" : {
         "sv" : {
           "stringUnit" : {

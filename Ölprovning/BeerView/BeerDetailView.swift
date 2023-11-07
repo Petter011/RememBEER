@@ -15,12 +15,13 @@ struct BeerDetailView: View {
     @State private var isShowingFullScreenImage = false
     @State private var selectedBeer: Beer? // New state variable for selected beer
     @State private var isShowingEditView = false
+    @State private var showAlert = false
     
     @AppStorage("isBlurOn") private var isBlurOn = false
     @AppStorage("blurRadius") private var blurRadius = 2.0
     @State private var isFirstBeerAdded = UserDefaults.standard.bool(forKey: "isFirstBeerAdded")
     @Environment(\.managedObjectContext) var moc
-
+    @Environment(\.presentationMode) var presentationMode
     
     
     var body: some View {
@@ -31,10 +32,10 @@ struct BeerDetailView: View {
                     .edgesIgnoringSafeArea(.top)
                     .blur(radius: isBlurOn ? CGFloat(blurRadius) : 0)
                 
-                
                 VStack {
                     Text(beerType.name!)
                         .font(.title)
+                        .fontWeight(.bold)
                         .underline()
                         .foregroundColor(Color.orange)
                     
@@ -63,30 +64,20 @@ struct BeerDetailView: View {
                                                       )
                                     )
                                     .contextMenu {
-                                            Button {
-                                                viewModel.setSelectedBeer(beer)
-                                                isShowingEditView = true 
-                                                selectedBeer = beer
-                                                print("Edit button pressed")
-                                            } label:{
-                                                Label("Edit", systemImage: "pencil.and.scribble")
-                                            }
-                                            Button(role: .destructive) {
-                                                // Check if a beer is selected
-                                                guard let beer = selectedBeer else {
-                                                    print("No beer selected, do nothing")
-                                                    return
-                                                }
-                                                do {
-                                                    moc.delete(beer)
-                                                    try? moc.save()
-                                                    selectedBeer = nil
-                                                }
-                                                
-                                            } label:{
-                                                Label("Delete", systemImage: "trash")
-                                            }
+                                        Button {
+                                            viewModel.setSelectedBeer(beer)
+                                            isShowingEditView = true
+                                            selectedBeer = beer
+                                        } label:{
+                                            Label("Edit", systemImage: "pencil.and.scribble")
                                         }
+                                        Button(role: .destructive) {
+                                            selectedBeer = beer
+                                            showAlert = true
+                                        } label:{
+                                            Label("Delete", systemImage: "trash")
+                                        }
+                                    }
                                     .sheet(isPresented: $isShowingEditView) {
                                         if let beer = selectedBeer {
                                             EditBeerView(isShowingEditView: $isShowingEditView, viewModel: viewModel, beer: selectedBeer!)
@@ -97,6 +88,43 @@ struct BeerDetailView: View {
                     }
                     Spacer()
                 }
+                .alert(isPresented: $showAlert) {
+                    Alert(
+                        title: Text("Confirm Delete"),
+                        message: Text("Are you sure you want to delete this beer?"),
+                        primaryButton: .destructive(Text("Delete")) {
+                            
+                            if let beer = selectedBeer {
+                                moc.delete(beer)
+                            }
+                            
+                            /*if let beers = beerType.beers as? Set<Beer>, beers.count == 1 {
+                             moc.delete(beerType)
+                             }*/
+                            
+                            if let beers = beerType.beers as? Set<Beer> {
+                                // Check if beerType is empty
+                                if beers.isEmpty {
+                                    moc.delete(beerType)
+                                }
+                            }
+                            
+                            do {
+                                try moc.save()
+                                
+                                if let beers = beerType.beers as? Set<Beer>, beers.isEmpty {
+                                    // Leave the view if no more beers are in this beerType
+                                    presentationMode.wrappedValue.dismiss()
+                                }
+                                selectedBeer = nil
+                            } catch {
+                                print("Error deleting beer: \(error)")
+                            }
+                        },
+                        secondaryButton: .cancel()
+                    )
+                }
+                
             }
             .onAppear {
                 viewModel.setSelectedBeer(nil)
@@ -116,42 +144,30 @@ struct BeerDetailView: View {
                         .foregroundColor(Color.orange)
                         .padding(.top)
                         .underline()
-                        //.padding(15)
                     HStack{
                         Image(systemName: "mug.fill")
                             .symbolRenderingMode(.palette)
-                                .foregroundStyle(
-                                    .linearGradient(colors: [.orange, .black], startPoint: .top, endPoint: .bottomTrailing)
-                                )
-                                .font(.system(size: 40))
+                            .foregroundStyle(
+                                .linearGradient(colors: [.orange, .black], startPoint: .top, endPoint: .bottomTrailing)
+                            )
+                            .font(.system(size: 40))
                         Text("\(beer.name!)")
-                        .bold()
-                        .font(.title2)
+                            .bold()
+                            .font(.title2)
                     }
                     .padding(.top,10)
                     HStack{
                         Image(systemName: "medal.fill")
                             .symbolRenderingMode(.palette)
-                                .foregroundStyle(
-                                    .linearGradient(colors: [.orange, .black], startPoint: .top, endPoint: .bottomTrailing)
-                                )
-                                .font(.system(size: 40))
+                            .foregroundStyle(
+                                .linearGradient(colors: [.orange, .black], startPoint: .top, endPoint: .bottomTrailing)
+                            )
+                            .font(.system(size: 40))
                         Text("\(beer.score)")
                             .bold()
                             .font(.title2)
                     }
                     .padding(.top,10)
-                    /*HStack{
-                        Image(systemName: "list.clipboard.fill")
-                            .symbolRenderingMode(.palette)
-                                .foregroundStyle(
-                                    .linearGradient(colors: [.orange, .black], startPoint: .top, endPoint: .bottomTrailing)
-                                )
-                                .font(.system(size: 30))
-                        Text("Note")
-                            .underline()
-                    }
-                    .padding(.top,10)*/
                     VStack{
                         Text(beer.note!)
                             .padding(.bottom)
@@ -172,8 +188,6 @@ struct BeerDetailView: View {
                 }
             }
         }
+        
     }
 }
-
-
-

@@ -84,9 +84,12 @@ struct AddBeerView: View {
                 .font(.headline)
                 .foregroundColor(.white)
                 .frame(maxWidth: 150, maxHeight: 50)
+                //.background(Color.orange)
+                .fontWeight(.bold)
                 .background(.linearGradient(colors: [.orange, .black], startPoint: .top, endPoint: .bottomTrailing))
                 .cornerRadius(20)
                 .shadow(color: .orange , radius: 5, y: 3)
+                .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.white, lineWidth: 1))
                 .sheet(isPresented: $showingImagePicker) {
                     ImagePicker(selectedImages: $selectedImages, sourceType: .camera)
                 }
@@ -109,11 +112,13 @@ struct AddBeerView: View {
                     }
                 }
                 .font(.headline)
+                .fontWeight(.bold)
                 .foregroundColor(.black)
                 .frame(maxWidth: 150, maxHeight: 60)
                 .background(Color.orange)
                 .cornerRadius(40)
                 .shadow(color: .orange , radius: 5, y: 3)
+                .overlay(RoundedRectangle(cornerRadius: 40).stroke(Color.black, lineWidth: 1))
             }
             .ignoresSafeArea(.keyboard)
             .navigationBarTitle("Add new beer", displayMode: .inline)
@@ -123,7 +128,7 @@ struct AddBeerView: View {
             .alert(isPresented: $showError) {
                 Alert(
                     title: Text("Error"),
-                    message: Text("You need to enter both beer type and take a picture before saving."),
+                    message: Text("You need to enter beer type and take a picture before saving."),
                     dismissButton: .default(Text("OK"))
                 )
             }

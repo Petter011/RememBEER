@@ -24,6 +24,8 @@ struct O_lprovningApp: App {
                 .environmentObject(viewModel)
                 .environment(\.managedObjectContext, dataController.container.viewContext)
                 .preferredColorScheme(isDarkModeOn ? .dark : .light)
+                .accentColor(.orange) 
+
         }
     }
 }

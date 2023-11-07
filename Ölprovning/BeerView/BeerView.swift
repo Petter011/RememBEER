@@ -14,10 +14,10 @@ struct BeerView: View {
     
     @State private var showingAddBeerView = false
     @State private var selectedBeerType: String? = nil
-    
+    @State private var isFirstBeerAdded = UserDefaults.standard.bool(forKey: "isFirstBeerAdded")
+
     @AppStorage("isBlurOn") private var isBlurOn = false
     @AppStorage("blurRadius") private var blurRadius = 2.0
-    @State private var isFirstBeerAdded = UserDefaults.standard.bool(forKey: "isFirstBeerAdded")
     
     @FetchRequest(sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)]) var beerTypes: FetchedResults<BeerType>
     
@@ -42,8 +42,9 @@ struct BeerView: View {
                                             .foregroundColor(.orange)
                                             .background(Color.black)
                                             .cornerRadius(15)
+                                            .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.white, lineWidth: 1))
                                             .font(.title2)
-                                            .shadow(radius: 5)
+                                            .fontWeight(.bold)
                                     }
                                 )
                             }
@@ -76,9 +77,11 @@ struct BeerView: View {
                             .foregroundColor(.white)
                             .background(.linearGradient(colors: [.orange, .black], startPoint: .top, endPoint: .bottomTrailing))
                             .cornerRadius(15)
+                            .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.white, lineWidth: 1))
                             .font(.title3)
+                            .fontWeight(.bold)
                     }
-                    .shadow(color: .orange , radius: 25, y: 5)
+                    //.shadow(color: .orange , radius: 25, y: 5)
                     .padding(.bottom, 30)
                     .sheet(isPresented: $showingAddBeerView) {
                         AddBeerView(

@@ -14,6 +14,7 @@ struct EditBeerView: View {
     @EnvironmentObject var beerManager: BeerManager
     @ObservedObject var viewModel: BeerViewModel
     var beer: Beer // Pass the selected beer to edit
+
     @State private var beerPointsOptions: [Int16] = Array(0...10)
     @State private var showingImagePicker = false
     @State private var editedBeerImageData: Data?
@@ -28,9 +29,10 @@ struct EditBeerView: View {
         _isShowingEditView = isShowingEditView
         self.viewModel = viewModel
         self.beer = beer
-        _editedBeerName = State(initialValue: beer.name!) // Initialize with current value
-        _editedBeerPoints = State(initialValue: beer.score) // Initialize with current value
+        _editedBeerName = State(initialValue: beer.name!)
+        _editedBeerPoints = State(initialValue: beer.score)
         _editedBeerNote = State(initialValue: beer.note!)
+        //_editedBeerType = State(initialValue: beer.beerType!.name!)
     }
 
     
@@ -41,7 +43,7 @@ struct EditBeerView: View {
                 Group {
                     
                     
-                    /*TextField("Which type of beer", text: $editedBeerType)
+                    /*TextField("Which type of beer? e.g. IPA, APA", text: $editedBeerType)
                         .textFieldStyle(.roundedBorder)
                         .keyboardType(.default)*/
                     
@@ -102,14 +104,13 @@ struct EditBeerView: View {
                 .sheet(isPresented: $showingImagePicker) {
                     ImagePicker(selectedImages: $editedselectedImages, sourceType: .camera) // Pass the array binding
                 }*/
+                Spacer()
                 
                 Button("Save") {
-                    // Update the selected beer's attributes with the edited values
                     beer.name = editedBeerName
                     beer.score = editedBeerPoints
                     beer.note = editedBeerNote
-
-                    // Save the changes
+                    //beer.beerType!.name! = editedBeerType
                     do {
                         try moc.save()
                         isShowingEditView = false
@@ -117,27 +118,25 @@ struct EditBeerView: View {
                         print("Error saving edited beer: \(error)")
                     }
                 }
-
                 .font(.headline)
                 .foregroundColor(.black)
-                .frame(maxWidth: 140)
-                .padding()
+                .frame(maxWidth: 150, maxHeight: 60)
                 .background(Color.orange)
-                .cornerRadius(20)
-                .shadow(radius: 40)
+                .cornerRadius(40)
+                .shadow(color: .orange , radius: 5, y: 3)
             }
             .ignoresSafeArea(.keyboard)
             .navigationBarTitle("Edit beer", displayMode: .inline)
             .onTapGesture {
                 self.endEditing()
             }
-            .alert(isPresented: $showError) {
+            /*.alert(isPresented: $showError) {
                 Alert(
                     title: Text("Error"),
                     message: Text("Please take a picture before saving."),
                     dismissButton: .default(Text("OK"))
                 )
-            }
+            }*/
         }
     }
 }

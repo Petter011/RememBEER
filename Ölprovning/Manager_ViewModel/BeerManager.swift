@@ -19,21 +19,6 @@ class BeerManager: ObservableObject {
         }
         beers[type]?.append(beer)
     }
-    
-   /* // Function to set the selected beer
-    func setSelectedBeer(_ beer: Beer?) {
-        selectedBeer = beer
-    }
-    // Function to delete a beer
-       func deleteBeer(_ beer: BeerWithImage, from type: String, in context: NSManagedObjectContext) {
-           if let index = beers[type]?.firstIndex(where: { $0.id == beer.id }) {
-               // Remove the beer from the list
-               beers[type]?.remove(at: index)
-
-               // Delete the beer from Core Data
-               //context.delete(beer)
-           }
-       }*/
 }
 
 

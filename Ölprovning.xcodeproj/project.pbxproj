@@ -509,7 +509,7 @@
 				DEVELOPMENT_TEAM = BXY9G7CMC3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSCameraUsageDescription = "Ge ölprovning tillåtelse att öppna din kamera";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Give RememBEER permission to open your camera";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Ge ölprovning tillåtelse att öppna dina bilder";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -545,7 +545,7 @@
 				DEVELOPMENT_TEAM = BXY9G7CMC3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSCameraUsageDescription = "Ge ölprovning tillåtelse att öppna din kamera";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Give RememBEER permission to open your camera";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Ge ölprovning tillåtelse att öppna dina bilder";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

@@ -19,7 +19,6 @@ extension Beer {
 struct BeerWithImage: Identifiable {
     var id = UUID()
     var beerType: String
-    //var beerWho: String
     var beerPoints: Int16
     var beerName: String
     let beerImageData: Data?

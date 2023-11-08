@@ -17,7 +17,7 @@ struct BeerView: View {
     @State private var isFirstBeerAdded = UserDefaults.standard.bool(forKey: "isFirstBeerAdded")
 
     @AppStorage("isBlurOn") private var isBlurOn = false
-    @AppStorage("blurRadius") private var blurRadius = 2.0
+    @AppStorage("blurRadius") private var blurRadius = 1.0
     
     @FetchRequest(sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)]) var beerTypes: FetchedResults<BeerType>
     
@@ -73,7 +73,7 @@ struct BeerView: View {
                     }) {
                         Text("Add beer")
                             .padding()
-                            .frame(maxWidth: 140, maxHeight: 50)
+                            .frame(maxWidth: 200, maxHeight: 60)
                             .foregroundColor(.white)
                             .background(.linearGradient(colors: [.orange, .black], startPoint: .top, endPoint: .bottomTrailing))
                             .cornerRadius(15)

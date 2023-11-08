@@ -37,7 +37,7 @@ struct AddBeerView: View {
                     TextField("Which type of beer? e.g. IPA, APA", text: $beerType)
                         .textFieldStyle(.roundedBorder)
                         .keyboardType(.default)
-                        .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardDidHideNotification)) { _ in                            
+                        .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardDidHideNotification)) { _ in
                             beerType = beerType.trimmingCharacters(in: .whitespacesAndNewlines)
                         }
                     
@@ -58,10 +58,10 @@ struct AddBeerView: View {
                                 .underline()
                             Picker("Points (0-10)", selection: $beerPoints) {
                                 ForEach(beerPointsOptions, id: \.self) {
-                                        Text("\($0)")
+                                    Text("\($0)")
                                 }
                             }
-                            .pickerStyle(.wheel) 
+                            .pickerStyle(.wheel)
                             .onAppear {
                                 beerPoints = 5
                             }
@@ -75,17 +75,18 @@ struct AddBeerView: View {
                         .resizable()
                         .scaledToFit()
                         .cornerRadius(10)
-                        .frame(maxWidth: .infinity, alignment: .center)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                 }
                 
-                Button("Take a picture") {
+                Button {
                     showingImagePicker.toggle()
+                } label: {
+                    Text("Take a picture")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .frame(maxWidth: 150, maxHeight: 50)
+                        .fontWeight(.bold)
                 }
-                .font(.headline)
-                .foregroundColor(.white)
-                .frame(maxWidth: 150, maxHeight: 50)
-                //.background(Color.orange)
-                .fontWeight(.bold)
                 .background(.linearGradient(colors: [.orange, .black], startPoint: .top, endPoint: .bottomTrailing))
                 .cornerRadius(20)
                 .shadow(color: .orange , radius: 5, y: 3)
@@ -95,11 +96,8 @@ struct AddBeerView: View {
                 }
                 Spacer()
                 
-                Button("Save") {
-                    if selectedImages.isEmpty {
-                        showError = true
-                    } 
-                    if beerType.isEmpty {
+                Button {
+                    if selectedImages.isEmpty || beerType.isEmpty {
                         showError = true
                     } else {
                         if let lastImage = selectedImages.last,
@@ -110,14 +108,17 @@ struct AddBeerView: View {
                             isPresented = false
                         }
                     }
+                } label: {
+                    Text("Save")
+                        .font(.headline)
+                        .fontWeight(.bold)
+                        .foregroundColor(.black)
+                        .frame(maxWidth: 200, maxHeight: 60)
+
                 }
-                .font(.headline)
-                .fontWeight(.bold)
-                .foregroundColor(.black)
-                .frame(maxWidth: 150, maxHeight: 60)
                 .background(Color.orange)
                 .cornerRadius(40)
-                .shadow(color: .orange , radius: 5, y: 3)
+                .shadow(color: .orange, radius: 5, y: 3)
                 .overlay(RoundedRectangle(cornerRadius: 40).stroke(Color.black, lineWidth: 1))
             }
             .ignoresSafeArea(.keyboard)

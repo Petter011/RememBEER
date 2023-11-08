@@ -105,7 +105,7 @@ struct EditBeerView: View {
                     ImagePicker(selectedImages: $editedselectedImages, sourceType: .camera) // Pass the array binding
                 }*/
                 Spacer()
-                
+                // fix to action 
                 Button("Save") {
                     beer.name = editedBeerName
                     beer.score = editedBeerPoints
@@ -119,11 +119,14 @@ struct EditBeerView: View {
                     }
                 }
                 .font(.headline)
+                .fontWeight(.bold)
                 .foregroundColor(.black)
-                .frame(maxWidth: 150, maxHeight: 60)
+                .frame(maxWidth: 200, maxHeight: 60)
                 .background(Color.orange)
                 .cornerRadius(40)
                 .shadow(color: .orange , radius: 5, y: 3)
+                .overlay(RoundedRectangle(cornerRadius: 40).stroke(Color.black, lineWidth: 1))
+                .padding(EdgeInsets(top: 20, leading: 80, bottom: 20, trailing: 80))
             }
             .ignoresSafeArea(.keyboard)
             .navigationBarTitle("Edit beer", displayMode: .inline)

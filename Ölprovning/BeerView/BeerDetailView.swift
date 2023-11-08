@@ -18,7 +18,7 @@ struct BeerDetailView: View {
     @State private var showAlert = false
     
     @AppStorage("isBlurOn") private var isBlurOn = false
-    @AppStorage("blurRadius") private var blurRadius = 2.0
+    @AppStorage("blurRadius") private var blurRadius = 1.0
     @State private var isFirstBeerAdded = UserDefaults.standard.bool(forKey: "isFirstBeerAdded")
     @Environment(\.managedObjectContext) var moc
     @Environment(\.presentationMode) var presentationMode
@@ -33,7 +33,8 @@ struct BeerDetailView: View {
                     .blur(radius: isBlurOn ? CGFloat(blurRadius) : 0)
                 
                 VStack {
-                    Text(beerType.name!)
+                    
+                    Text(beerType.name == nil ? "" : beerType.name!)
                         .font(.title)
                         .fontWeight(.bold)
                         .underline()
@@ -94,32 +95,25 @@ struct BeerDetailView: View {
                         message: Text("Are you sure you want to delete this beer?"),
                         primaryButton: .destructive(Text("Delete")) {
                             
-                            if let beer = selectedBeer {
-                                moc.delete(beer)
-                            }
-                            
-                            /*if let beers = beerType.beers as? Set<Beer>, beers.count == 1 {
-                             moc.delete(beerType)
-                             }*/
-                            
-                            if let beers = beerType.beers as? Set<Beer> {
-                                // Check if beerType is empty
-                                if beers.isEmpty {
+                            do {
+                                if let beer = selectedBeer {
+                                    moc.delete(beer)
+                                }
+                                
+                                if let beers = beerType.beers as? Set<Beer>, beers.count == 1 {
                                     moc.delete(beerType)
                                 }
-                            }
-                            
-                            do {
-                                try moc.save()
                                 
-                                if let beers = beerType.beers as? Set<Beer>, beers.isEmpty {
-                                    // Leave the view if no more beers are in this beerType
-                                    presentationMode.wrappedValue.dismiss()
-                                }
-                                selectedBeer = nil
-                            } catch {
+                                try moc.save()
+                            }catch {
                                 print("Error deleting beer: \(error)")
                             }
+                            
+                            let beers = beerType.beers as? Set<Beer>
+                            if beers == nil || beers!.isEmpty {
+                                presentationMode.wrappedValue.dismiss()
+                            }
+                            selectedBeer = nil
                         },
                         secondaryButton: .cancel()
                     )

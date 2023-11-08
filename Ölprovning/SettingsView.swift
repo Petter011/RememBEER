@@ -25,7 +25,7 @@ struct SettingsView: View {
                     if isBlurOn {
                         HStack {
                             Text("Blur-radie:")
-                            Slider(value: $blurRadius, in: 0...20, step: 1)
+                            Slider(value: $blurRadius, in: 0...5, step: 0.1)
                         }
                     }
                 }

@@ -49,6 +49,7 @@ struct AddBeerView: View {
                         .textFieldStyle(.roundedBorder)
                         .keyboardType(.default)
                         .lineLimit(3, reservesSpace: true)
+                        
                     
                     VStack{
                         VStack(alignment: .center) {
@@ -70,13 +71,7 @@ struct AddBeerView: View {
                 }
                 .padding(.horizontal)
                 
-                if let selectedImage = selectedImages.last {
-                    Image(uiImage: selectedImage)
-                        .resizable()
-                        .scaledToFit()
-                        .cornerRadius(10)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-                }
+                
                 
                 Button {
                     showingImagePicker.toggle()
@@ -94,6 +89,17 @@ struct AddBeerView: View {
                 .sheet(isPresented: $showingImagePicker) {
                     ImagePicker(selectedImages: $selectedImages, sourceType: .camera)
                 }
+                
+                if let selectedImage = selectedImages.last {
+                    Image(uiImage: selectedImage)
+                        .resizable()
+                        .scaledToFit()
+                        .cornerRadius(10)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                        .padding(.top,10)
+                }
+                    
+                
                 Spacer()
                 
                 Button {

@@ -8,11 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		151243B02AF40BF9005459D1 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 151243AF2AF40BF9005459D1 /* Localizable.xcstrings */; };
-		151243B22AF4147D005459D1 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 151243B12AF4147D005459D1 /* Launch Screen.storyboard */; };
 		15185A032AA478530028E0DC /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 15185A012AA478530028E0DC /* Model.xcdatamodeld */; };
 		15185A052AA47D530028E0DC /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15185A042AA47D520028E0DC /* DataController.swift */; };
 		152C57C92A9D24CE006FD102 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152C57C82A9D24CE006FD102 /* SettingsView.swift */; };
 		152C57D02A9DCCBC006FD102 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 152C57CF2A9DCCBC006FD102 /* CodeScanner */; };
+		155EFD882AFB8767009D37F9 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 155EFD872AFB8767009D37F9 /* Launch Screen.storyboard */; };
 		157B693A2AF186FE002A0F97 /* TheBestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157B69392AF186FE002A0F97 /* TheBestView.swift */; };
 		15901B312AEA341100249A93 /* EditBeerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15901B302AEA341100249A93 /* EditBeerView.swift */; };
 		15A8F6D32A8D1BB700EB3ABE /* O_lprovningApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A8F6D22A8D1BB700EB3ABE /* O_lprovningApp.swift */; };
@@ -51,10 +51,11 @@
 
 /* Begin PBXFileReference section */
 		151243AF2AF40BF9005459D1 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
-		151243B12AF4147D005459D1 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		15185A022AA478530028E0DC /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		15185A042AA47D520028E0DC /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		152C57C82A9D24CE006FD102 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		155EFD862AFB7F5B009D37F9 /* O-lprovning-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "O-lprovning-Info.plist"; sourceTree = SOURCE_ROOT; };
+		155EFD872AFB8767009D37F9 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		157B69392AF186FE002A0F97 /* TheBestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheBestView.swift; sourceTree = "<group>"; };
 		15901B302AEA341100249A93 /* EditBeerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBeerView.swift; sourceTree = "<group>"; };
 		15A8F6CF2A8D1BB700EB3ABE /* Ölprovning.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ölprovning.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -150,6 +151,8 @@
 		15A8F6D12A8D1BB700EB3ABE /* Ölprovning */ = {
 			isa = PBXGroup;
 			children = (
+				155EFD862AFB7F5B009D37F9 /* O-lprovning-Info.plist */,
+				155EFD872AFB8767009D37F9 /* Launch Screen.storyboard */,
 				15185A012AA478530028E0DC /* Model.xcdatamodeld */,
 				15A8F6D22A8D1BB700EB3ABE /* O_lprovningApp.swift */,
 				15185A042AA47D520028E0DC /* DataController.swift */,
@@ -159,7 +162,6 @@
 				152C57C82A9D24CE006FD102 /* SettingsView.swift */,
 				157B69392AF186FE002A0F97 /* TheBestView.swift */,
 				15A8F6D62A8D1BB900EB3ABE /* Assets.xcassets */,
-				151243B12AF4147D005459D1 /* Launch Screen.storyboard */,
 				15A8F6D82A8D1BB900EB3ABE /* Preview Content */,
 			);
 			path = "Ölprovning";
@@ -303,7 +305,7 @@
 			files = (
 				15A8F6DA2A8D1BB900EB3ABE /* Preview Assets.xcassets in Resources */,
 				151243B02AF40BF9005459D1 /* Localizable.xcstrings in Resources */,
-				151243B22AF4147D005459D1 /* Launch Screen.storyboard in Resources */,
+				155EFD882AFB8767009D37F9 /* Launch Screen.storyboard in Resources */,
 				15A8F6D72A8D1BB900EB3ABE /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -509,12 +511,12 @@
 				DEVELOPMENT_TEAM = BXY9G7CMC3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "O-lprovning-Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Give RememBEER permission to open your camera";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Ge ölprovning tillåtelse att öppna dina bilder";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = "";
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -545,12 +547,12 @@
 				DEVELOPMENT_TEAM = BXY9G7CMC3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "O-lprovning-Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Give RememBEER permission to open your camera";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Ge ölprovning tillåtelse att öppna dina bilder";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = "";
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;

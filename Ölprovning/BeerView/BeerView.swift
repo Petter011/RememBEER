@@ -40,14 +40,14 @@ struct BeerView: View {
                                             .padding()
                                             .frame(maxWidth: 150)
                                             .foregroundColor(.orange)
-                                            .background(Color.black)
-                                            .cornerRadius(15)
-                                            .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.white, lineWidth: 1))
                                             .font(.title2)
                                             .fontWeight(.bold)
                                     }
                                 )
                             }
+                            .background(Color.black)
+                            .cornerRadius(15)
+                            .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.white, lineWidth: 1))
                         }
                     }
                     .safeAreaInset(edge: .top) {
@@ -75,13 +75,12 @@ struct BeerView: View {
                             .padding()
                             .frame(maxWidth: 200, maxHeight: 60)
                             .foregroundColor(.white)
-                            .background(.linearGradient(colors: [.orange, .black], startPoint: .top, endPoint: .bottomTrailing))
-                            .cornerRadius(15)
-                            .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.white, lineWidth: 1))
                             .font(.title3)
                             .fontWeight(.bold)
                     }
-                    //.shadow(color: .orange , radius: 25, y: 5)
+                    .background(.linearGradient(colors: [.orange, .black], startPoint: .top, endPoint: .bottomTrailing))
+                    .cornerRadius(15)
+                    .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.white, lineWidth: 1))
                     .padding(.bottom, 30)
                     .sheet(isPresented: $showingAddBeerView) {
                         AddBeerView(

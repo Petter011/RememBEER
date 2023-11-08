@@ -72,6 +72,7 @@ struct BeerDetailView: View {
                                         } label:{
                                             Label("Edit", systemImage: "pencil.and.scribble")
                                         }
+                                        Divider()
                                         Button(role: .destructive) {
                                             selectedBeer = beer
                                             showAlert = true
@@ -132,12 +133,14 @@ struct BeerDetailView: View {
                             .opacity(0.5)
                             .frame(width: 35, height: 5)
                             .padding(6)
+                    
                     Text(beer.beerType!.name!)
                         .font(.title)
                         .bold()
                         .foregroundColor(Color.orange)
                         .padding(.top)
                         .underline()
+                    
                     HStack{
                         Image(systemName: "mug.fill")
                             .symbolRenderingMode(.palette)
@@ -150,6 +153,7 @@ struct BeerDetailView: View {
                             .font(.title2)
                     }
                     .padding(.top,10)
+                    
                     HStack{
                         Image(systemName: "medal.fill")
                             .symbolRenderingMode(.palette)
@@ -162,15 +166,20 @@ struct BeerDetailView: View {
                             .font(.title2)
                     }
                     .padding(.top,10)
+                    
                     VStack{
                         Text(beer.note!)
                             .padding(.bottom)
+                            .padding(.leading)
+                            .padding(.trailing)
                     }
                     .frame(width: 250, height: 100)
                     .shadow(radius: 10)
                     .border(Color.black, width: 3)
                     .cornerRadius(15)
-                    .padding(10)
+                    .padding(.top, 30)
+                    
+                    Spacer()
                     
                     if let image = beer.getBeerImage() {
                         Image(uiImage: image)
@@ -178,6 +187,7 @@ struct BeerDetailView: View {
                             .aspectRatio(contentMode: .fit)
                             .edgesIgnoringSafeArea(.top)
                             .cornerRadius(15)
+                            .padding(.bottom, 30)
                     }
                 }
             }

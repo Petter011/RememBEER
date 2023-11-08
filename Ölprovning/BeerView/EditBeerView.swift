@@ -42,19 +42,22 @@ struct EditBeerView: View {
             VStack(spacing: 20) {
                 Group {
                     
-                    
-                    /*TextField("Which type of beer? e.g. IPA, APA", text: $editedBeerType)
+                    /*Text(beer.beerType!.name!)
+                        .foregroundColor(Color.orange)
+                    TextField("Which type of beer? e.g. IPA, APA", text: $editedBeerType)
                         .textFieldStyle(.roundedBorder)
                         .keyboardType(.default)*/
                     
                     TextField("Name of the beer?", text: $editedBeerName)
                         .textFieldStyle(.roundedBorder)
                         .keyboardType(.default)
+                        .padding(.top, 30)
                     TextField("Add a Note", text: $editedBeerNote, axis: .vertical)
                         .textFieldStyle(.roundedBorder)
                         .keyboardType(.default)
                         .lineLimit(3, reservesSpace: true)
-                    
+                        .padding(.top, 10)
+
                     VStack{
                         VStack(alignment: .center) {
                             Text("Points (0-10)")
@@ -75,23 +78,20 @@ struct EditBeerView: View {
                         }
                         
                     }
+                    .padding(.top, 60)
                 }
                 .padding(.horizontal)
                 
-                /*if !editedselectedImages.isEmpty {
-                    VStack(spacing: 100) {
-                        ForEach(editedselectedImages, id: \.self) { image in
-                            Image(uiImage: image)
-                                .resizable()
-                                .scaledToFit()
-                                .cornerRadius(10)
-                                .frame(maxWidth: .infinity, alignment: .center)
-                            
-                        }
-                    }
-                }*/
+                /*if let selectedImage = editedselectedImages.last {
+                    Image(uiImage: selectedImage)
+                        .resizable()
+                        .scaledToFit()
+                        .cornerRadius(10)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                 
-                /*Button("Take a picture") {
+                }
+                
+                Button("Take a picture") {
                     showingImagePicker.toggle()
                 }
                 .font(.headline)
@@ -105,8 +105,8 @@ struct EditBeerView: View {
                     ImagePicker(selectedImages: $editedselectedImages, sourceType: .camera) // Pass the array binding
                 }*/
                 Spacer()
-                // fix to action 
-                Button("Save") {
+                
+                Button {
                     beer.name = editedBeerName
                     beer.score = editedBeerPoints
                     beer.note = editedBeerNote
@@ -117,16 +117,18 @@ struct EditBeerView: View {
                     } catch {
                         print("Error saving edited beer: \(error)")
                     }
+                } label: {
+                    Text("Save")
+                        .font(.headline)
+                        .fontWeight(.bold)
+                        .foregroundColor(.black)
+                        .frame(maxWidth: 200, maxHeight: 60)
+                    
                 }
-                .font(.headline)
-                .fontWeight(.bold)
-                .foregroundColor(.black)
-                .frame(maxWidth: 200, maxHeight: 60)
                 .background(Color.orange)
                 .cornerRadius(40)
-                .shadow(color: .orange , radius: 5, y: 3)
+                .shadow(color: .orange, radius: 5, y: 3)
                 .overlay(RoundedRectangle(cornerRadius: 40).stroke(Color.black, lineWidth: 1))
-                .padding(EdgeInsets(top: 20, leading: 80, bottom: 20, trailing: 80))
             }
             .ignoresSafeArea(.keyboard)
             .navigationBarTitle("Edit beer", displayMode: .inline)

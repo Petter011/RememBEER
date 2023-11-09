@@ -136,21 +136,15 @@ struct BeerDetailView: View {
                     
                     Text(beer.beerType!.name!)
                         .font(.title)
-                        .bold()
-                        .foregroundColor(Color.orange)
+                        .fontWeight(.heavy)
                         .padding(.top)
                         .underline()
                     
-                    HStack{
-                        Image(systemName: "mug.fill")
-                            .symbolRenderingMode(.palette)
-                            .foregroundStyle(
-                                .linearGradient(colors: [.orange, .black], startPoint: .top, endPoint: .bottomTrailing)
-                            )
-                            .font(.system(size: 40))
+                    HStack {
                         Text("\(beer.name!)")
-                            .bold()
-                            .font(.title2)
+                            .fontWeight(.medium)
+                            .font(.title)
+                            .fontDesign(.serif)
                     }
                     .padding(.top,10)
                     

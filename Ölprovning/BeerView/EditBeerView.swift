@@ -78,7 +78,7 @@ struct EditBeerView: View {
                         }
                         
                     }
-                    .padding(.top, 60)
+                    .padding(.top, 30)
                 }
                 .padding(.horizontal)
                 

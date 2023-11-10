@@ -38,7 +38,7 @@ struct AddBeerView: View {
                         .textFieldStyle(.roundedBorder)
                         .keyboardType(.default)
                         .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardDidHideNotification)) { _ in
-                            beerType = beerType.trimmingCharacters(in: .whitespacesAndNewlines)
+                            beerType = beerType.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
                         }
                     
                     TextField("Name of the beer?", text: $beerName)

@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "15A8F6CE2A8D1BB700EB3ABE"
-               BuildableName = "O&#x308;lprovning.app"
-               BlueprintName = "O&#x308;lprovning"
-               ReferencedContainer = "container:O&#x308;lprovning.xcodeproj">
+               BuildableName = "RememBBER.app"
+               BlueprintName = "RememBBER"
+               ReferencedContainer = "container:RememBBER.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,9 +35,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "15A8F6DE2A8D1BB900EB3ABE"
-               BuildableName = "O&#x308;lprovningTests.xctest"
-               BlueprintName = "O&#x308;lprovningTests"
-               ReferencedContainer = "container:O&#x308;lprovning.xcodeproj">
+               BuildableName = "RememBBERTests.xctest"
+               BlueprintName = "RememBBERTests"
+               ReferencedContainer = "container:RememBBER.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -46,9 +46,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "15A8F6E82A8D1BB900EB3ABE"
-               BuildableName = "O&#x308;lprovningUITests.xctest"
-               BlueprintName = "O&#x308;lprovningUITests"
-               ReferencedContainer = "container:O&#x308;lprovning.xcodeproj">
+               BuildableName = "RememBBERUITests.xctest"
+               BlueprintName = "RememBBERUITests"
+               ReferencedContainer = "container:RememBBER.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -69,9 +69,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "15A8F6CE2A8D1BB700EB3ABE"
-            BuildableName = "O&#x308;lprovning.app"
-            BlueprintName = "O&#x308;lprovning"
-            ReferencedContainer = "container:O&#x308;lprovning.xcodeproj">
+            BuildableName = "RememBBER.app"
+            BlueprintName = "RememBBER"
+            ReferencedContainer = "container:RememBBER.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <CommandLineArguments>
@@ -96,9 +96,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "15A8F6CE2A8D1BB700EB3ABE"
-            BuildableName = "O&#x308;lprovning.app"
-            BlueprintName = "O&#x308;lprovning"
-            ReferencedContainer = "container:O&#x308;lprovning.xcodeproj">
+            BuildableName = "RememBBER.app"
+            BlueprintName = "RememBBER"
+            ReferencedContainer = "container:RememBBER.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

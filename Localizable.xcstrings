@@ -161,13 +161,13 @@
         }
       }
     },
-    "Give RememBEER permission to open your camera" : {
+    "Give RememBEER permission to open your camera. Pictures are saved on your phone to show pictures of your beers" : {
       "extractionState" : "manual",
       "localizations" : {
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ge RememBEER tillåtelse att öppna din kamera"
+            "value" : "Ge RememBEER tillåtelse att öppna din kamera. Bilderna sparas på din telefon för att visa bilder på dina öl "
           }
         }
       }

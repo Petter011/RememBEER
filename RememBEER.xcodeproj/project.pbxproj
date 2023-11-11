@@ -58,13 +58,13 @@
 		155EFD872AFB8767009D37F9 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		157B69392AF186FE002A0F97 /* TheBestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheBestView.swift; sourceTree = "<group>"; };
 		15901B302AEA341100249A93 /* EditBeerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBeerView.swift; sourceTree = "<group>"; };
-		15A8F6CF2A8D1BB700EB3ABE /* RememBBER.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RememBBER.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		15A8F6CF2A8D1BB700EB3ABE /* RememBEER.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RememBEER.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		15A8F6D22A8D1BB700EB3ABE /* O_lprovningApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = O_lprovningApp.swift; sourceTree = "<group>"; };
 		15A8F6D62A8D1BB900EB3ABE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		15A8F6D92A8D1BB900EB3ABE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		15A8F6DF2A8D1BB900EB3ABE /* RememBBERTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RememBBERTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		15A8F6DF2A8D1BB900EB3ABE /* RememBEERTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RememBEERTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		15A8F6E32A8D1BB900EB3ABE /* O_lprovningTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = O_lprovningTests.swift; sourceTree = "<group>"; };
-		15A8F6E92A8D1BB900EB3ABE /* RememBBERUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RememBBERUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		15A8F6E92A8D1BB900EB3ABE /* RememBEERUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RememBEERUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		15A8F6ED2A8D1BB900EB3ABE /* O_lprovningUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = O_lprovningUITests.swift; sourceTree = "<group>"; };
 		15A8F6EF2A8D1BB900EB3ABE /* O_lprovningUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = O_lprovningUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		15A8F6FC2A8D1C3300EB3ABE /* AddBeerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBeerView.swift; sourceTree = "<group>"; };
@@ -141,9 +141,9 @@
 		15A8F6D02A8D1BB700EB3ABE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				15A8F6CF2A8D1BB700EB3ABE /* RememBBER.app */,
-				15A8F6DF2A8D1BB900EB3ABE /* RememBBERTests.xctest */,
-				15A8F6E92A8D1BB900EB3ABE /* RememBBERUITests.xctest */,
+				15A8F6CF2A8D1BB700EB3ABE /* RememBEER.app */,
+				15A8F6DF2A8D1BB900EB3ABE /* RememBEERTests.xctest */,
+				15A8F6E92A8D1BB900EB3ABE /* RememBEERUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -195,9 +195,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		15A8F6CE2A8D1BB700EB3ABE /* RememBBER */ = {
+		15A8F6CE2A8D1BB700EB3ABE /* RememBEER */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 15A8F6F32A8D1BB900EB3ABE /* Build configuration list for PBXNativeTarget "RememBBER" */;
+			buildConfigurationList = 15A8F6F32A8D1BB900EB3ABE /* Build configuration list for PBXNativeTarget "RememBEER" */;
 			buildPhases = (
 				15A8F6CB2A8D1BB700EB3ABE /* Sources */,
 				15A8F6CC2A8D1BB700EB3ABE /* Frameworks */,
@@ -207,17 +207,17 @@
 			);
 			dependencies = (
 			);
-			name = RememBBER;
+			name = RememBEER;
 			packageProductDependencies = (
 				152C57CF2A9DCCBC006FD102 /* CodeScanner */,
 			);
 			productName = "Ölprovning";
-			productReference = 15A8F6CF2A8D1BB700EB3ABE /* RememBBER.app */;
+			productReference = 15A8F6CF2A8D1BB700EB3ABE /* RememBEER.app */;
 			productType = "com.apple.product-type.application";
 		};
-		15A8F6DE2A8D1BB900EB3ABE /* RememBBERTests */ = {
+		15A8F6DE2A8D1BB900EB3ABE /* RememBEERTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 15A8F6F62A8D1BB900EB3ABE /* Build configuration list for PBXNativeTarget "RememBBERTests" */;
+			buildConfigurationList = 15A8F6F62A8D1BB900EB3ABE /* Build configuration list for PBXNativeTarget "RememBEERTests" */;
 			buildPhases = (
 				15A8F6DB2A8D1BB900EB3ABE /* Sources */,
 				15A8F6DC2A8D1BB900EB3ABE /* Frameworks */,
@@ -228,14 +228,14 @@
 			dependencies = (
 				15A8F6E12A8D1BB900EB3ABE /* PBXTargetDependency */,
 			);
-			name = RememBBERTests;
+			name = RememBEERTests;
 			productName = "ÖlprovningTests";
-			productReference = 15A8F6DF2A8D1BB900EB3ABE /* RememBBERTests.xctest */;
+			productReference = 15A8F6DF2A8D1BB900EB3ABE /* RememBEERTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		15A8F6E82A8D1BB900EB3ABE /* RememBBERUITests */ = {
+		15A8F6E82A8D1BB900EB3ABE /* RememBEERUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 15A8F6F92A8D1BB900EB3ABE /* Build configuration list for PBXNativeTarget "RememBBERUITests" */;
+			buildConfigurationList = 15A8F6F92A8D1BB900EB3ABE /* Build configuration list for PBXNativeTarget "RememBEERUITests" */;
 			buildPhases = (
 				15A8F6E52A8D1BB900EB3ABE /* Sources */,
 				15A8F6E62A8D1BB900EB3ABE /* Frameworks */,
@@ -246,9 +246,9 @@
 			dependencies = (
 				15A8F6EB2A8D1BB900EB3ABE /* PBXTargetDependency */,
 			);
-			name = RememBBERUITests;
+			name = RememBEERUITests;
 			productName = "ÖlprovningUITests";
-			productReference = 15A8F6E92A8D1BB900EB3ABE /* RememBBERUITests.xctest */;
+			productReference = 15A8F6E92A8D1BB900EB3ABE /* RememBEERUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -274,7 +274,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 15A8F6CA2A8D1BB700EB3ABE /* Build configuration list for PBXProject "RememBBER" */;
+			buildConfigurationList = 15A8F6CA2A8D1BB700EB3ABE /* Build configuration list for PBXProject "RememBEER" */;
 			compatibilityVersion = "Xcode 15.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -291,9 +291,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				15A8F6CE2A8D1BB700EB3ABE /* RememBBER */,
-				15A8F6DE2A8D1BB900EB3ABE /* RememBBERTests */,
-				15A8F6E82A8D1BB900EB3ABE /* RememBBERUITests */,
+				15A8F6CE2A8D1BB700EB3ABE /* RememBEER */,
+				15A8F6DE2A8D1BB900EB3ABE /* RememBEERTests */,
+				15A8F6E82A8D1BB900EB3ABE /* RememBEERUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -371,12 +371,12 @@
 /* Begin PBXTargetDependency section */
 		15A8F6E12A8D1BB900EB3ABE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 15A8F6CE2A8D1BB700EB3ABE /* RememBBER */;
+			target = 15A8F6CE2A8D1BB700EB3ABE /* RememBEER */;
 			targetProxy = 15A8F6E02A8D1BB900EB3ABE /* PBXContainerItemProxy */;
 		};
 		15A8F6EB2A8D1BB900EB3ABE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 15A8F6CE2A8D1BB700EB3ABE /* RememBBER */;
+			target = 15A8F6CE2A8D1BB700EB3ABE /* RememBEER */;
 			targetProxy = 15A8F6EA2A8D1BB900EB3ABE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -506,7 +506,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 18;
 				DEVELOPMENT_ASSET_PATHS = "\"Ölprovning/Preview Content\"";
 				DEVELOPMENT_TEAM = BXY9G7CMC3;
 				ENABLE_PREVIEWS = YES;
@@ -541,7 +541,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 18;
 				DEVELOPMENT_ASSET_PATHS = "\"Ölprovning/Preview Content\"";
 				DEVELOPMENT_TEAM = BXY9G7CMC3;
 				ENABLE_PREVIEWS = YES;
@@ -585,7 +585,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RememBBER.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/RememBBER";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RememBEER.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/RememBEER";
 			};
 			name = Debug;
 		};
@@ -604,7 +604,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RememBBER.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/RememBBER";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RememBEER.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/RememBEER";
 			};
 			name = Release;
 		};
@@ -645,7 +645,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		15A8F6CA2A8D1BB700EB3ABE /* Build configuration list for PBXProject "RememBBER" */ = {
+		15A8F6CA2A8D1BB700EB3ABE /* Build configuration list for PBXProject "RememBEER" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				15A8F6F12A8D1BB900EB3ABE /* Debug */,
@@ -654,7 +654,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		15A8F6F32A8D1BB900EB3ABE /* Build configuration list for PBXNativeTarget "RememBBER" */ = {
+		15A8F6F32A8D1BB900EB3ABE /* Build configuration list for PBXNativeTarget "RememBEER" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				15A8F6F42A8D1BB900EB3ABE /* Debug */,
@@ -663,7 +663,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		15A8F6F62A8D1BB900EB3ABE /* Build configuration list for PBXNativeTarget "RememBBERTests" */ = {
+		15A8F6F62A8D1BB900EB3ABE /* Build configuration list for PBXNativeTarget "RememBEERTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				15A8F6F72A8D1BB900EB3ABE /* Debug */,
@@ -672,7 +672,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		15A8F6F92A8D1BB900EB3ABE /* Build configuration list for PBXNativeTarget "RememBBERUITests" */ = {
+		15A8F6F92A8D1BB900EB3ABE /* Build configuration list for PBXNativeTarget "RememBEERUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				15A8F6FA2A8D1BB900EB3ABE /* Debug */,

@@ -16,6 +16,11 @@ struct BeerDetailView: View {
     @State private var selectedBeer: Beer? // New state variable for selected beer
     @State private var isShowingEditView = false
     @State private var showAlert = false
+    @State private var isShowingGenerateQRView = false
+    @State private var isShowingScannedDetails = false
+    @State private var scannedBeer: Beer?
+    
+    
     
     @AppStorage("isBlurOn") private var isBlurOn = false
     @AppStorage("blurRadius") private var blurRadius = 1.0
@@ -39,6 +44,7 @@ struct BeerDetailView: View {
                         .fontWeight(.bold)
                         .underline()
                         .foregroundColor(Color.orange)
+                    //QRCodeGeneratorView(beer: encodeBeerDetails()) // Pass the beer details for encoding
                     
                     ScrollView {
                         LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 20) {
@@ -72,12 +78,26 @@ struct BeerDetailView: View {
                                         } label:{
                                             Label("Edit", systemImage: "pencil.and.scribble")
                                         }
+                                        Button {
+                                            viewModel.setSelectedBeer(beer)
+                                            selectedBeer = beer
+                                            isShowingGenerateQRView = true
+                                        }label: {
+                                            Label("QR Code", systemImage: "qrcode")
+                                        }
+                                        
                                         Divider()
+                                        
                                         Button(role: .destructive) {
                                             selectedBeer = beer
                                             showAlert = true
                                         } label:{
                                             Label("Delete", systemImage: "trash")
+                                        }
+                                    }
+                                    .sheet(isPresented: $isShowingGenerateQRView) {
+                                        if let beer = selectedBeer {
+                                            GenerateQRView(beer: beer)
                                         }
                                     }
                                     .sheet(isPresented: $isShowingEditView) {
@@ -119,7 +139,6 @@ struct BeerDetailView: View {
                         secondaryButton: .cancel()
                     )
                 }
-                
             }
             .onAppear {
                 viewModel.setSelectedBeer(nil)
@@ -129,10 +148,10 @@ struct BeerDetailView: View {
             if let beer = selectedBeer {
                 VStack {
                     Capsule()
-                            .fill(Color.secondary)
-                            .opacity(0.5)
-                            .frame(width: 35, height: 5)
-                            .padding(6)
+                        .fill(Color.secondary)
+                        .opacity(0.5)
+                        .frame(width: 35, height: 5)
+                        .padding(6)
                     
                     Text(beer.beerType!.name!)
                         .font(.title)
@@ -184,8 +203,25 @@ struct BeerDetailView: View {
                             .padding(.bottom, 30)
                     }
                 }
+                //.background(.linearGradient(colors: [.lightOrange, .lightOrange2], startPoint: .top, endPoint: .bottom))
+                
             }
         }
+    }
+    
+    
+    // Helper method to encode beer details
+    private func encodeBeerDetails() -> String {
+        // Create a JSONEncoder and encode beer details
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
         
+        do {
+            let beerData = try encoder.encode(selectedBeer)
+            return String(data: beerData, encoding: .utf8) ?? ""
+        } catch {
+            print("Error encoding beer details: \(error)")
+            return ""
+        }
     }
 }

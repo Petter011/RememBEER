@@ -202,6 +202,9 @@
         }
       }
     },
+    "QR Code" : {
+
+    },
     "Save" : {
       "localizations" : {
         "sv" : {
@@ -211,6 +214,15 @@
           }
         }
       }
+    },
+    "Scan QR" : {
+
+    },
+    "Scan QR Code" : {
+
+    },
+    "Scanned Code: %@" : {
+
     },
     "Settings" : {
       "localizations" : {

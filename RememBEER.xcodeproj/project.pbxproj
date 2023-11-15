@@ -30,6 +30,10 @@
 		15A8F7132A8DEA1100EB3ABE /* EnvironmentKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A8F7122A8DEA1100EB3ABE /* EnvironmentKeys.swift */; };
 		15A8F7152A8F41AD00EB3ABE /* BeerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A8F7142A8F41AD00EB3ABE /* BeerManager.swift */; };
 		15A8F7172A8F4BAC00EB3ABE /* BeerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A8F7162A8F4BAC00EB3ABE /* BeerViewModel.swift */; };
+		15F259D32B02A010009F5581 /* GenerateQRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F259D22B02A010009F5581 /* GenerateQRView.swift */; };
+		15F259D72B04BF21009F5581 /* QRCodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F259D62B04BF21009F5581 /* QRCodeScannerView.swift */; };
+		15F259D92B04BFDD009F5581 /* ScanQRcodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F259D82B04BFDD009F5581 /* ScanQRcodeView.swift */; };
+		15F259E12B04F60B009F5581 /* QRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F259E02B04F60B009F5581 /* QRView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +80,10 @@
 		15A8F7122A8DEA1100EB3ABE /* EnvironmentKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentKeys.swift; sourceTree = "<group>"; };
 		15A8F7142A8F41AD00EB3ABE /* BeerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerManager.swift; sourceTree = "<group>"; };
 		15A8F7162A8F4BAC00EB3ABE /* BeerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerViewModel.swift; sourceTree = "<group>"; };
+		15F259D22B02A010009F5581 /* GenerateQRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateQRView.swift; sourceTree = "<group>"; };
+		15F259D62B04BF21009F5581 /* QRCodeScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeScannerView.swift; sourceTree = "<group>"; };
+		15F259D82B04BFDD009F5581 /* ScanQRcodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQRcodeView.swift; sourceTree = "<group>"; };
+		15F259E02B04F60B009F5581 /* QRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,9 +164,11 @@
 				15185A012AA478530028E0DC /* Model.xcdatamodeld */,
 				15A8F6D22A8D1BB700EB3ABE /* O_lprovningApp.swift */,
 				15185A042AA47D520028E0DC /* DataController.swift */,
-				15A8F7082A8D1C7300EB3ABE /* ContentView.swift */,
-				152C57C52A9D12F9006FD102 /* BeerView */,
+				15F259E22B04FDAD009F5581 /* QRCode */,
 				15901B2B2AE9388200249A93 /* Manager_ViewModel */,
+				152C57C52A9D12F9006FD102 /* BeerView */,
+				15A8F7082A8D1C7300EB3ABE /* ContentView.swift */,
+				15F259E02B04F60B009F5581 /* QRView.swift */,
 				152C57C82A9D24CE006FD102 /* SettingsView.swift */,
 				157B69392AF186FE002A0F97 /* TheBestView.swift */,
 				15A8F6D62A8D1BB900EB3ABE /* Assets.xcassets */,
@@ -190,6 +200,16 @@
 				15A8F6EF2A8D1BB900EB3ABE /* O_lprovningUITestsLaunchTests.swift */,
 			);
 			path = "ÖlprovningUITests";
+			sourceTree = "<group>";
+		};
+		15F259E22B04FDAD009F5581 /* QRCode */ = {
+			isa = PBXGroup;
+			children = (
+				15F259D62B04BF21009F5581 /* QRCodeScannerView.swift */,
+				15F259D22B02A010009F5581 /* GenerateQRView.swift */,
+				15F259D82B04BFDD009F5581 /* ScanQRcodeView.swift */,
+			);
+			path = QRCode;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -333,18 +353,22 @@
 			files = (
 				15A8F6FD2A8D1C3300EB3ABE /* AddBeerView.swift in Sources */,
 				15A8F7092A8D1C7300EB3ABE /* ContentView.swift in Sources */,
+				15F259D32B02A010009F5581 /* GenerateQRView.swift in Sources */,
 				15A8F70B2A8D1C7900EB3ABE /* ImagePicker.swift in Sources */,
 				152C57C92A9D24CE006FD102 /* SettingsView.swift in Sources */,
 				15185A032AA478530028E0DC /* Model.xcdatamodeld in Sources */,
 				15A8F6D32A8D1BB700EB3ABE /* O_lprovningApp.swift in Sources */,
 				15A8F7172A8F4BAC00EB3ABE /* BeerViewModel.swift in Sources */,
 				157B693A2AF186FE002A0F97 /* TheBestView.swift in Sources */,
+				15F259D92B04BFDD009F5581 /* ScanQRcodeView.swift in Sources */,
 				15901B312AEA341100249A93 /* EditBeerView.swift in Sources */,
 				15A8F7052A8D1C6500EB3ABE /* BeerWithImage.swift in Sources */,
+				15F259E12B04F60B009F5581 /* QRView.swift in Sources */,
 				15A8F7152A8F41AD00EB3ABE /* BeerManager.swift in Sources */,
 				15A8F7132A8DEA1100EB3ABE /* EnvironmentKeys.swift in Sources */,
 				15A8F7032A8D1C5F00EB3ABE /* BeerView.swift in Sources */,
 				15185A052AA47D530028E0DC /* DataController.swift in Sources */,
+				15F259D72B04BF21009F5581 /* QRCodeScannerView.swift in Sources */,
 				15A8F70F2A8D383E00EB3ABE /* BeerDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -506,18 +530,19 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_ASSET_PATHS = "\"Ölprovning/Preview Content\"";
 				DEVELOPMENT_TEAM = BXY9G7CMC3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "O-lprovning-Info.plist";
-				INFOPLIST_KEY_NSCameraUsageDescription = "Give RememBEER permission to access your camera. Pictures are saved locally on your phone to show a pictures of your beers. ";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Give RememBEER permission to access your camera. Pictures are saved locally on your phone to show pictures of your beers. ";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Ge ölprovning tillåtelse att öppna dina bilder";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -531,7 +556,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -541,18 +566,19 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_ASSET_PATHS = "\"Ölprovning/Preview Content\"";
 				DEVELOPMENT_TEAM = BXY9G7CMC3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "O-lprovning-Info.plist";
-				INFOPLIST_KEY_NSCameraUsageDescription = "Give RememBEER permission to access your camera. Pictures are saved locally on your phone to show a pictures of your beers. ";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Give RememBEER permission to access your camera. Pictures are saved locally on your phone to show pictures of your beers. ";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Ge ölprovning tillåtelse att öppna dina bilder";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -566,7 +592,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

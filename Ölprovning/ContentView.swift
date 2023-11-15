@@ -16,10 +16,10 @@ struct ContentView: View {
                     .tabItem {
                         Label("Beer", systemImage: "mug.fill")
                     }
-                /*TheBestView()
+                QRView()
                     .tabItem {
-                        Label("The Best", systemImage: "medal.fill")
-                    }*/
+                        Label("Scan QR", systemImage: "qrcode")
+                    }
                 SettingsView()
                     .tabItem {
                         Label("Settings", systemImage: "slider.horizontal.3")

@@ -15,7 +15,7 @@ struct BeerView: View {
     @State private var showingAddBeerView = false
     @State private var selectedBeerType: String? = nil
     @State private var isFirstBeerAdded = UserDefaults.standard.bool(forKey: "isFirstBeerAdded")
-
+    
     @AppStorage("isBlurOn") private var isBlurOn = false
     @AppStorage("blurRadius") private var blurRadius = 1.0
     
@@ -33,17 +33,17 @@ struct BeerView: View {
                     ScrollView {
                         LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 20) {
                             ForEach(beerTypes, id: \.self) { beerType in
+#if os(iOS)
                                 NavigationLink(
                                     destination: BeerDetailView(viewModel: viewModel, beerType: beerType),
                                     label: {
-                                        Text(beerType.name!)
-                                            .padding()
-                                            .frame(maxWidth: 150)
-                                            .foregroundColor(.orange)
-                                            .font(.title2)
-                                            .fontWeight(.bold)
+                                        BeerTypeCell(beerType: beerType)
                                     }
                                 )
+#else
+                                BeerTypeCell(beerType: beerType)
+#endif
+                                
                             }
                             .background(Color.black)
                             .cornerRadius(15)
@@ -51,20 +51,7 @@ struct BeerView: View {
                         }
                     }
                     .safeAreaInset(edge: .top) {
-                        VStack() {
-                            HStack() {
-                                Spacer()
-                                Text("Beer")
-                                    .font(.largeTitle.weight(.bold))
-                                    .foregroundStyle(Color.orange)
-                                Spacer()
-                            }
-                        }
-                        .padding()
-                        .background(LinearGradient(colors: [.black.opacity(0.1), .orange.opacity(0.6)],
-                                                   startPoint: .topLeading, endPoint: .bottomTrailing)
-                            .overlay(.ultraThinMaterial)
-                        )
+                       navBar()
                     }
                     .navigationBarHidden(true)
                     
@@ -127,3 +114,36 @@ struct BeerView: View {
         }
     }
 }
+
+struct BeerTypeCell: View {
+    let beerType: BeerType
+
+    var body: some View {
+        Text(beerType.name!)
+            .padding()
+            .frame(maxWidth: 150)
+            .foregroundColor(.orange)
+            .font(.title2)
+            .fontWeight(.bold)
+    }
+}
+
+struct navBar: View {
+    var body: some View {
+            VStack() {
+                HStack() {
+                    Spacer()
+                    Text("Beer")
+                        .font(.largeTitle.weight(.bold))
+                        .foregroundStyle(Color.orange)
+                    Spacer()
+                }
+            }
+            .padding()
+            .background(LinearGradient(colors: [.black.opacity(0.1), .orange.opacity(0.6)],
+                                       startPoint: .topLeading, endPoint: .bottomTrailing)
+                .overlay(.ultraThinMaterial)
+            )
+        }
+    }
+

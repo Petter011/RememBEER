@@ -21,6 +21,12 @@
         }
       }
     },
+    "%d/10" : {
+
+    },
+    "%lld/10" : {
+
+    },
     "Add a Note" : {
       "localizations" : {
         "sv" : {
@@ -203,7 +209,14 @@
       }
     },
     "QR Code" : {
-
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "QR kod"
+          }
+        }
+      }
     },
     "Save" : {
       "localizations" : {
@@ -216,13 +229,24 @@
       }
     },
     "Scan QR" : {
-
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scanna QR"
+          }
+        }
+      }
     },
     "Scan QR Code" : {
-
-    },
-    "Scanned Code: %@" : {
-
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scanna QR kod"
+          }
+        }
+      }
     },
     "Settings" : {
       "localizations" : {

@@ -5,10 +5,11 @@
 //  Created by Petter Gustafsson on 2023-08-18.
 //
 
-import SwiftUI
+import Foundation
 
 class BeerViewModel: ObservableObject {
     @Published var beers: [String: [BeerWithImage]] = [:]
+    @Published var scannedbeers: [String: [BeerWithImage]] = [:]
     @Published var selectedBeer: Beer? = nil
 
     // Function to add a new beer
@@ -17,6 +18,13 @@ class BeerViewModel: ObservableObject {
             beers[type] = []
         }
         beers[type]?.append(beer)
+    }
+    
+    func addscannedBeer(_ beer: BeerWithImage, for type: String) {
+        if scannedbeers[type] == nil {
+            scannedbeers[type] = []
+        }
+        scannedbeers[type]?.append(beer)
     }
 
     // Function to set the selected beer

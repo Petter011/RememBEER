@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+
+
 @main
 struct O_lprovningApp: App {
     @StateObject private var dataController = DataController()

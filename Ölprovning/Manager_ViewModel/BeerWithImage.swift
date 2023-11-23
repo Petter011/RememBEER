@@ -6,13 +6,24 @@
 //
 import SwiftUI
 import Foundation
-import CoreData
 
+struct ScannedBeerType: Decodable {
+    let name: String
+    let id: String
+}
 
+struct ScannedBeer: Decodable {
+    let beerType: ScannedBeerType
+    let name: String
+    let id: String
+    let score: Int
+    let note: String
+    //let imageData: String? // Added property for base64-encoded image data
+}
 
 extension Beer: Encodable {
     enum CodingKeys: CodingKey {
-        case id, name, score, note, beerType
+        case id, name, score, note, beerType//, imageData
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -21,13 +32,28 @@ extension Beer: Encodable {
         try container.encode(name, forKey: .name)
         try container.encode(score, forKey: .score)
         try container.encode(note, forKey: .note)
-
+        
         // Encode the relationship if it exists
         if let beerType = beerType {
             try container.encode(beerType, forKey: .beerType)
         }
+        // Encode the image data if it exists
+        /*if let imageData = image?.base64EncodedString() {
+            try container.encode(imageData, forKey: .imageData)
+        }*/
     }
 }
+
+// Decode image data
+/*extension ScannedBeer {
+    func getBeerImage() -> UIImage? {
+        if let imageDataString = imageData,
+           let imageData = Data(base64Encoded: imageDataString) {
+            return UIImage(data: imageData)
+        }
+        return nil
+    }
+}*/
 
 extension BeerType: Encodable {
     enum CodingKeys: CodingKey {
@@ -41,14 +67,9 @@ extension BeerType: Encodable {
     }
 }
 
-extension Beer {
-    func getBeerImage() -> UIImage? {
-        if image != nil {
-            return UIImage(data: image!)
-        }
-        return nil
-    }
-}
+    
+
+
 
 struct BeerWithImage: Identifiable, Codable {
     var id = UUID()
@@ -66,3 +87,15 @@ struct BeerWithImage: Identifiable, Codable {
         return nil
     }
 }
+extension Beer {
+    func getBeerImage() -> UIImage? {
+        if image != nil {
+            return UIImage(data: image!)
+        }
+        return nil
+    }
+}
+
+
+
+

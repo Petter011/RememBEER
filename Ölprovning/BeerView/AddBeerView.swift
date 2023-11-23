@@ -71,8 +71,6 @@ struct AddBeerView: View {
                 }
                 .padding(.horizontal)
                 
-                
-                
                 Button {
                     showingImagePicker.toggle()
                 } label: {
@@ -99,7 +97,6 @@ struct AddBeerView: View {
                         .padding(.top,10)
                 }
                     
-                
                 Spacer()
                 
                 Button {

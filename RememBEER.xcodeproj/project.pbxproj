@@ -32,8 +32,10 @@
 		15A8F7172A8F4BAC00EB3ABE /* BeerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A8F7162A8F4BAC00EB3ABE /* BeerViewModel.swift */; };
 		15F259D32B02A010009F5581 /* GenerateQRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F259D22B02A010009F5581 /* GenerateQRView.swift */; };
 		15F259D72B04BF21009F5581 /* QRCodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F259D62B04BF21009F5581 /* QRCodeScannerView.swift */; };
-		15F259D92B04BFDD009F5581 /* ScanQRcodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F259D82B04BFDD009F5581 /* ScanQRcodeView.swift */; };
+		15F259D92B04BFDD009F5581 /* ScannedQRcodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F259D82B04BFDD009F5581 /* ScannedQRcodeView.swift */; };
 		15F259E12B04F60B009F5581 /* QRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F259E02B04F60B009F5581 /* QRView.swift */; };
+		15F259E42B06354B009F5581 /* DetailInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F259E32B06354B009F5581 /* DetailInfoView.swift */; };
+		15F259E62B064F62009F5581 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F259E52B064F62009F5581 /* Helper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,8 +84,10 @@
 		15A8F7162A8F4BAC00EB3ABE /* BeerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerViewModel.swift; sourceTree = "<group>"; };
 		15F259D22B02A010009F5581 /* GenerateQRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateQRView.swift; sourceTree = "<group>"; };
 		15F259D62B04BF21009F5581 /* QRCodeScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeScannerView.swift; sourceTree = "<group>"; };
-		15F259D82B04BFDD009F5581 /* ScanQRcodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQRcodeView.swift; sourceTree = "<group>"; };
+		15F259D82B04BFDD009F5581 /* ScannedQRcodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannedQRcodeView.swift; sourceTree = "<group>"; };
 		15F259E02B04F60B009F5581 /* QRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRView.swift; sourceTree = "<group>"; };
+		15F259E32B06354B009F5581 /* DetailInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoView.swift; sourceTree = "<group>"; };
+		15F259E52B064F62009F5581 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,12 +116,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1518D6012B07C70D00E8CA87 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		152C57C52A9D12F9006FD102 /* BeerView */ = {
 			isa = PBXGroup;
 			children = (
 				15A8F7022A8D1C5F00EB3ABE /* BeerView.swift */,
 				15A8F6FC2A8D1C3300EB3ABE /* AddBeerView.swift */,
 				15A8F70E2A8D383E00EB3ABE /* BeerDetailView.swift */,
+				15F259E32B06354B009F5581 /* DetailInfoView.swift */,
 				15901B302AEA341100249A93 /* EditBeerView.swift */,
 			);
 			path = BeerView;
@@ -143,6 +155,7 @@
 				15A8F6E22A8D1BB900EB3ABE /* ÖlprovningTests */,
 				15A8F6EC2A8D1BB900EB3ABE /* ÖlprovningUITests */,
 				15A8F6D02A8D1BB700EB3ABE /* Products */,
+				1518D6012B07C70D00E8CA87 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -170,6 +183,7 @@
 				15A8F7082A8D1C7300EB3ABE /* ContentView.swift */,
 				15F259E02B04F60B009F5581 /* QRView.swift */,
 				152C57C82A9D24CE006FD102 /* SettingsView.swift */,
+				15F259E52B064F62009F5581 /* Helper.swift */,
 				157B69392AF186FE002A0F97 /* TheBestView.swift */,
 				15A8F6D62A8D1BB900EB3ABE /* Assets.xcassets */,
 				15A8F6D82A8D1BB900EB3ABE /* Preview Content */,
@@ -207,7 +221,7 @@
 			children = (
 				15F259D62B04BF21009F5581 /* QRCodeScannerView.swift */,
 				15F259D22B02A010009F5581 /* GenerateQRView.swift */,
-				15F259D82B04BFDD009F5581 /* ScanQRcodeView.swift */,
+				15F259D82B04BFDD009F5581 /* ScannedQRcodeView.swift */,
 			);
 			path = QRCode;
 			sourceTree = "<group>";
@@ -359,11 +373,13 @@
 				15185A032AA478530028E0DC /* Model.xcdatamodeld in Sources */,
 				15A8F6D32A8D1BB700EB3ABE /* O_lprovningApp.swift in Sources */,
 				15A8F7172A8F4BAC00EB3ABE /* BeerViewModel.swift in Sources */,
+				15F259E62B064F62009F5581 /* Helper.swift in Sources */,
 				157B693A2AF186FE002A0F97 /* TheBestView.swift in Sources */,
-				15F259D92B04BFDD009F5581 /* ScanQRcodeView.swift in Sources */,
+				15F259D92B04BFDD009F5581 /* ScannedQRcodeView.swift in Sources */,
 				15901B312AEA341100249A93 /* EditBeerView.swift in Sources */,
 				15A8F7052A8D1C6500EB3ABE /* BeerWithImage.swift in Sources */,
 				15F259E12B04F60B009F5581 /* QRView.swift in Sources */,
+				15F259E42B06354B009F5581 /* DetailInfoView.swift in Sources */,
 				15A8F7152A8F41AD00EB3ABE /* BeerManager.swift in Sources */,
 				15A8F7132A8DEA1100EB3ABE /* EnvironmentKeys.swift in Sources */,
 				15A8F7032A8D1C5F00EB3ABE /* BeerView.swift in Sources */,
@@ -530,7 +546,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Ölprovning/Preview Content\"";
 				DEVELOPMENT_TEAM = BXY9G7CMC3;
 				ENABLE_PREVIEWS = YES;
@@ -548,7 +564,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2;
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Petter.O-lprovning";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -556,7 +572,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -566,7 +582,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Ölprovning/Preview Content\"";
 				DEVELOPMENT_TEAM = BXY9G7CMC3;
 				ENABLE_PREVIEWS = YES;
@@ -584,7 +600,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2;
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Petter.O-lprovning";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -592,7 +608,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

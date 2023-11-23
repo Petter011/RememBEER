@@ -22,128 +22,99 @@ struct BeerView: View {
     @FetchRequest(sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)]) var beerTypes: FetchedResults<BeerType>
     
     var body: some View {
-        NavigationStack {
-            ZStack {
-                Image("BackgroundImageBeer")
-                    .resizable()
-                    .edgesIgnoringSafeArea(.top)
-                    .blur(radius: isBlurOn ? CGFloat(blurRadius) : 0)
-                
-                VStack(spacing: 20) {
-                    ScrollView {
-                        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 20) {
-                            ForEach(beerTypes, id: \.self) { beerType in
-#if os(iOS)
-                                NavigationLink(
-                                    destination: BeerDetailView(viewModel: viewModel, beerType: beerType),
-                                    label: {
-                                        BeerTypeCell(beerType: beerType)
-                                    }
-                                )
-#else
-                                BeerTypeCell(beerType: beerType)
-#endif
-                                
-                            }
-                            .background(Color.black)
-                            .cornerRadius(15)
-                            .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.white, lineWidth: 1))
-                        }
-                    }
-                    .safeAreaInset(edge: .top) {
-                       navBar()
-                    }
-                    .navigationBarHidden(true)
-                    
-                    Button(action: {
-                        showingAddBeerView.toggle()
-                    }) {
-                        Text("Add beer")
-                            .padding()
-                            .frame(maxWidth: 200, maxHeight: 60)
-                            .foregroundColor(.white)
-                            .font(.title3)
-                            .fontWeight(.bold)
-                    }
-                    .background(.linearGradient(colors: [.orange, .black], startPoint: .top, endPoint: .bottomTrailing))
-                    .cornerRadius(15)
-                    .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.white, lineWidth: 1))
-                    .padding(.bottom, 30)
-                    .sheet(isPresented: $showingAddBeerView) {
-                        AddBeerView(
-                            onSave: { newBeer, beerType in
-                                beerManager.addBeer(newBeer, for: beerType)
-                                
-                                let fetchRequest: NSFetchRequest<BeerType>
-                                fetchRequest = BeerType.fetchRequest()
-                                fetchRequest.predicate = NSPredicate(format: "name LIKE %@", beerType)
-                                fetchRequest.fetchLimit = 1
-                                let types = try? moc.fetch(fetchRequest)
-                                let t: BeerType
-                                if types != nil && !types!.isEmpty {
-                                    t = types![0]
-                                } else {
-                                    t = BeerType(context: moc)
-                                    t.id = UUID()
-                                    t.name = beerType
-                                    t.beers = []
+        ZStack {
+            Image("BackgroundImageBeer")
+                .resizable()
+                .edgesIgnoringSafeArea(.top)
+                .blur(radius: isBlurOn ? CGFloat(blurRadius) : 0)
+            
+            VStack(spacing: 20) {
+                ScrollView {
+                    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 20) {
+                        ForEach(beerTypes.filter { $0.isScanned == false }, id: \.self) { addedBeerType in
+                            NavigationLink(
+                                destination: BeerDetailView(viewModel: viewModel, beerType: addedBeerType),
+                                label: {
+                                    Text(addedBeerType.name!)
+                                        .padding()
+                                        .frame(maxWidth: 150)
+                                        .foregroundColor(.orange)
+                                        .font(.title2)
+                                        .fontWeight(.bold)
                                 }
-                                
-                                let beer = Beer(context: moc)
-                                beer.id = UUID()
-                                beer.image = newBeer.beerImageData!
-                                beer.name = newBeer.beerName
-                                beer.score = newBeer.beerPoints
-                                beer.note = newBeer.beerNote
-                                beer.beerType = t
-                                try? moc.save()
-                                
-                                
-                                // Set isFirstBeerAdded to true
-                                isFirstBeerAdded = true
-                                UserDefaults.standard.set(isFirstBeerAdded, forKey: "isFirstBeerAdded")
-                                
-                                isBlurOn = true
-                            },
-                            selectedBeerType: $selectedBeerType,
-                            isPresented: $showingAddBeerView
-                        )
+                            )
+                        }
+                        .background(Color.black)
+                        .cornerRadius(15)
+                        .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.white, lineWidth: 1))
                     }
                 }
-            }
-        }
-    }
-}
-
-struct BeerTypeCell: View {
-    let beerType: BeerType
-
-    var body: some View {
-        Text(beerType.name!)
-            .padding()
-            .frame(maxWidth: 150)
-            .foregroundColor(.orange)
-            .font(.title2)
-            .fontWeight(.bold)
-    }
-}
-
-struct navBar: View {
-    var body: some View {
-            VStack() {
-                HStack() {
-                    Spacer()
-                    Text("Beer")
-                        .font(.largeTitle.weight(.bold))
-                        .foregroundStyle(Color.orange)
-                    Spacer()
+                .safeAreaInset(edge: .top) {
+                    navBar(headline: "Beer")
+                }
+                .navigationBarHidden(true)
+                
+                Button(action: {
+                    showingAddBeerView.toggle()
+                }) {
+                    Text("Add beer")
+                        .padding()
+                        .frame(maxWidth: 200, maxHeight: 60)
+                        .foregroundColor(.white)
+                        .font(.title3)
+                        .fontWeight(.bold)
+                }
+                .background(.linearGradient(colors: [.orange, .black], startPoint: .top, endPoint: .bottomTrailing))
+                .cornerRadius(15)
+                .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.white, lineWidth: 1))
+                .padding(.bottom, 30)
+                .sheet(isPresented: $showingAddBeerView) {
+                    AddBeerView(
+                        onSave: { newBeer, beerType in
+                            beerManager.addBeer(newBeer, for: beerType)
+                            
+                            let fetchRequest: NSFetchRequest<BeerType>
+                            fetchRequest = BeerType.fetchRequest()
+                            fetchRequest.predicate = NSPredicate(format: "name LIKE %@", beerType)
+                            fetchRequest.fetchLimit = 1
+                            let types = try? moc.fetch(fetchRequest)
+                            let t: BeerType
+                            if types != nil && !types!.isEmpty {
+                                t = types![0]
+                            } else {
+                                t = BeerType(context: moc)
+                                t.id = UUID()
+                                t.name = beerType
+                                t.isScanned = false
+                                t.beers = []
+                            }
+                            
+                            let beer = Beer(context: moc)
+                            beer.id = UUID()
+                            beer.image = newBeer.beerImageData!
+                            beer.name = newBeer.beerName
+                            beer.score = newBeer.beerPoints
+                            beer.note = newBeer.beerNote
+                            beer.beerType?.isScanned = false
+                            beer.beerType = t
+                            try? moc.save()
+                            
+                            
+                            // Set isFirstBeerAdded to true
+                            isFirstBeerAdded = true
+                            UserDefaults.standard.set(isFirstBeerAdded, forKey: "isFirstBeerAdded")
+                            
+                            isBlurOn = true
+                        },
+                        selectedBeerType: $selectedBeerType,
+                        isPresented: $showingAddBeerView
+                    )
                 }
             }
-            .padding()
-            .background(LinearGradient(colors: [.black.opacity(0.1), .orange.opacity(0.6)],
-                                       startPoint: .topLeading, endPoint: .bottomTrailing)
-                .overlay(.ultraThinMaterial)
-            )
         }
     }
+}
+
+
+
 

@@ -7,14 +7,19 @@
 
 import SwiftUI
 
-struct ScannedQRcodeView: View {
-    @State private var scannedBeer: ScannedBeer?
-    //@ObservedObject var viewModel: BeerViewModel
-    let onSave: (BeerWithImage, String) -> Void
 
+struct ScannedQRcodeView: View {
+    @EnvironmentObject var beerManager: BeerManager
+    @EnvironmentObject var viewModel: BeerViewModel
+    @State private var scannedBeer: ScannedBeer?
+    
+
+    let onSave: (BeerWithImage, String) -> Void
+    
+    @Binding var selectedBeerType: String?
+    @Binding var isPresented: Bool
     var body: some View {
         VStack {
-            // Display the decoded beer information
             if let scannedBeer = scannedBeer {
                 VStack {
                     Text(scannedBeer.beerType.name)
@@ -60,8 +65,7 @@ struct ScannedQRcodeView: View {
                     
                     
                     Button(action: {
-                        let QrBeer = BeerWithImage(beerType: beerType, beerPoints: beerPoints, beerName: beerName, beerNote: beerNote)
-                        onSave(QrBeer, beerType)
+                        saveScannedBeer()
                     }, label: {
                         Text("Save")
                             .font(.headline)
@@ -73,15 +77,14 @@ struct ScannedQRcodeView: View {
                     .cornerRadius(40)
                     .shadow(color: .orange, radius: 5, y: 3)
                     .overlay(RoundedRectangle(cornerRadius: 40).stroke(Color.black, lineWidth: 1))
-                   .padding(.bottom, 30)
+                    .padding(.bottom, 30)
                     
                     
                     /*Image(uiImage: scannedBeer.getBeerImage()!)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 100, height: 100)*/
+                     .resizable()
+                     .scaledToFit()
+                     .frame(width: 100, height: 100)*/
                 }
-                // Add other properties as needed
             } else {
                 // Use the QRCodeScannerView to scan QR codes
                 QRCodeScannerView { code in
@@ -96,7 +99,22 @@ struct ScannedQRcodeView: View {
             }
         }
     }
-
+    
+    private func saveScannedBeer() {
+            if let beer = scannedBeer {
+                let newBeer = BeerWithImage(
+                    beerType: beer.beerType.name,
+                    beerPoints: Int16(beer.score),
+                    beerName: beer.name,
+                    beerImageData: nil,  // Set the actual image data here if available
+                    beerNote: beer.note
+                )
+                onSave(newBeer, beer.beerType.name)
+                isPresented = false
+            }
+        
+        }
+    
     private func decodeScannedCode(_ code: String) {
         // Attempt to decode the scanned code
         if let jsonData = code.data(using: .utf8) {

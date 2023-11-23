@@ -12,24 +12,28 @@ struct ContentView: View {
     var body: some View {
         TabView{
             Group{
-                BeerView()
-                    .tabItem {
-                        Label("Beer", systemImage: "mug.fill")
-                    }
-                QRView()
-                    .tabItem {
-                        Label("Scan QR", systemImage: "qrcode")
-                    }
-                SettingsView()
-                    .tabItem {
-                        Label("Settings", systemImage: "slider.horizontal.3")
-                    }
+                NavigationStack{
+                    BeerView()
+                }
+                .tabItem {
+                    Label("Beer", systemImage: "mug.fill")
+                }
+                NavigationStack{
+                    QRView()
+                }
+                .tabItem {
+                    Label("Scan QR", systemImage: "qrcode")
+                }
+                NavigationStack{
+                    SettingsView()
+                }
+                .tabItem {
+                    Label("Settings", systemImage: "slider.horizontal.3")
+                }
             }
             .toolbarBackground(.black, for: .tabBar)
             .toolbarBackground(.visible, for: .tabBar)
             .toolbarColorScheme(.dark, for: .tabBar)
-            
-            
         }
     }
 }

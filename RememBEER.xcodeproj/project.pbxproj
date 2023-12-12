@@ -13,6 +13,9 @@
 		152C57C92A9D24CE006FD102 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152C57C82A9D24CE006FD102 /* SettingsView.swift */; };
 		152C57D02A9DCCBC006FD102 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 152C57CF2A9DCCBC006FD102 /* CodeScanner */; };
 		155EFD882AFB8767009D37F9 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 155EFD872AFB8767009D37F9 /* Launch Screen.storyboard */; };
+		1573C26B2B18BBA7003A18B4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1573C26A2B18BBA7003A18B4 /* GoogleService-Info.plist */; };
+		1573C26E2B18BE36003A18B4 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 1573C26D2B18BE36003A18B4 /* FirebaseStorage */; };
+		157A9A592B224B9200BEADCB /* ShowScannedBeerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157A9A582B224B9200BEADCB /* ShowScannedBeerView.swift */; };
 		157B693A2AF186FE002A0F97 /* TheBestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157B69392AF186FE002A0F97 /* TheBestView.swift */; };
 		15901B312AEA341100249A93 /* EditBeerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15901B302AEA341100249A93 /* EditBeerView.swift */; };
 		15A8F6D32A8D1BB700EB3ABE /* O_lprovningApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A8F6D22A8D1BB700EB3ABE /* O_lprovningApp.swift */; };
@@ -62,6 +65,8 @@
 		152C57C82A9D24CE006FD102 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		155EFD862AFB7F5B009D37F9 /* O-lprovning-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "O-lprovning-Info.plist"; sourceTree = SOURCE_ROOT; };
 		155EFD872AFB8767009D37F9 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		1573C26A2B18BBA7003A18B4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		157A9A582B224B9200BEADCB /* ShowScannedBeerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowScannedBeerView.swift; sourceTree = "<group>"; };
 		157B69392AF186FE002A0F97 /* TheBestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheBestView.swift; sourceTree = "<group>"; };
 		15901B302AEA341100249A93 /* EditBeerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBeerView.swift; sourceTree = "<group>"; };
 		15A8F6CF2A8D1BB700EB3ABE /* RememBEER.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RememBEER.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,6 +87,7 @@
 		15A8F7122A8DEA1100EB3ABE /* EnvironmentKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentKeys.swift; sourceTree = "<group>"; };
 		15A8F7142A8F41AD00EB3ABE /* BeerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerManager.swift; sourceTree = "<group>"; };
 		15A8F7162A8F4BAC00EB3ABE /* BeerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerViewModel.swift; sourceTree = "<group>"; };
+		15D01A3F2B2309B3000D9A1B /* RememBEER.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RememBEER.entitlements; sourceTree = "<group>"; };
 		15F259D22B02A010009F5581 /* GenerateQRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateQRView.swift; sourceTree = "<group>"; };
 		15F259D62B04BF21009F5581 /* QRCodeScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeScannerView.swift; sourceTree = "<group>"; };
 		15F259D82B04BFDD009F5581 /* ScannedQRcodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannedQRcodeView.swift; sourceTree = "<group>"; };
@@ -96,6 +102,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				152C57D02A9DCCBC006FD102 /* CodeScanner in Frameworks */,
+				1573C26E2B18BE36003A18B4 /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,6 +157,8 @@
 		15A8F6C62A8D1BB700EB3ABE = {
 			isa = PBXGroup;
 			children = (
+				1573C26A2B18BBA7003A18B4 /* GoogleService-Info.plist */,
+				15D01A3F2B2309B3000D9A1B /* RememBEER.entitlements */,
 				151243AF2AF40BF9005459D1 /* Localizable.xcstrings */,
 				15A8F6D12A8D1BB700EB3ABE /* Ölprovning */,
 				15A8F6E22A8D1BB900EB3ABE /* ÖlprovningTests */,
@@ -222,6 +231,7 @@
 				15F259D62B04BF21009F5581 /* QRCodeScannerView.swift */,
 				15F259D22B02A010009F5581 /* GenerateQRView.swift */,
 				15F259D82B04BFDD009F5581 /* ScannedQRcodeView.swift */,
+				157A9A582B224B9200BEADCB /* ShowScannedBeerView.swift */,
 			);
 			path = QRCode;
 			sourceTree = "<group>";
@@ -244,6 +254,7 @@
 			name = RememBEER;
 			packageProductDependencies = (
 				152C57CF2A9DCCBC006FD102 /* CodeScanner */,
+				1573C26D2B18BE36003A18B4 /* FirebaseStorage */,
 			);
 			productName = "Ölprovning";
 			productReference = 15A8F6CF2A8D1BB700EB3ABE /* RememBEER.app */;
@@ -320,6 +331,7 @@
 			mainGroup = 15A8F6C62A8D1BB700EB3ABE;
 			packageReferences = (
 				152C57CE2A9DCCBC006FD102 /* XCRemoteSwiftPackageReference "CodeScanner" */,
+				1573C26C2B18BC74003A18B4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 15A8F6D02A8D1BB700EB3ABE /* Products */;
 			projectDirPath = "";
@@ -339,6 +351,7 @@
 			files = (
 				15A8F6DA2A8D1BB900EB3ABE /* Preview Assets.xcassets in Resources */,
 				151243B02AF40BF9005459D1 /* Localizable.xcstrings in Resources */,
+				1573C26B2B18BBA7003A18B4 /* GoogleService-Info.plist in Resources */,
 				155EFD882AFB8767009D37F9 /* Launch Screen.storyboard in Resources */,
 				15A8F6D72A8D1BB900EB3ABE /* Assets.xcassets in Resources */,
 			);
@@ -373,6 +386,7 @@
 				15185A032AA478530028E0DC /* Model.xcdatamodeld in Sources */,
 				15A8F6D32A8D1BB700EB3ABE /* O_lprovningApp.swift in Sources */,
 				15A8F7172A8F4BAC00EB3ABE /* BeerViewModel.swift in Sources */,
+				157A9A592B224B9200BEADCB /* ShowScannedBeerView.swift in Sources */,
 				15F259E62B064F62009F5581 /* Helper.swift in Sources */,
 				157B693A2AF186FE002A0F97 /* TheBestView.swift in Sources */,
 				15F259D92B04BFDD009F5581 /* ScannedQRcodeView.swift in Sources */,
@@ -545,6 +559,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = RememBEER.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Ölprovning/Preview Content\"";
@@ -581,6 +596,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = RememBEER.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Ölprovning/Preview Content\"";
@@ -734,6 +750,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		1573C26C2B18BC74003A18B4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.18.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -741,6 +765,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 152C57CE2A9DCCBC006FD102 /* XCRemoteSwiftPackageReference "CodeScanner" */;
 			productName = CodeScanner;
+		};
+		1573C26D2B18BE36003A18B4 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1573C26C2B18BC74003A18B4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
 		};
 /* End XCSwiftPackageProductDependency section */
 

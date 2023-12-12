@@ -8,23 +8,23 @@
 import Foundation
 
 class BeerViewModel: ObservableObject {
-    @Published var beers: [String: [BeerWithImage]] = [:]
-    @Published var scannedbeers: [String: [BeerWithImage]] = [:]
+    @Published var addedBeers: [String: [BeerWithImage]] = [:]
+    @Published var scannedBeers: [String: [BeerWithImage]] = [:]
     @Published var selectedBeer: Beer? = nil
 
     // Function to add a new beer
     func addBeer(_ beer: BeerWithImage, for type: String) {
-        if beers[type] == nil {
-            beers[type] = []
+        if addedBeers[type] == nil {
+            addedBeers[type] = []
         }
-        beers[type]?.append(beer)
+        addedBeers[type]?.append(beer)
     }
     
     func addscannedBeer(_ beer: BeerWithImage, for type: String) {
-        if scannedbeers[type] == nil {
-            scannedbeers[type] = []
+        if scannedBeers[type] == nil {
+            scannedBeers[type] = []
         }
-        scannedbeers[type]?.append(beer)
+        scannedBeers[type]?.append(beer)
     }
 
     // Function to set the selected beer

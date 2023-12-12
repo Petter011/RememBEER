@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct EditBeerView: View {
     
@@ -14,7 +15,12 @@ struct EditBeerView: View {
     @EnvironmentObject var beerManager: BeerManager
     @ObservedObject var viewModel: BeerViewModel
     var beer: Beer // Pass the selected beer to edit
-
+    var beerType: BeerType
+    
+    
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)]) var beerTypes: FetchedResults<BeerType>
+    @Environment(\.presentationMode) var presentationMode
+    
     @State private var beerPointsOptions: [Int16] = Array(0...10)
     @State private var showingImagePicker = false
     @State private var editedBeerImageData: Data?
@@ -25,28 +31,26 @@ struct EditBeerView: View {
     @State private var editedBeerType: String = ""
     @State private var showError = false
     
-    init(isShowingEditView: Binding<Bool>, viewModel: BeerViewModel, beer: Beer) {
+    init(isShowingEditView: Binding<Bool>, viewModel: BeerViewModel, beer: Beer, beerType: BeerType) {
         _isShowingEditView = isShowingEditView
         self.viewModel = viewModel
         self.beer = beer
+        self.beerType = beerType
         _editedBeerName = State(initialValue: beer.name!)
         _editedBeerPoints = State(initialValue: beer.score)
         _editedBeerNote = State(initialValue: beer.note!)
-        //_editedBeerType = State(initialValue: beer.beerType!.name!)
+        _editedBeerType = State(initialValue: (beer.beerType?.name!)!)
     }
-
-    
-    
     var body: some View {
         NavigationStack {
             VStack(spacing: 20) {
                 Group {
-                    
-                    /*Text(beer.beerType!.name!)
-                        .foregroundColor(Color.orange)
                     TextField("Which type of beer? e.g. IPA, APA", text: $editedBeerType)
                         .textFieldStyle(.roundedBorder)
-                        .keyboardType(.default)*/
+                        .keyboardType(.default)
+                        .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardDidHideNotification)) { _ in
+                            editedBeerType = editedBeerType.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+                        }
                     
                     TextField("Name of the beer?", text: $editedBeerName)
                         .textFieldStyle(.roundedBorder)
@@ -57,7 +61,7 @@ struct EditBeerView: View {
                         .keyboardType(.default)
                         .lineLimit(3, reservesSpace: true)
                         .padding(.top, 10)
-
+                    
                     VStack{
                         VStack(alignment: .center) {
                             Text("Points (0-10)")
@@ -70,53 +74,91 @@ struct EditBeerView: View {
                                     
                                 }
                             }
-                            
                             .pickerStyle(.wheel)
                             .onAppear {
                                 editedBeerPoints = beer.score
                             }
                         }
-                        
                     }
                     .padding(.top, 30)
                 }
                 .padding(.horizontal)
                 
                 /*if let selectedImage = editedselectedImages.last {
-                    Image(uiImage: selectedImage)
-                        .resizable()
-                        .scaledToFit()
-                        .cornerRadius(10)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-                
-                }
-                
-                Button("Take a picture") {
-                    showingImagePicker.toggle()
-                }
-                .font(.headline)
-                .foregroundColor(.white)
-                .frame(maxWidth: 140)
-                .padding()
-                .background(Color.orange)
-                .cornerRadius(20)
-                .shadow(radius: 40)
-                .sheet(isPresented: $showingImagePicker) {
-                    ImagePicker(selectedImages: $editedselectedImages, sourceType: .camera) // Pass the array binding
-                }*/
+                 Image(uiImage: selectedImage)
+                 .resizable()
+                 .scaledToFit()
+                 .cornerRadius(10)
+                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                 
+                 }
+                 
+                 Button("Take a picture") {
+                 showingImagePicker.toggle()
+                 }
+                 .font(.headline)
+                 .foregroundColor(.white)
+                 .frame(maxWidth: 140)
+                 .padding()
+                 .background(Color.orange)
+                 .cornerRadius(20)
+                 .shadow(radius: 40)
+                 .sheet(isPresented: $showingImagePicker) {
+                 ImagePicker(selectedImages: $editedselectedImages, sourceType: .camera)
+                 }*/
                 Spacer()
                 
                 Button {
-                    beer.name = editedBeerName
-                    beer.score = editedBeerPoints
-                    beer.note = editedBeerNote
-                    //beer.beerType!.name! = editedBeerType
+                    // Fetch existing beer type with the entered name
+                    let fetchRequest: NSFetchRequest<BeerType> = BeerType.fetchRequest()
+                    fetchRequest.predicate = NSPredicate(format: "name LIKE %@", editedBeerType)
+                    fetchRequest.fetchLimit = 1
+
                     do {
+                        let existingTypes = try moc.fetch(fetchRequest)
+
+                        if let existingType = existingTypes.first {
+                            // Check the current count of beers in the beer type
+                            //let currentBeerCount = existingType.beers?.count ?? 0
+
+                            // Associate the beer with the existing beer type
+                            beer.name = editedBeerName
+                            beer.score = editedBeerPoints
+                            beer.note = editedBeerNote
+                            beer.beerType = existingType
+
+                            try moc.save()
+                            
+                        } else {
+                            // Create a new beer type
+                            let newType = BeerType(context: moc)
+                            newType.id = UUID()
+                            newType.name = editedBeerType
+                            newType.isScanned = false
+                            newType.beers = []
+                            beer.name = editedBeerName
+                            beer.score = editedBeerPoints
+                            beer.note = editedBeerNote
+                            beer.beerType = newType
+
+                            try moc.save()
+                        }
+                        
+                        // Check if the beer type is now empty and delete it
+                        if let beers = beerType.beers as? Set<Beer>, beers.count == 0 {
+                            moc.delete(beerType)
+                        }
                         try moc.save()
-                        isShowingEditView = false
+                        
                     } catch {
                         print("Error saving edited beer: \(error)")
                     }
+                    let beers = beerType.beers as? Set<Beer>
+                    if beers == nil || beers!.isEmpty {
+                        presentationMode.wrappedValue.dismiss()
+                    }
+                    // Dismiss the view
+                    isShowingEditView = false
                 } label: {
                     Text("Save")
                         .font(.headline)
@@ -136,17 +178,17 @@ struct EditBeerView: View {
                 self.endEditing()
             }
             /*.alert(isPresented: $showError) {
-                Alert(
-                    title: Text("Error"),
-                    message: Text("Please take a picture before saving."),
-                    dismissButton: .default(Text("OK"))
-                )
-            }*/
+             Alert(
+             title: Text("Error"),
+             message: Text("Please take a picture before saving."),
+             dismissButton: .default(Text("OK"))
+             )
+             }*/
         }
     }
 }
 
 /*#Preview {
-    EditBeerView()
-}
-*/
+ EditBeerView()
+ }
+ */

@@ -117,6 +117,16 @@
         }
       }
     },
+    "Creating QR Code..." : {
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skapar QR kod..."
+          }
+        }
+      }
+    },
     "Dark Mode" : {
       "localizations" : {
         "sv" : {
@@ -167,6 +177,16 @@
         }
       }
     },
+    "Error generating QR code" : {
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fel vid skapande av QR kod"
+          }
+        }
+      }
+    },
     "Give RememBEER permission to open your camera. Pictures are saved on your phone to show pictures of your beers" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -177,6 +197,9 @@
           }
         }
       }
+    },
+    "Key" : {
+      "extractionState" : "manual"
     },
     "Name of the beer?" : {
       "localizations" : {
@@ -209,6 +232,7 @@
       }
     },
     "QR Code" : {
+      "extractionState" : "stale",
       "localizations" : {
         "sv" : {
           "stringUnit" : {
@@ -248,12 +272,32 @@
         }
       }
     },
+    "Scanned Beers" : {
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scannade öl"
+          }
+        }
+      }
+    },
     "Settings" : {
       "localizations" : {
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Inställningar"
+          }
+        }
+      }
+    },
+    "Share with QR Code" : {
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dela med QR kod"
           }
         }
       }

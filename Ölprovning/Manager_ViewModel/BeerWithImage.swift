@@ -18,12 +18,36 @@ struct ScannedBeer: Decodable {
     let id: String
     let score: Int
     let note: String
-    //let imageData: String? // Added property for base64-encoded image data
+    var imageData : Data?
+    var imageUrl: String?
+    
+    // UIImage property for display
+        var image: UIImage? {
+            if let imageData = imageData {
+                return UIImage(data: imageData)
+            }
+            return nil
+        }
+    
+    enum CodingKeys: String, CodingKey {
+            case beerType, name, id, score, note, imageData, imageUrl
+        }
+}
+
+// Decode image data
+extension ScannedBeer {
+    func getBeerImage() -> UIImage? {
+        if let imageDataString = imageUrl,
+           let imageData = Data(base64Encoded: imageDataString) {
+            return UIImage(data: imageData)
+        }
+        return nil
+    }
 }
 
 extension Beer: Encodable {
     enum CodingKeys: CodingKey {
-        case id, name, score, note, beerType//, imageData
+        case id, name, score, note, beerType, imageUrl
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -32,28 +56,16 @@ extension Beer: Encodable {
         try container.encode(name, forKey: .name)
         try container.encode(score, forKey: .score)
         try container.encode(note, forKey: .note)
+        try container.encode(imageUrl, forKey: .imageUrl)
         
         // Encode the relationship if it exists
         if let beerType = beerType {
             try container.encode(beerType, forKey: .beerType)
         }
-        // Encode the image data if it exists
-        /*if let imageData = image?.base64EncodedString() {
-            try container.encode(imageData, forKey: .imageData)
-        }*/
     }
 }
 
-// Decode image data
-/*extension ScannedBeer {
-    func getBeerImage() -> UIImage? {
-        if let imageDataString = imageData,
-           let imageData = Data(base64Encoded: imageDataString) {
-            return UIImage(data: imageData)
-        }
-        return nil
-    }
-}*/
+
 
 extension BeerType: Encodable {
     enum CodingKeys: CodingKey {

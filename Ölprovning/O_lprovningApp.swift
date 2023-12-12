@@ -6,7 +6,16 @@
 //
 
 import SwiftUI
+import Firebase
 
+class AppDelegate: NSObject, UIApplicationDelegate {
+  func application(_ application: UIApplication,
+                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+    FirebaseApp.configure()
+
+    return true
+  }
+}
 
 
 @main
@@ -18,6 +27,9 @@ struct O_lprovningApp: App {
     @AppStorage("isBlurOn") private var isBlurOn = false
     @AppStorage("blurRadius") private var blurRadius = 10.0
     @AppStorage("isFirstBeerAdded") private var isFirstBeerAdded = false
+    
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+
 
     var body: some Scene {
         WindowGroup {

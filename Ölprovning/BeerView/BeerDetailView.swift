@@ -79,7 +79,7 @@ struct BeerDetailView: View {
                                         selectedBeer = beer
                                         isShowingGenerateQRView = true
                                     }label: {
-                                        Label("QR Code", systemImage: "qrcode")
+                                        Label("Share with QR Code", systemImage: "qrcode")
                                     }
                                     
                                     Divider()
@@ -98,7 +98,7 @@ struct BeerDetailView: View {
                                 }
                                 .sheet(isPresented: $isShowingEditView) {
                                     if let beer = selectedBeer {
-                                        EditBeerView(isShowingEditView: $isShowingEditView, viewModel: viewModel, beer: beer)
+                                        EditBeerView(isShowingEditView: $isShowingEditView, viewModel: viewModel, beer: beer, beerType: beerType)
                                     }
                                 }
                                 .sheet(isPresented: $isShowingFullScreenImage) {
@@ -109,8 +109,6 @@ struct BeerDetailView: View {
                         }
                     }
                 }
-                /*.navigationTitle(beerType.name == nil ? "" : beerType.name!)
-                 .toolbarBackground(.hidden)*/
                 Spacer()
             }
             .alert(isPresented: $showAlert) {
@@ -127,8 +125,8 @@ struct BeerDetailView: View {
                             if let beers = beerType.beers as? Set<Beer>, beers.count == 1 {
                                 moc.delete(beerType)
                             }
-                            
                             try moc.save()
+                            
                         }catch {
                             print("Error deleting beer: \(error)")
                         }

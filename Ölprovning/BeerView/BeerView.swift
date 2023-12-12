@@ -16,11 +16,15 @@ struct BeerView: View {
     @State private var selectedBeerType: String? = nil
     @State private var isFirstBeerAdded = UserDefaults.standard.bool(forKey: "isFirstBeerAdded")
     
+    var addedBeers: [BeerType] {
+            beerTypes.filter { $0.isScanned == false }
+        }
+    
     @AppStorage("isBlurOn") private var isBlurOn = false
     @AppStorage("blurRadius") private var blurRadius = 1.0
     
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)]) var beerTypes: FetchedResults<BeerType>
-    
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(key: "name", ascending: true), NSSortDescriptor(key: "isScanned", ascending: false)]) var beerTypes: FetchedResults<BeerType>
+
     var body: some View {
         ZStack {
             Image("BackgroundImageBeer")
@@ -31,11 +35,11 @@ struct BeerView: View {
             VStack(spacing: 20) {
                 ScrollView {
                     LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 20) {
-                        ForEach(beerTypes.filter { $0.isScanned == false }, id: \.self) { addedBeerType in
+                        ForEach(addedBeers, id: \.self) { addedBeerType in
                             NavigationLink(
                                 destination: BeerDetailView(viewModel: viewModel, beerType: addedBeerType),
                                 label: {
-                                    Text(addedBeerType.name!)
+                                    Text(addedBeerType.name == nil ? "" : addedBeerType.name!)
                                         .padding()
                                         .frame(maxWidth: 150)
                                         .foregroundColor(.orange)
@@ -49,25 +53,13 @@ struct BeerView: View {
                         .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.white, lineWidth: 1))
                     }
                 }
-                .safeAreaInset(edge: .top) {
-                    navBar(headline: "Beer")
-                }
-                .navigationBarHidden(true)
-                
                 Button(action: {
                     showingAddBeerView.toggle()
-                }) {
+                }, label: {
                     Text("Add beer")
-                        .padding()
-                        .frame(maxWidth: 200, maxHeight: 60)
-                        .foregroundColor(.white)
-                        .font(.title3)
-                        .fontWeight(.bold)
-                }
-                .background(.linearGradient(colors: [.orange, .black], startPoint: .top, endPoint: .bottomTrailing))
-                .cornerRadius(15)
-                .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.white, lineWidth: 1))
-                .padding(.bottom, 30)
+                        .modifier(buttonColor())
+                })
+                .modifier(buttonBackgroundColor())
                 .sheet(isPresented: $showingAddBeerView) {
                     AddBeerView(
                         onSave: { newBeer, beerType in
@@ -78,15 +70,17 @@ struct BeerView: View {
                             fetchRequest.predicate = NSPredicate(format: "name LIKE %@", beerType)
                             fetchRequest.fetchLimit = 1
                             let types = try? moc.fetch(fetchRequest)
-                            let t: BeerType
-                            if types != nil && !types!.isEmpty {
-                                t = types![0]
+                            let addType: BeerType
+                            if let existingType = types?.first {
+                                addType = existingType
+                                addType.isScanned = false
+                                
                             } else {
-                                t = BeerType(context: moc)
-                                t.id = UUID()
-                                t.name = beerType
-                                t.isScanned = false
-                                t.beers = []
+                                addType = BeerType(context: moc)
+                                addType.id = UUID()
+                                addType.name = beerType
+                                addType.isScanned = false
+                                addType.beers = []
                             }
                             
                             let beer = Beer(context: moc)
@@ -95,8 +89,7 @@ struct BeerView: View {
                             beer.name = newBeer.beerName
                             beer.score = newBeer.beerPoints
                             beer.note = newBeer.beerNote
-                            beer.beerType?.isScanned = false
-                            beer.beerType = t
+                            beer.beerType = addType
                             try? moc.save()
                             
                             
@@ -112,6 +105,10 @@ struct BeerView: View {
                 }
             }
         }
+        .safeAreaInset(edge: .top) {
+            navBar(headline: (String(localized: "Beer")))
+        }
+        .navigationBarHidden(true)
     }
 }
 

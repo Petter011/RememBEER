@@ -38,10 +38,10 @@ struct GenerateQRView: View {
                         .progressViewStyle(CircularProgressViewStyle())
                         .foregroundColor(.orange)
                 } else {
-                    Text("Error generating QR code")
-                        .foregroundColor(.red)
+                    ProgressView("Creating QR Code...")
+                        .progressViewStyle(CircularProgressViewStyle())
+                        .foregroundColor(.orange)
                 }
-                
             }
             Spacer()
         }

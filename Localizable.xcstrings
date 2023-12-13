@@ -22,10 +22,24 @@
       }
     },
     "%d/10" : {
-
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d/10"
+          }
+        }
+      }
     },
     "%lld/10" : {
-
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%11d/10"
+          }
+        }
+      }
     },
     "Add a Note" : {
       "localizations" : {
@@ -56,6 +70,12 @@
           }
         }
       }
+    },
+    "All" : {
+
+    },
+    "All Beer" : {
+
     },
     "Appearance" : {
       "localizations" : {
@@ -106,6 +126,9 @@
           }
         }
       }
+    },
+    "Cancel" : {
+
     },
     "Confirm Delete" : {
       "localizations" : {
@@ -178,6 +201,7 @@
       }
     },
     "Error generating QR code" : {
+      "extractionState" : "stale",
       "localizations" : {
         "sv" : {
           "stringUnit" : {
@@ -198,8 +222,34 @@
         }
       }
     },
+    "Hints" : {
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tips"
+          }
+        }
+      }
+    },
+    "If you longpress the beer of chose you can edit, share or delete the beer!" : {
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Om du \"trycker länge\" på en öl kan du redigera, dela eller radera ölen!"
+          }
+        }
+      }
+    },
     "Key" : {
       "extractionState" : "manual"
+    },
+    "Let's go" : {
+
+    },
+    "My Beers" : {
+
     },
     "Name of the beer?" : {
       "localizations" : {
@@ -242,6 +292,22 @@
         }
       }
     },
+    "Received Beers" : {
+
+    },
+    "Recived" : {
+
+    },
+    "RememBEER" : {
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "RememBEER"
+          }
+        }
+      }
+    },
     "Save" : {
       "localizations" : {
         "sv" : {
@@ -253,6 +319,7 @@
       }
     },
     "Scan QR" : {
+      "extractionState" : "stale",
       "localizations" : {
         "sv" : {
           "stringUnit" : {
@@ -273,6 +340,7 @@
       }
     },
     "Scanned Beers" : {
+      "extractionState" : "stale",
       "localizations" : {
         "sv" : {
           "stringUnit" : {
@@ -281,6 +349,12 @@
           }
         }
       }
+    },
+    "Search All Beer" : {
+
+    },
+    "Search Beer" : {
+
     },
     "Settings" : {
       "localizations" : {
@@ -311,6 +385,20 @@
           }
         }
       }
+    },
+    "Welcome to RememBEER – where beer lovers connect and share the joy of discovery! \n\nUnleash the power of QR codes to share your favorite beers with friends and fellow enthusiasts. Scan and unveil a world of flavors, ratings, and images, creating a unique experience for every beer. \n\nJoin our vibrant community, where each QR code tells a story, sparking conversations and fostering a shared passion for craft beer. Let's explore, savor, and celebrate together. \n\nCheers to the journey of beer discovery!" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Välkommen till RememBEER – där ölälskare ansluter och delar upptäckarglädjen!\n\nSläpp lös kraften med QR-koder för att dela dina favoritöl med vänner och andra entusiaster. Skanna och avslöja en värld av smaker, betyg och bilder, vilket skapar en unik upplevelse för varje öl.\n\nGå med i vår pulserande community, där varje QR-kod berättar en historia, väcker konversationer och främjar en gemensam passion för hantverksöl. Låt oss utforska, njuta av och fira tillsammans.\n\nSkål för att upptäcka nya smakrika öl!"
+          }
+        }
+      }
+    },
+    "Welcome to RememBEER – where beer lovers share the joy of discovery! \n\nUnleash the power of QR codes to share your favorite beers with friends and fellow enthusiasts. Scan and unveil a world of flavors, ratings, and images, creating a unique experience for every beer. \n\nJoin our vibrant community, where each QR code tells a story, sparking conversations and fostering a shared passion for craft beer. Let's explore, savor, and celebrate together. \n\nCheers to the journey of beer discovery!" : {
+
     },
     "Which type of beer? e.g. IPA, APA" : {
       "localizations" : {

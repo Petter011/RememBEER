@@ -59,7 +59,7 @@ struct ScannedQRcodeView: View {
                     }
                     .frame(width: 250, height: 100)
                     .shadow(radius: 10)
-                    .border(Color.black, width: 3)
+                    .border(Color.black, width: 1)
                     .cornerRadius(15)
                     .padding(.top, 30)
                     
@@ -69,7 +69,6 @@ struct ScannedQRcodeView: View {
                         Image(uiImage: image)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            //.edgesIgnoringSafeArea(.top)
                             .cornerRadius(15)
                             .padding(.bottom, 20)
                     }
@@ -77,20 +76,54 @@ struct ScannedQRcodeView: View {
                 
                 Spacer()
                 
-                Button(action: {
-                    saveScannedBeer()
-                }, label: {
-                    Text("Save")
-                        .font(.headline)
-                        .fontWeight(.bold)
-                        .foregroundColor(.black)
-                        .frame(maxWidth: 200, maxHeight: 60)
-                })
-                .background(Color.orange)
-                .cornerRadius(40)
-                .shadow(color: .orange, radius: 5, y: 3)
-                .overlay(RoundedRectangle(cornerRadius: 40).stroke(Color.black, lineWidth: 1))
-                .padding(.bottom, 30)
+                HStack {
+                    Button(action: {
+                        guard let imageUrlString = scannedBeer.imageUrl else {
+                            print("No image URL available for deletion")
+                            return
+                        }
+                        deleteScannedBeer(urlString: imageUrlString)
+                        isPresented = false
+                    }, label: {
+                        Text("Cancel")
+                            .font(.headline)
+                            .fontWeight(.bold)
+                            .foregroundColor(.black)
+                            .frame(maxWidth: 150, maxHeight: 60)
+                    })
+                    .background(Color.orange)
+                    .cornerRadius(40)
+                    .shadow(color: .orange, radius: 5, y: 3)
+                    .overlay(RoundedRectangle(cornerRadius: 40).stroke(Color.black, lineWidth: 1))
+                    .padding(.bottom, 30)
+                    .padding(.leading, 15)
+                    
+                    Spacer()
+                    
+                    Button(action: {
+                        saveScannedBeer()
+                        
+                        guard let imageUrlString = scannedBeer.imageUrl else {
+                            print("No image URL available for deletion")
+                            return
+                        }
+                        deleteScannedBeer(urlString: imageUrlString)
+                    }, label: {
+                        Text("Save")
+                            .font(.headline)
+                            .fontWeight(.bold)
+                            .foregroundColor(.black)
+                            .frame(maxWidth: 150, maxHeight: 60)
+                    })
+                    .background(Color.orange)
+                    .cornerRadius(40)
+                    .shadow(color: .orange, radius: 5, y: 3)
+                    .overlay(RoundedRectangle(cornerRadius: 40).stroke(Color.black, lineWidth: 1))
+                    .padding(.bottom, 30)
+                    .padding(.trailing, 15)
+                }
+                
+                
             } else {
                 // Use the QRCodeScannerView to scan QR codes
                 QRCodeScannerView(didFindCode: { code in
@@ -118,8 +151,24 @@ struct ScannedQRcodeView: View {
             onSave(newBeer, beer.beerType.name)
             isPresented = false
         }
-        
     }
+    
+    private func deleteScannedBeer(urlString: String) {
+        // Create a reference to the file to delete
+        let imageRef = Storage.storage().reference(forURL: urlString)
+        
+        // Delete the file
+        imageRef.delete { error in
+            if let error = error {
+                print("Error deleting image from Firebase Storage: \(error.localizedDescription)")
+                // Handle the error, if needed
+            } else {
+                print("Image deleted successfully from Firebase Storage")
+                // File deleted successfully
+            }
+        }
+    }
+    
     
     private func decodeScannedCode(_ code: String) {
         guard let jsonData = code.data(using: .utf8) else {
@@ -145,7 +194,7 @@ struct ScannedQRcodeView: View {
             fetchImageFromFirebaseStorage(url: imageUrl) { imageData in
                 // Set the fetched image data to the scannedBeer
                 scannedBeer?.imageData = imageData
-                                
+                
                 //self.saveScannedBeer()
             } stopScanningCallback: {
                 
@@ -177,4 +226,6 @@ struct ScannedQRcodeView: View {
         }
     }
 }
-    
+
+
+

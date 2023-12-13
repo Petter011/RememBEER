@@ -11,26 +11,28 @@ import UIKit
 import AVFoundation
 
 
-struct navBar: View {
+func navBar() {
     
-    var headline = ""
-    var body: some View {
-        VStack() {
-            HStack() {
-                Spacer()
-                Text(headline)
-                    .font(.largeTitle.weight(.bold))
-                    .foregroundStyle(Color.orange)
-                Spacer()
-            }
-        }
-        .padding()
-        .background(LinearGradient(colors: [.black.opacity(0.1), .orange.opacity(0.6)],
-                                   startPoint: .topLeading, endPoint: .bottomTrailing)
-            .overlay(.ultraThinMaterial)
-        )
+        let appearance = UINavigationBarAppearance()
+        let textColor = UIColor(Color.orange.opacity(0.8))
+        
+        appearance.backgroundEffect = UIBlurEffect(style: .systemUltraThinMaterial)
+        appearance.backgroundColor = UIColor(Color.orange.opacity(0.2))
+        appearance.largeTitleTextAttributes = [
+            .font: UIFont(name: "GillSans-Bold", size: 32)!,
+            .foregroundColor: textColor,
+            .textEffect: NSAttributedString.TextEffectStyle.letterpressStyle
+        ]
+        appearance.titleTextAttributes = [
+            .font: UIFont(name: "GillSans-Bold", size: 32)!,
+            .foregroundColor: textColor,
+            .textEffect: NSAttributedString.TextEffectStyle.letterpressStyle
+        ]
+        
+        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
     }
-}
+
 
 struct buttonColor: ViewModifier{
     func body(content: Content) -> some View {

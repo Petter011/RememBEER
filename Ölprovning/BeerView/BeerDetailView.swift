@@ -1,6 +1,6 @@
 //
 //  BeerDetailView.swift
-//  Ölprovning
+//  RememBEER
 //
 //  Created by Petter Gustafsson on 2023-08-16.
 //
@@ -18,7 +18,7 @@ struct BeerDetailView: View {
     @State private var showAlert = false
     @State private var isShowingGenerateQRView = false
     @State private var isShowingScannedDetails = false
-    @State private var scannedBeer: Beer?
+    //@State private var scannedBeer: Beer?
     
     
     
@@ -146,8 +146,6 @@ struct BeerDetailView: View {
         }
         
     }
-    
-    
     
     // Helper method to encode beer details
     private func encodeBeerDetails() -> String {

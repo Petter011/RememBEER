@@ -13,25 +13,31 @@ struct SettingsView: View {
     @AppStorage("blurRadius") private var blurRadius = 5.0
     
     var body: some View {
-        VStack{
-            Form {
-                Section(header: Text("Appearance")) {
-                    Toggle(isOn: $isDarkModeOn, label: {
-                        Text("Dark Mode")
-                    })
-                    Toggle(isOn: $isBlurOn, label: {
-                        Text("Blur-effect")
-                    })
-                    if isBlurOn {
-                        HStack {
-                            Text("Blur-radie:")
-                            Slider(value: $blurRadius, in: 0...5, step: 0.1)
+        NavigationStack {
+            VStack{
+                Form {
+                    Section(header: Text("Appearance")) {
+                        Toggle(isOn: $isDarkModeOn, label: {
+                            Text("Dark Mode")
+                        })
+                        Toggle(isOn: $isBlurOn, label: {
+                            Text("Blur-effect")
+                        })
+                        if isBlurOn {
+                            HStack {
+                                Text("Blur-radie:")
+                                Slider(value: $blurRadius, in: 0...5, step: 0.1)
+                            }
                         }
                     }
+                    NavigationLink(destination: HintView(),
+                                   label: {
+                        Text("Hints")
+                    })
                 }
             }
+            .navigationTitle("Settings")
         }
-        .navigationTitle("Settings")
     }
 }
 

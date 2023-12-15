@@ -20,8 +20,6 @@ struct BeerDetailView: View {
     @State private var isShowingScannedDetails = false
     //@State private var scannedBeer: Beer?
     
-    
-    
     @AppStorage("isBlurOn") private var isBlurOn = false
     @AppStorage("blurRadius") private var blurRadius = 1.0
     @State private var isFirstBeerAdded = UserDefaults.standard.bool(forKey: "isFirstBeerAdded")

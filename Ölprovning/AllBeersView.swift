@@ -8,7 +8,7 @@
 import SwiftUI
 import CoreData
 
-struct AllBeerView: View {
+struct AllBeersView: View {
     @EnvironmentObject var beerManager: BeerManager
     @EnvironmentObject var viewModel: BeerViewModel
     @Environment(\.managedObjectContext) private var moc
@@ -21,15 +21,24 @@ struct AllBeerView: View {
     @State private var isShowingEditView = false
     @State private var isShowingGenerateQRView = false
     @State private var showAlert = false
-    //var beerType : BeerType
+    
+    @AppStorage("isBlurOn") private var isBlurOn = false
+    @AppStorage("blurRadius") private var blurRadius = 1.0
     
     var filteredBeers: [Beer] {
         if searchText.isEmpty {
-            return Array(allBeers)
+            return Array(allBeers.sorted(by: { $0.score > $1.score }))
         } else {
-            return allBeers.filter { $0.name?.localizedCaseInsensitiveContains(searchText) == true }
+            return allBeers.filter { beer in
+                let nameMatches = beer.name?.contains(searchText) == true
+                let scoreMatches = String(beer.score).localizedCaseInsensitiveContains(searchText)
+                return nameMatches || scoreMatches
+            }
+            .sorted(by: { $0.score > $1.score })
         }
     }
+
+
 
     var body: some View {
         NavigationStack{
@@ -37,8 +46,8 @@ struct AllBeerView: View {
                 Image("BackgroundImageBeer")
                     .resizable()
                     .edgesIgnoringSafeArea(.top)
-                // Add blur based on your isBlurOn and blurRadius logic
-                
+                    .blur(radius: isBlurOn ? CGFloat(blurRadius) : 0)
+
                 VStack {
                     ScrollView {
                         LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 20) {
@@ -116,7 +125,7 @@ struct AllBeerView: View {
                                 moc.delete(beer)
                             }
                             
-                            if let beers = beerType.beers as? Set<Beer>, beers.count == 1 {
+                            if let beers = beerType as? Set<Beer>, beers.count == 1 {
                                 moc.delete(beerType)
                             }
                             try moc.save()
@@ -125,7 +134,7 @@ struct AllBeerView: View {
                             print("Error deleting beer: \(error)")
                         }
                         
-                        let beers = beerType.beers as? Set<Beer>
+                        let beers = beerType as? Set<Beer>
                         if beers == nil || beers!.isEmpty {
                             presentationMode.wrappedValue.dismiss()
                         }
@@ -136,7 +145,7 @@ struct AllBeerView: View {
             }*/
             .ignoresSafeArea(.keyboard)
             .navigationTitle("All Beer")
-            .searchable(text: $searchText, prompt: "Search All Beer")
+            .searchable(text: $searchText, prompt: "Search by name or rating")
             .navigationBarTitleDisplayMode(.inline)
         }
         .onAppear {

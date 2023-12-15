@@ -48,6 +48,7 @@ struct EditBeerView: View {
                     TextField("Which type of beer? e.g. IPA, APA", text: $editedBeerType)
                         .textFieldStyle(.roundedBorder)
                         .keyboardType(.default)
+                        .padding(.top, 10)
                         .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardDidHideNotification)) { _ in
                             editedBeerType = editedBeerType.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
                         }
@@ -64,11 +65,11 @@ struct EditBeerView: View {
                     
                     VStack{
                         VStack(alignment: .center) {
-                            Text("Points (0-10)")
+                            Text("Rating (0-10)")
                                 .bold()
                                 .foregroundColor(Color.black)
                                 .underline()
-                            Picker("Points (0-10)", selection: $editedBeerPoints) {
+                            Picker("Rating (0-10)", selection: $editedBeerPoints) {
                                 ForEach(beerPointsOptions, id: \.self) {
                                     Text("\($0)")
                                     
@@ -109,56 +110,70 @@ struct EditBeerView: View {
                 Spacer()
                 
                 Button {
-                    // Fetch existing beer type with the entered name
-                    let fetchRequest: NSFetchRequest<BeerType> = BeerType.fetchRequest()
-                    fetchRequest.predicate = NSPredicate(format: "name LIKE %@", editedBeerType)
-                    fetchRequest.fetchLimit = 1
-
-                    do {
-                        let existingTypes = try moc.fetch(fetchRequest)
-
-                        if let existingType = existingTypes.first {
-                            // Check the current count of beers in the beer type
-                            //let currentBeerCount = existingType.beers?.count ?? 0
-
-                            // Associate the beer with the existing beer type
-                            beer.name = editedBeerName
-                            beer.score = editedBeerPoints
-                            beer.note = editedBeerNote
-                            beer.beerType = existingType
-
-                            try moc.save()
+                    if editedBeerType.isEmpty{
+                        showError = true
+                    } else {
+                        // Fetch existing beer type with the entered name
+                        let fetchRequest: NSFetchRequest<BeerType> = BeerType.fetchRequest()
+                        fetchRequest.predicate = NSPredicate(format: "name LIKE %@", editedBeerType)
+                        fetchRequest.fetchLimit = 1
+                        
+                        do {
+                            let existingTypes = try moc.fetch(fetchRequest)
                             
-                        } else {
-                            // Create a new beer type
-                            let newType = BeerType(context: moc)
-                            newType.id = UUID()
-                            newType.name = editedBeerType
-                            newType.isScanned = false
-                            newType.beers = []
-                            beer.name = editedBeerName
-                            beer.score = editedBeerPoints
-                            beer.note = editedBeerNote
-                            beer.beerType = newType
+                            if let existingType = existingTypes.first {
+                                // Check the current count of beers in the beer type
+                                let originalBeerCount = existingType.beers?.count ?? 0
 
+                                // Associate the beer with the existing beer type
+                                beer.name = editedBeerName
+                                beer.score = editedBeerPoints
+                                beer.note = editedBeerNote
+                                beer.beerType = existingType
+                                
+                                try moc.save()
+                                
+                                // Check if the original beer type was empty and delete it
+                                if originalBeerCount == 0 {
+                                    moc.delete(existingType)
+                                    try moc.save()
+                                }
+                                
+                                // Dismiss the view
+                                isShowingEditView = false
+                                
+                            } else {
+                                // Create a new beer type
+                                let newType = BeerType(context: moc)
+                                newType.id = UUID()
+                                newType.name = editedBeerType
+                                //newType.isScanned = false
+                                newType.beers = []
+                                beer.name = editedBeerName
+                                beer.score = editedBeerPoints
+                                beer.note = editedBeerNote
+                                beer.beerType = newType
+                                
+                                try moc.save()
+                            }
+                            
+                            // Check if the beer type is now empty and delete it
+                            if let beers = beerType.beers as? Set<Beer>, beers.count == 0 {
+                                moc.delete(beerType)
+                            }
                             try moc.save()
+                            presentationMode.wrappedValue.dismiss()
+                            
+                        } catch {
+                            print("Error saving edited beer: \(error)")
                         }
-                        
-                        // Check if the beer type is now empty and delete it
-                        if let beers = beerType.beers as? Set<Beer>, beers.count == 0 {
-                            moc.delete(beerType)
+                        let beers = beerType.beers as? Set<Beer>
+                        if beers == nil || beers!.isEmpty {
+                            presentationMode.wrappedValue.dismiss()
                         }
-                        try moc.save()
-                        
-                    } catch {
-                        print("Error saving edited beer: \(error)")
+                        // Dismiss the view
+                        isShowingEditView = false
                     }
-                    let beers = beerType.beers as? Set<Beer>
-                    if beers == nil || beers!.isEmpty {
-                        presentationMode.wrappedValue.dismiss()
-                    }
-                    // Dismiss the view
-                    isShowingEditView = false
                 } label: {
                     Text("Save")
                         .font(.headline)
@@ -177,13 +192,13 @@ struct EditBeerView: View {
             .onTapGesture {
                 self.endEditing()
             }
-            /*.alert(isPresented: $showError) {
-             Alert(
-             title: Text("Error"),
-             message: Text("Please take a picture before saving."),
-             dismissButton: .default(Text("OK"))
-             )
-             }*/
+            .alert(isPresented: $showError) {
+                Alert(
+                    title: Text("Error"),
+                    message: Text("You need to enter beer type."),
+                    dismissButton: .default(Text("OK"))
+                )
+            }
         }
     }
 }

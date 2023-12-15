@@ -10,6 +10,8 @@ import FirebaseStorage
 import Firebase
 
 struct GenerateQRView: View {
+    @Environment(\.presentationMode) var presentationMode
+
     let beer: Beer
     @State private var qrCodeImage: UIImage?
     @State private var isLoading = false
@@ -31,6 +33,7 @@ struct GenerateQRView: View {
                             .frame(width: 100, height: 100)
                         
                     )
+                
             } else {
                 if isLoading {
                     // Show activity indicator while loading
@@ -44,10 +47,31 @@ struct GenerateQRView: View {
                 }
             }
             Spacer()
+            
+            Button(action: {
+                guard let imageUrlString = beer.imageUrl else {
+                    print("No image URL available for deletion")
+                    return
+                }
+                deleteBeer(urlString: imageUrlString)
+                presentationMode.wrappedValue.dismiss()
+            }, label: {
+                Text("Done")
+                    .foregroundStyle(.orange)
+                    .font(.title2)
+                    .padding(.bottom, 20)
+            })
         }
         .padding()
         .onAppear {
             generateQRCode()
+        }
+        .onDisappear{
+            guard let imageUrlString = beer.imageUrl else {
+                print("No image URL available for deletion")
+                return
+            }
+            deleteBeer(urlString: imageUrlString)
         }
     }
     
@@ -130,6 +154,21 @@ struct GenerateQRView: View {
             }
         } catch {
             print("Error encoding beer details: \(error)")
+        }
+    }
+    private func deleteBeer(urlString: String) {
+        // Create a reference to the file to delete
+        let imageRef = Storage.storage().reference(forURL: urlString)
+        
+        // Delete the file
+        imageRef.delete { error in
+            if let error = error {
+                print("Error deleting image from Firebase Storage: \(error.localizedDescription)")
+                // Handle the error, if needed
+            } else {
+                print("Image deleted successfully from Firebase Storage")
+                // File deleted successfully
+            }
         }
     }
 }

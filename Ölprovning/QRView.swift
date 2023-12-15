@@ -38,6 +38,7 @@ struct QRView: View {
                     .resizable()
                     .edgesIgnoringSafeArea(.top)
                     .blur(radius: isBlurOn ? CGFloat(blurRadius) : 0)
+                
                 VStack(spacing: 20) {
                     ScrollView {
                         LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 20) {
@@ -45,7 +46,7 @@ struct QRView: View {
                                 NavigationLink(
                                     destination: BeerDetailView(viewModel: viewModel, beerType: scannedBeerType),
                                     label: {
-                                        Text(scannedBeerType.name!)
+                                        Text(scannedBeerType.name == nil ? "" : scannedBeerType.name!)
                                             .padding()
                                             .frame(maxWidth: 150)
                                             .foregroundColor(.orange)
@@ -125,13 +126,9 @@ struct QRView: View {
                 .ignoresSafeArea(.keyboard)
 
             }
-            .navigationTitle("Received Beers")
+            .navigationTitle("Received Beer")
             .searchable(text: $searchText, prompt: "Search Beer")
             .navigationBarTitleDisplayMode(.inline)
-            /*.safeAreaInset(edge: .top) {
-                navBar(headline: (String(localized: "Received Beers")))
-            }
-            .navigationBarHidden(true)*/
         }
         .onAppear {
                     navBar()

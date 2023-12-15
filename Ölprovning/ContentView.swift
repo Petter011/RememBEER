@@ -13,15 +13,15 @@ struct ContentView: View {
             Group{
                 BeerView()
                     .tabItem {
-                        Label("Beer", systemImage: "mug.fill")
+                        Label("MY Beer", systemImage: "mug.fill")
                     }
                 QRView()
                     .tabItem {
                         Label("Recived", systemImage: "qrcode")
                     }
-                AllBeerView()
+                AllBeersView()
                     .tabItem{
-                        Label("All", systemImage: "mug.fill")
+                        Label("All", systemImage: "medal.fill")
                     }
                 SettingsView()
                     .tabItem {

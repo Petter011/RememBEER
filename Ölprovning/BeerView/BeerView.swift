@@ -62,8 +62,6 @@ struct BeerView: View {
                         }
                     }
                     
-                    
-
                     Button(action: {
                         showingAddBeerView.toggle()
                     }, label: {
@@ -78,7 +76,7 @@ struct BeerView: View {
                                 
                                 let fetchRequest: NSFetchRequest<BeerType>
                                 fetchRequest = BeerType.fetchRequest()
-                                fetchRequest.predicate = NSPredicate(format: "name LIKE %@", beerType)
+                                fetchRequest.predicate = NSPredicate(format: "name LIKE %@ AND isScanned == false", beerType)
                                 fetchRequest.fetchLimit = 1
                                 let types = try? moc.fetch(fetchRequest)
                                 let addType: BeerType
@@ -105,8 +103,8 @@ struct BeerView: View {
                                 
                                 
                                 // Set isFirstBeerAdded to true
-                                isFirstBeerAdded = true
-                                UserDefaults.standard.set(isFirstBeerAdded, forKey: "isFirstBeerAdded")
+                                /*isFirstBeerAdded = true
+                                UserDefaults.standard.set(isFirstBeerAdded, forKey: "isFirstBeerAdded")*/
                                 
                                 isBlurOn = true
                             },
@@ -117,15 +115,9 @@ struct BeerView: View {
                 }
             }
             .ignoresSafeArea(.keyboard)
-            .navigationTitle("My Beers")
+            .navigationTitle("My Beer")
             .searchable(text: $searchText, prompt: "Search Beer")
             .navigationBarTitleDisplayMode(.inline)
-
-            /*.safeAreaInset(edge: .top) {
-             navBar(headline: (String(localized: "My Beers")))
-             }*/
-            
-            //.navigationBarHidden(true)
         }
         .onAppear {
                     navBar()

@@ -36,7 +36,7 @@ struct WelcomeView: View {
                     Button(action: {
                         isShownWelcome = false
                     }) {
-                        Text("Let's go")
+                        Text("Cheers")
                             .modifier(buttonColor())
                     }
                     .modifier(buttonBackgroundColor())

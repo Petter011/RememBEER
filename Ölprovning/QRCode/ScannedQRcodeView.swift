@@ -137,6 +137,13 @@ struct ScannedQRcodeView: View {
                 .edgesIgnoringSafeArea(.all)
             }
         }
+        .onDisappear{
+            guard let imageUrlString = scannedBeer?.imageUrl else {
+                print("No image URL available for deletion")
+                return
+            }
+            deleteScannedBeer(urlString: imageUrlString)
+        }
     }
     
     private func saveScannedBeer() {

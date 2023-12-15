@@ -12,13 +12,12 @@
 		15185A052AA47D530028E0DC /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15185A042AA47D520028E0DC /* DataController.swift */; };
 		152C57C92A9D24CE006FD102 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152C57C82A9D24CE006FD102 /* SettingsView.swift */; };
 		152C57D02A9DCCBC006FD102 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 152C57CF2A9DCCBC006FD102 /* CodeScanner */; };
-		1549ACDF2B29E4A900F7C090 /* AllBeerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ACDE2B29E4A900F7C090 /* AllBeerView.swift */; };
+		1549ACDF2B29E4A900F7C090 /* AllBeersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1549ACDE2B29E4A900F7C090 /* AllBeersView.swift */; };
 		155EFD882AFB8767009D37F9 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 155EFD872AFB8767009D37F9 /* Launch Screen.storyboard */; };
 		156212F62B2854BD00B5E617 /* HintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156212F52B2854BD00B5E617 /* HintView.swift */; };
 		156212F82B285C4F00B5E617 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156212F72B285C4F00B5E617 /* WelcomeView.swift */; };
 		1573C26B2B18BBA7003A18B4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1573C26A2B18BBA7003A18B4 /* GoogleService-Info.plist */; };
 		1573C26E2B18BE36003A18B4 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 1573C26D2B18BE36003A18B4 /* FirebaseStorage */; };
-		157A9A592B224B9200BEADCB /* ShowScannedBeerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157A9A582B224B9200BEADCB /* ShowScannedBeerView.swift */; };
 		15901B312AEA341100249A93 /* EditBeerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15901B302AEA341100249A93 /* EditBeerView.swift */; };
 		15A8F6D32A8D1BB700EB3ABE /* O_lprovningApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A8F6D22A8D1BB700EB3ABE /* O_lprovningApp.swift */; };
 		15A8F6D72A8D1BB900EB3ABE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 15A8F6D62A8D1BB900EB3ABE /* Assets.xcassets */; };
@@ -65,13 +64,12 @@
 		15185A022AA478530028E0DC /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		15185A042AA47D520028E0DC /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		152C57C82A9D24CE006FD102 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		1549ACDE2B29E4A900F7C090 /* AllBeerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllBeerView.swift; sourceTree = "<group>"; };
+		1549ACDE2B29E4A900F7C090 /* AllBeersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllBeersView.swift; sourceTree = "<group>"; };
 		155EFD862AFB7F5B009D37F9 /* O-lprovning-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "O-lprovning-Info.plist"; sourceTree = SOURCE_ROOT; };
 		155EFD872AFB8767009D37F9 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		156212F52B2854BD00B5E617 /* HintView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintView.swift; sourceTree = "<group>"; };
 		156212F72B285C4F00B5E617 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		1573C26A2B18BBA7003A18B4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		157A9A582B224B9200BEADCB /* ShowScannedBeerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowScannedBeerView.swift; sourceTree = "<group>"; };
 		15901B302AEA341100249A93 /* EditBeerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBeerView.swift; sourceTree = "<group>"; };
 		15A8F6CF2A8D1BB700EB3ABE /* RememBEER.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RememBEER.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		15A8F6D22A8D1BB700EB3ABE /* O_lprovningApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = O_lprovningApp.swift; sourceTree = "<group>"; };
@@ -199,7 +197,7 @@
 				156212F52B2854BD00B5E617 /* HintView.swift */,
 				156212F72B285C4F00B5E617 /* WelcomeView.swift */,
 				15F259E52B064F62009F5581 /* Helper.swift */,
-				1549ACDE2B29E4A900F7C090 /* AllBeerView.swift */,
+				1549ACDE2B29E4A900F7C090 /* AllBeersView.swift */,
 				15A8F6D62A8D1BB900EB3ABE /* Assets.xcassets */,
 				15A8F6D82A8D1BB900EB3ABE /* Preview Content */,
 			);
@@ -237,7 +235,6 @@
 				15F259D62B04BF21009F5581 /* QRCodeScannerView.swift */,
 				15F259D22B02A010009F5581 /* GenerateQRView.swift */,
 				15F259D82B04BFDD009F5581 /* ScannedQRcodeView.swift */,
-				157A9A582B224B9200BEADCB /* ShowScannedBeerView.swift */,
 			);
 			path = QRCode;
 			sourceTree = "<group>";
@@ -389,11 +386,10 @@
 				15F259D32B02A010009F5581 /* GenerateQRView.swift in Sources */,
 				15A8F70B2A8D1C7900EB3ABE /* ImagePicker.swift in Sources */,
 				152C57C92A9D24CE006FD102 /* SettingsView.swift in Sources */,
-				1549ACDF2B29E4A900F7C090 /* AllBeerView.swift in Sources */,
+				1549ACDF2B29E4A900F7C090 /* AllBeersView.swift in Sources */,
 				15185A032AA478530028E0DC /* Model.xcdatamodeld in Sources */,
 				15A8F6D32A8D1BB700EB3ABE /* O_lprovningApp.swift in Sources */,
 				15A8F7172A8F4BAC00EB3ABE /* BeerViewModel.swift in Sources */,
-				157A9A592B224B9200BEADCB /* ShowScannedBeerView.swift in Sources */,
 				15F259E62B064F62009F5581 /* Helper.swift in Sources */,
 				15F259D92B04BFDD009F5581 /* ScannedQRcodeView.swift in Sources */,
 				15901B312AEA341100249A93 /* EditBeerView.swift in Sources */,
@@ -571,13 +567,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = RememBEER.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Ölprovning/Preview Content\"";
 				DEVELOPMENT_TEAM = BXY9G7CMC3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "O-lprovning-Info.plist";
-				INFOPLIST_KEY_NSCameraUsageDescription = "Give RememBEER permission to access your camera. Pictures are saved locally on your phone to show pictures of your beers. ";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Give RememBEER permission to access your camera. Pictures are saved locally on your phone to show pictures of your beers and to scan QR code to store others beer locally on your phone ";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Ge ölprovning tillåtelse att öppna dina bilder";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -608,13 +604,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = RememBEER.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Ölprovning/Preview Content\"";
 				DEVELOPMENT_TEAM = BXY9G7CMC3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "O-lprovning-Info.plist";
-				INFOPLIST_KEY_NSCameraUsageDescription = "Give RememBEER permission to access your camera. Pictures are saved locally on your phone to show pictures of your beers. ";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Give RememBEER permission to access your camera. Pictures are saved locally on your phone to show pictures of your beers and to scan QR code to store others beer locally on your phone ";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Ge ölprovning tillåtelse att öppna dina bilder";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

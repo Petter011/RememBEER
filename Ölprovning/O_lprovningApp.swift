@@ -6,6 +6,17 @@
 //
 
 import SwiftUI
+import Firebase
+
+class AppDelegate: NSObject, UIApplicationDelegate {
+  func application(_ application: UIApplication,
+                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+    FirebaseApp.configure()
+
+    return true
+  }
+}
+
 
 @main
 struct O_lprovningApp: App {
@@ -16,16 +27,24 @@ struct O_lprovningApp: App {
     @AppStorage("isBlurOn") private var isBlurOn = false
     @AppStorage("blurRadius") private var blurRadius = 10.0
     @AppStorage("isFirstBeerAdded") private var isFirstBeerAdded = false
+    @AppStorage("isShownWelcome") private var isShownWelcome: Bool = true
+
+    
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environmentObject(beerManager)
-                .environmentObject(viewModel)
-                .environment(\.managedObjectContext, dataController.container.viewContext)
-                .preferredColorScheme(isDarkModeOn ? .dark : .light)
-                .accentColor(.orange) 
-
+            if isShownWelcome{
+                WelcomeView()
+            } else{
+                ContentView()
+                    .environmentObject(beerManager)
+                    .environmentObject(viewModel)
+                    .environment(\.managedObjectContext, dataController.container.viewContext)
+                    .preferredColorScheme(isDarkModeOn ? .dark : .light)
+                    .accentColor(.orange)
+            }
         }
     }
 }

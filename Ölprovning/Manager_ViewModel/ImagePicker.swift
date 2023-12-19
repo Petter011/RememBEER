@@ -62,7 +62,7 @@ struct ImagePicker: UIViewControllerRepresentable {
         func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
             if parent.sourceType == .photoLibrary {
                 let moc = parent.moc
-
+                
                 for result in results {
                     if result.itemProvider.canLoadObject(ofClass: UIImage.self) {
                         result.itemProvider.loadObject(ofClass: UIImage.self) { image, error in
@@ -70,18 +70,18 @@ struct ImagePicker: UIViewControllerRepresentable {
                                 DispatchQueue.main.async {
                                     // Fix image orientation here
                                     let fixedImage = self.fixImageOrientation(image)
-
+                                    
                                     // Check if the image is unique before adding it
                                     if !self.uniqueImages.contains(fixedImage) {
                                         self.uniqueImages.insert(fixedImage)
                                         self.parent.selectedImages.append(fixedImage)
-
+                                        
                                         // Create a new Picture managed object and save the image data
                                         let picture = Picture(context: moc)
                                         if let imageData = fixedImage.jpegData(compressionQuality: 1.0) {
                                             picture.imageData = imageData
                                         }
-
+                                        
                                         do {
                                             try moc.save()
                                         } catch {
@@ -96,9 +96,6 @@ struct ImagePicker: UIViewControllerRepresentable {
             }
             picker.dismiss(animated: true)
         }
-       
-    
-
         
         
         func fixImageOrientation(_ image: UIImage) -> UIImage {
@@ -113,7 +110,7 @@ struct ImagePicker: UIViewControllerRepresentable {
             
             return fixedImage ?? image
         }
-
+        
         
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
             if parent.sourceType == .camera {

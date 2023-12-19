@@ -8,18 +8,21 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-    
     var body: some View {
         TabView{
             Group{
                 BeerView()
                     .tabItem {
-                        Label("Beer", systemImage: "mug.fill")
+                        Label("My Beer", systemImage: "mug.fill")
                     }
-                /*TheBestView()
+                QRView()
                     .tabItem {
-                        Label("The Best", systemImage: "medal.fill")
-                    }*/
+                        Label("Recived", systemImage: "qrcode")
+                    }
+                AllBeersView()
+                    .tabItem{
+                        Label("All", systemImage: "medal.fill")
+                    }
                 SettingsView()
                     .tabItem {
                         Label("Settings", systemImage: "slider.horizontal.3")
@@ -28,8 +31,6 @@ struct ContentView: View {
             .toolbarBackground(.black, for: .tabBar)
             .toolbarBackground(.visible, for: .tabBar)
             .toolbarColorScheme(.dark, for: .tabBar)
-            
-            
         }
     }
 }
@@ -41,3 +42,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+

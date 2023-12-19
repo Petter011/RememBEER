@@ -21,6 +21,26 @@
         }
       }
     },
+    "%d/10" : {
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d/10"
+          }
+        }
+      }
+    },
+    "%lld/10" : {
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%11d/10"
+          }
+        }
+      }
+    },
     "Add a Note" : {
       "localizations" : {
         "sv" : {
@@ -51,6 +71,26 @@
         }
       }
     },
+    "All" : {
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alla"
+          }
+        }
+      }
+    },
+    "All Beer" : {
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alla Öl"
+          }
+        }
+      }
+    },
     "Appearance" : {
       "localizations" : {
         "sv" : {
@@ -72,6 +112,7 @@
       }
     },
     "Beer" : {
+      "extractionState" : "stale",
       "localizations" : {
         "sv" : {
           "stringUnit" : {
@@ -101,12 +142,42 @@
         }
       }
     },
+    "Cancel" : {
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avbryt"
+          }
+        }
+      }
+    },
+    "Cheers" : {
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skål"
+          }
+        }
+      }
+    },
     "Confirm Delete" : {
       "localizations" : {
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bekräfta"
+          }
+        }
+      }
+    },
+    "Creating QR Code..." : {
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skapar QR kod..."
           }
         }
       }
@@ -127,6 +198,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Radera"
+          }
+        }
+      }
+    },
+    "Done" : {
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Klar"
           }
         }
       }
@@ -161,6 +242,27 @@
         }
       }
     },
+    "Error generating QR code" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fel vid skapande av QR kod"
+          }
+        }
+      }
+    },
+    "Fetching Image..." : {
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hämtar bild"
+          }
+        }
+      }
+    },
     "Give RememBEER permission to open your camera. Pictures are saved on your phone to show pictures of your beers" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -168,6 +270,47 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ge RememBEER tillåtelse att öppna din kamera. Bilderna sparas på din telefon för att visa bilder på dina öl "
+          }
+        }
+      }
+    },
+    "Hints" : {
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tips"
+          }
+        }
+      }
+    },
+    "If you longpress the beer of chose you can edit, share or delete the beer!" : {
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Om du \"trycker länge\" på en öl kan du redigera, dela eller radera ölen!"
+          }
+        }
+      }
+    },
+    "Key" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Key"
+          }
+        }
+      }
+    },
+    "My Beer" : {
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mina Öl"
           }
         }
       }
@@ -192,12 +335,53 @@
         }
       }
     },
-    "Points (0-10)" : {
+    "QR Code" : {
+      "extractionState" : "stale",
       "localizations" : {
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Poäng (0-10)"
+            "value" : "QR kod"
+          }
+        }
+      }
+    },
+    "Rating (0-10)" : {
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Betyg (0-10)"
+          }
+        }
+      }
+    },
+    "Received Beer" : {
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mottagna Öl"
+          }
+        }
+      }
+    },
+    "Recived" : {
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mottagna"
+          }
+        }
+      }
+    },
+    "RememBEER" : {
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "RememBEER"
           }
         }
       }
@@ -212,6 +396,57 @@
         }
       }
     },
+    "Save to My Beer" : {
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spara till Mina Öl"
+          }
+        }
+      }
+    },
+    "Scan QR" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scanna QR"
+          }
+        }
+      }
+    },
+    "Scan QR Code" : {
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scanna QR kod"
+          }
+        }
+      }
+    },
+    "Search Beer" : {
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sök öl"
+          }
+        }
+      }
+    },
+    "Search by name or rating" : {
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sök namn eller betyg"
+          }
+        }
+      }
+    },
     "Settings" : {
       "localizations" : {
         "sv" : {
@@ -222,12 +457,42 @@
         }
       }
     },
+    "Share with QR Code" : {
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dela med QR kod"
+          }
+        }
+      }
+    },
     "Take a picture" : {
       "localizations" : {
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ta kort"
+          }
+        }
+      }
+    },
+    "Welcome to RememBEER – where beer lovers share the joy of discovery! \n\nUnleash the power of QR codes to share your favorite beers with friends and fellow enthusiasts. Scan and unveil a world of flavors, ratings, and images, creating a unique experience for every beer. \n\nJoin our vibrant community, where each QR code tells a story, sparking conversations and fostering a shared passion for craft beer. Let's explore, savor, and celebrate together. \n\nCheers to the journey of beer discovery!" : {
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Välkommen till RememBEER – där ölälskare delar upptäckarglädjen!\n\nSläpp lös kraften med QR-koder för att dela dina favoritöl med vänner och andra entusiaster. Skanna och avslöja en värld av smaker, betyg och bilder, vilket skapar en unik upplevelse för varje öl.\n\nGå med i vår pulserande community, där varje QR-kod berättar en historia, väcker konversationer och främjar en gemensam passion för hantverksöl. Låt oss utforska, njuta av och fira tillsammans.\n\nSkål för resan att upptäcka nya smakrika öl!"
+          }
+        }
+      }
+    },
+    "When you seach in All Beers you can seach both by name or points." : {
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nur du söker i Alla öl kan du söka både efter namn eller poäng."
           }
         }
       }
@@ -248,6 +513,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Du måste fylla i öl typen och ta ett kort innan du sparar."
+          }
+        }
+      }
+    },
+    "You need to enter beer type." : {
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Du måste fylla i öl typen"
           }
         }
       }

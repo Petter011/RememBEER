@@ -253,6 +253,16 @@
         }
       }
     },
+    "Fetching Image..." : {
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hämtar bild"
+          }
+        }
+      }
+    },
     "Give RememBEER permission to open your camera. Pictures are saved on your phone to show pictures of your beers" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -304,9 +314,6 @@
           }
         }
       }
-    },
-    "MY Beer" : {
-
     },
     "Name of the beer?" : {
       "localizations" : {
@@ -511,7 +518,14 @@
       }
     },
     "You need to enter beer type." : {
-
+      "localizations" : {
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Du måste fylla i öl typen"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

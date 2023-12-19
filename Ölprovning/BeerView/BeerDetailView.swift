@@ -11,6 +11,8 @@ struct BeerDetailView: View {
     @EnvironmentObject var beerManager: BeerManager
     @ObservedObject var viewModel: BeerViewModel
     var beerType: BeerType
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)]) var DetailBeers: FetchedResults<Beer>
+
     
     @State private var isShowingFullScreenImage = false
     @State private var selectedBeer: Beer? // New state variable for selected beer
@@ -18,131 +20,140 @@ struct BeerDetailView: View {
     @State private var showAlert = false
     @State private var isShowingGenerateQRView = false
     @State private var isShowingScannedDetails = false
-    //@State private var scannedBeer: Beer?
-    
+    @State private var searchText = ""
+
     @AppStorage("isBlurOn") private var isBlurOn = false
     @AppStorage("blurRadius") private var blurRadius = 1.0
     @State private var isFirstBeerAdded = UserDefaults.standard.bool(forKey: "isFirstBeerAdded")
     @Environment(\.managedObjectContext) var moc
     @Environment(\.presentationMode) var presentationMode
     
+    var filteredBeer: [Beer] {
+        let filteredBeers = DetailBeers.filter { beer in
+            return beer.beerType == beerType &&
+                   (searchText.isEmpty ||
+                   (beer.name?.localizedCaseInsensitiveContains(searchText) == true) ||
+                   (String(beer.score).localizedCaseInsensitiveContains(searchText)))
+        }
+
+        return filteredBeers.sorted(by: { $0.score > $1.score })
+    }
+
+    
     
     var body: some View {
-        ZStack {
-            Image("BackgroundImageBeer")
-                .resizable()
-                .edgesIgnoringSafeArea(.top)
-                .blur(radius: isBlurOn ? CGFloat(blurRadius) : 0)
-            
-            VStack {
-                Text(beerType.name == nil ? "" : beerType.name!)
-                    .font(.title)
-                    .fontWeight(.bold)
-                    .underline()
-                    .foregroundColor(Color.orange)
+        NavigationStack{
+            ZStack {
+                Image("BackgroundImageBeer")
+                    .resizable()
+                    .edgesIgnoringSafeArea(.top)
+                    .blur(radius: isBlurOn ? CGFloat(blurRadius) : 0)
                 
-                ScrollView {
-                    LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 20) {
-                        ForEach(beerType.beers?.allObjects as? [Beer] ?? []) { beer in
-                            Image(uiImage: beer.getBeerImage() ?? UIImage(systemName: "photo")!)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(height: 130)
-                                .cornerRadius(10)
-                                .gesture(
-                                    TapGesture()
-                                        .onEnded { _ in
-                                            viewModel.setSelectedBeer(beer)
-                                            selectedBeer = beer
-                                            isShowingFullScreenImage = true
-                                        }
-                                        .sequenced(before:
-                                                    LongPressGesture(minimumDuration: 1)
+                VStack {
+                    ScrollView {
+                        LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 20) {
+                            ForEach(filteredBeer) { beer in
+                                BeerItemView(beer: beer)
+                                    .gesture(
+                                        TapGesture()
                                             .onEnded { _ in
                                                 viewModel.setSelectedBeer(beer)
                                                 selectedBeer = beer
+                                                isShowingFullScreenImage = true
                                             }
-                                                  )
-                                )
-                                .contextMenu {
-                                    Button {
-                                        viewModel.setSelectedBeer(beer)
-                                        isShowingEditView = true
-                                        selectedBeer = beer
-                                    } label:{
-                                        Label("Edit", systemImage: "pencil.and.scribble")
+                                            .sequenced(before:
+                                                        LongPressGesture(minimumDuration: 1)
+                                                .onEnded { _ in
+                                                    viewModel.setSelectedBeer(beer)
+                                                    selectedBeer = beer
+                                                }
+                                                      )
+                                    )
+                                    .contextMenu {
+                                        Button {
+                                            viewModel.setSelectedBeer(beer)
+                                            isShowingEditView = true
+                                            selectedBeer = beer
+                                        } label:{
+                                            Label("Edit", systemImage: "pencil.and.scribble")
+                                        }
+                                        Button {
+                                            viewModel.setSelectedBeer(beer)
+                                            selectedBeer = beer
+                                            isShowingGenerateQRView = true
+                                        }label: {
+                                            Label("Share with QR Code", systemImage: "qrcode")
+                                        }
+                                        
+                                        Divider()
+                                        
+                                        Button(role: .destructive) {
+                                            selectedBeer = beer
+                                            showAlert = true
+                                        } label:{
+                                            Label("Delete", systemImage: "trash")
+                                        }
                                     }
-                                    Button {
-                                        viewModel.setSelectedBeer(beer)
-                                        selectedBeer = beer
-                                        isShowingGenerateQRView = true
-                                    }label: {
-                                        Label("Share with QR Code", systemImage: "qrcode")
+                                    .sheet(isPresented: $isShowingGenerateQRView) {
+                                        if let beer = selectedBeer {
+                                            GenerateQRView(beer: beer)
+                                        }
                                     }
-                                    
-                                    Divider()
-                                    
-                                    Button(role: .destructive) {
-                                        selectedBeer = beer
-                                        showAlert = true
-                                    } label:{
-                                        Label("Delete", systemImage: "trash")
+                                    .sheet(isPresented: $isShowingEditView) {
+                                        if let beer = selectedBeer {
+                                            EditBeerView(isShowingEditView: $isShowingEditView, viewModel: viewModel, beer: beer, beerType: beerType)
+                                        }
                                     }
-                                }
-                                .sheet(isPresented: $isShowingGenerateQRView) {
-                                    if let beer = selectedBeer {
-                                        GenerateQRView(beer: beer)
+                                    .sheet(isPresented: $isShowingFullScreenImage) {
+                                        if let beer = selectedBeer {
+                                            DetailInfoView(beerType: beerType, beer: beer)
+                                        }
                                     }
-                                }
-                                .sheet(isPresented: $isShowingEditView) {
-                                    if let beer = selectedBeer {
-                                        EditBeerView(isShowingEditView: $isShowingEditView, viewModel: viewModel, beer: beer, beerType: beerType)
-                                    }
-                                }
-                                .sheet(isPresented: $isShowingFullScreenImage) {
-                                    if let beer = selectedBeer {
-                                        DetailInfoView(beerType: beerType, beer: beer)
-                                    }
-                                }
+                            }
                         }
                     }
+
+                    //Spacer()
                 }
-                Spacer()
-            }
-            .alert(isPresented: $showAlert) {
-                Alert(
-                    title: Text("Confirm Delete"),
-                    message: Text("Are you sure you want to delete this beer?"),
-                    primaryButton: .destructive(Text("Delete")) {
-                        
-                        do {
-                            if let beer = selectedBeer {
-                                moc.delete(beer)
+                .alert(isPresented: $showAlert) {
+                    Alert(
+                        title: Text("Confirm Delete"),
+                        message: Text("Are you sure you want to delete this beer?"),
+                        primaryButton: .destructive(Text("Delete")) {
+                            
+                            do {
+                                if let beer = selectedBeer {
+                                    moc.delete(beer)
+                                }
+                                
+                                if let beers = beerType.beers as? Set<Beer>, beers.count == 1 {
+                                    moc.delete(beerType)
+                                }
+                                try moc.save()
+                                
+                            }catch {
+                                print("Error deleting beer: \(error)")
                             }
                             
-                            if let beers = beerType.beers as? Set<Beer>, beers.count == 1 {
-                                moc.delete(beerType)
+                            let beers = beerType.beers as? Set<Beer>
+                            if beers == nil || beers!.isEmpty {
+                                presentationMode.wrappedValue.dismiss()
                             }
-                            try moc.save()
-                            
-                        }catch {
-                            print("Error deleting beer: \(error)")
-                        }
-                        
-                        let beers = beerType.beers as? Set<Beer>
-                        if beers == nil || beers!.isEmpty {
-                            presentationMode.wrappedValue.dismiss()
-                        }
-                        selectedBeer = nil
-                    },
-                    secondaryButton: .cancel()
-                )
+                            selectedBeer = nil
+                        },
+                        secondaryButton: .cancel()
+                    )
+                }
             }
+            .ignoresSafeArea(.keyboard)
+            .navigationTitle(Text(beerType.name == nil ? "" : beerType.name!))
+            .searchable(text: $searchText, prompt: "Search Beer")
+            .navigationBarTitleDisplayMode(.inline)
         }
         .onAppear {
             viewModel.setSelectedBeer(nil)
+            
         }
-        
     }
     
     // Helper method to encode beer details

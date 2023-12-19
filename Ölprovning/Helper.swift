@@ -45,6 +45,19 @@ struct buttonColor: ViewModifier{
     }
 }
 
+struct saveAndCancel: ViewModifier{
+    func body(content: Content) -> some View {
+        content
+            .background(Color.orange)
+            .cornerRadius(40)
+            .shadow(color: .orange, radius: 5, y: 3)
+            .overlay(RoundedRectangle(cornerRadius: 40).stroke(Color.black, lineWidth: 1))
+            .padding(.bottom, 30)
+            .padding(.trailing, 15)
+    }
+}
+
+
 struct buttonBackgroundColor: ViewModifier{
     func body(content: Content) -> some View {
         content
@@ -52,6 +65,19 @@ struct buttonBackgroundColor: ViewModifier{
             .cornerRadius(15)
             .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.white, lineWidth: 1))
             .padding(.bottom, 30)
+    }
+}
+
+struct BeerItemView: View {
+    let beer: Beer
+
+    var body: some View {
+        Image(uiImage: beer.getBeerImage() ?? UIImage(systemName: "photo")!)
+            .resizable()
+            .scaledToFit()
+            .frame(height: 130)
+            .cornerRadius(10)
+            // Additional styling or gestures if needed
     }
 }
 

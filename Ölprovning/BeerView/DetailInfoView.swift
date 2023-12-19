@@ -92,13 +92,14 @@ struct DetailInfoView: View {
                     do {
                         try moc.save()
                         
+                        presentationMode.wrappedValue.dismiss()
                         // Check if the beerType should be deleted
                         if let beers = beerType.beers as? Set<Beer>, beers.isEmpty {
                             moc.delete(beerType)
-                            try moc.save()
-                            presentationMode.wrappedValue.dismiss()
-                            
                         }
+                        
+                        try moc.save()
+                        presentationMode.wrappedValue.dismiss()
                     } catch {
                         print("Error saving to Core Data: \(error.localizedDescription)")
                         // Handle the error as needed

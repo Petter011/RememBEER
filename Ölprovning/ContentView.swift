@@ -13,7 +13,7 @@ struct ContentView: View {
             Group{
                 BeerView()
                     .tabItem {
-                        Label("MY Beer", systemImage: "mug.fill")
+                        Label("My Beer", systemImage: "mug.fill")
                     }
                 QRView()
                     .tabItem {

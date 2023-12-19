@@ -6,16 +6,15 @@
 //
 
 import SwiftUI
-import Firebase
 import FirebaseStorage
 
 struct ScannedQRcodeView: View {
     @EnvironmentObject var beerManager: BeerManager
     @EnvironmentObject var viewModel: BeerViewModel
     @State private var scannedBeer: ScannedBeer?
-    @State private var scannedBeerImage: UIImage?
     @State private var shouldScan: Bool = true
-    
+    @State private var isLoading = false
+
     let onSave: (BeerWithImage, String) -> Void
     
     @Binding var selectedBeerType: String?
@@ -71,6 +70,15 @@ struct ScannedQRcodeView: View {
                             .aspectRatio(contentMode: .fit)
                             .cornerRadius(15)
                             .padding(.bottom, 20)
+                    }else{
+                        Spacer()
+                        if isLoading {
+                            // Show activity indicator while loading
+                            ProgressView("Fetching Image...")
+                                .progressViewStyle(CircularProgressViewStyle())
+                                .foregroundColor(.orange)
+                        }
+                        Spacer()
                     }
                 }
                 
@@ -122,7 +130,6 @@ struct ScannedQRcodeView: View {
                     .padding(.bottom, 30)
                     .padding(.trailing, 15)
                 }
-                
                 
             } else {
                 // Use the QRCodeScannerView to scan QR codes
@@ -196,15 +203,16 @@ struct ScannedQRcodeView: View {
                 return
             }
             print("Image URL: \(imageUrlString)")
-            
+            isLoading = true
+
             // Fetch image data from Firebase Storage
             fetchImageFromFirebaseStorage(url: imageUrl) { imageData in
                 // Set the fetched image data to the scannedBeer
                 scannedBeer?.imageData = imageData
-                
-                //self.saveScannedBeer()
+                isLoading = false
+
             } stopScanningCallback: {
-                
+                isLoading = false
             }
         } catch {
             print("Error decoding scanned code: \(error)")
@@ -218,7 +226,7 @@ struct ScannedQRcodeView: View {
         let imageRef = Storage.storage().reference(forURL: url.absoluteString)
         print("URL absoluteString: \(url.absoluteString)")
         // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
-        imageRef.getData(maxSize: 10 * 1024 * 1024) { data, error in
+        imageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
             if let error = error {
                 print("Error downloading image from Firebase Storage: \(error)")
                 completion(nil)

@@ -6,6 +6,7 @@
 //
 import SwiftUI
 import CoreData
+import SwiftUIX
 
 struct BeerView: View {
     @EnvironmentObject var beerManager: BeerManager
@@ -60,6 +61,7 @@ struct BeerView: View {
                             .cornerRadius(15)
                             .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.white, lineWidth: 1))
                         }
+                        //.padding(.top, 15)
                     }
                     
                     Button(action: {
@@ -116,6 +118,8 @@ struct BeerView: View {
             }
             .ignoresSafeArea(.keyboard)
             .navigationTitle("My Beer")
+            //.background(VisualEffectBlurView(blurStyle: .systemThinMaterial))
+            //.toolbarBackground(.systemThinMaterial, for: .navigationBar)
             .searchable(text: $searchText, prompt: "Search Beer")
             .navigationBarTitleDisplayMode(.inline)
         }

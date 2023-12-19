@@ -21,7 +21,6 @@ struct AllBeersView: View {
     @State private var isShowingEditView = false
     @State private var isShowingGenerateQRView = false
     @State private var showAlert = false
-    
     @AppStorage("isBlurOn") private var isBlurOn = false
     @AppStorage("blurRadius") private var blurRadius = 1.0
     
@@ -37,8 +36,6 @@ struct AllBeersView: View {
             .sorted(by: { $0.score > $1.score })
         }
     }
-
-
 
     var body: some View {
         NavigationStack{
@@ -114,7 +111,7 @@ struct AllBeersView: View {
                     Spacer()
                 }
             }
-            /*.alert(isPresented: $showAlert) {
+            .alert(isPresented: $showAlert) {
                 Alert(
                     title: Text("Confirm Delete"),
                     message: Text("Are you sure you want to delete this beer?"),
@@ -125,24 +122,20 @@ struct AllBeersView: View {
                                 moc.delete(beer)
                             }
                             
-                            if let beers = beerType as? Set<Beer>, beers.count == 1 {
-                                moc.delete(beerType)
-                            }
-                            try moc.save()
+                            if let beerType = selectedBeer?.beerType, let beers = beerType.beers as? Set<Beer>, beers.count == 1 {
+                                    moc.delete(beerType)
+                                }
+                                try moc.save()
                             
                         }catch {
                             print("Error deleting beer: \(error)")
                         }
                         
-                        let beers = beerType as? Set<Beer>
-                        if beers == nil || beers!.isEmpty {
-                            presentationMode.wrappedValue.dismiss()
-                        }
                         selectedBeer = nil
                     },
                     secondaryButton: .cancel()
                 )
-            }*/
+            }
             .ignoresSafeArea(.keyboard)
             .navigationTitle("All Beer")
             .searchable(text: $searchText, prompt: "Search by name or rating")
@@ -169,18 +162,7 @@ struct AllBeersView: View {
 }
 
 
-struct BeerItemView: View {
-    let beer: Beer
 
-    var body: some View {
-        Image(uiImage: beer.getBeerImage() ?? UIImage(systemName: "photo")!)
-            .resizable()
-            .scaledToFit()
-            .frame(height: 130)
-            .cornerRadius(10)
-            // Additional styling or gestures if needed
-    }
-}
 
 
 /*#Preview {

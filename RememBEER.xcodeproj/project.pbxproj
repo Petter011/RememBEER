@@ -16,6 +16,7 @@
 		155EFD882AFB8767009D37F9 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 155EFD872AFB8767009D37F9 /* Launch Screen.storyboard */; };
 		156212F62B2854BD00B5E617 /* HintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156212F52B2854BD00B5E617 /* HintView.swift */; };
 		156212F82B285C4F00B5E617 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156212F72B285C4F00B5E617 /* WelcomeView.swift */; };
+		157280422B2E360E00CA7872 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 157280412B2E360E00CA7872 /* SwiftUIX */; };
 		1573C26B2B18BBA7003A18B4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1573C26A2B18BBA7003A18B4 /* GoogleService-Info.plist */; };
 		1573C26E2B18BE36003A18B4 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 1573C26D2B18BE36003A18B4 /* FirebaseStorage */; };
 		15901B312AEA341100249A93 /* EditBeerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15901B302AEA341100249A93 /* EditBeerView.swift */; };
@@ -103,6 +104,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				157280422B2E360E00CA7872 /* SwiftUIX in Frameworks */,
 				152C57D02A9DCCBC006FD102 /* CodeScanner in Frameworks */,
 				1573C26E2B18BE36003A18B4 /* FirebaseStorage in Frameworks */,
 			);
@@ -258,6 +260,7 @@
 			packageProductDependencies = (
 				152C57CF2A9DCCBC006FD102 /* CodeScanner */,
 				1573C26D2B18BE36003A18B4 /* FirebaseStorage */,
+				157280412B2E360E00CA7872 /* SwiftUIX */,
 			);
 			productName = "Ölprovning";
 			productReference = 15A8F6CF2A8D1BB700EB3ABE /* RememBEER.app */;
@@ -335,6 +338,7 @@
 			packageReferences = (
 				152C57CE2A9DCCBC006FD102 /* XCRemoteSwiftPackageReference "CodeScanner" */,
 				1573C26C2B18BC74003A18B4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				157280402B2E360E00CA7872 /* XCRemoteSwiftPackageReference "SwiftUIX" */,
 			);
 			productRefGroup = 15A8F6D02A8D1BB700EB3ABE /* Products */;
 			projectDirPath = "";
@@ -567,7 +571,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = RememBEER.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"Ölprovning/Preview Content\"";
 				DEVELOPMENT_TEAM = BXY9G7CMC3;
 				ENABLE_PREVIEWS = YES;
@@ -604,7 +608,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = RememBEER.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"Ölprovning/Preview Content\"";
 				DEVELOPMENT_TEAM = BXY9G7CMC3;
 				ENABLE_PREVIEWS = YES;
@@ -756,6 +760,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		157280402B2E360E00CA7872 /* XCRemoteSwiftPackageReference "SwiftUIX" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftUIX/SwiftUIX";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		1573C26C2B18BC74003A18B4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -771,6 +783,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 152C57CE2A9DCCBC006FD102 /* XCRemoteSwiftPackageReference "CodeScanner" */;
 			productName = CodeScanner;
+		};
+		157280412B2E360E00CA7872 /* SwiftUIX */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 157280402B2E360E00CA7872 /* XCRemoteSwiftPackageReference "SwiftUIX" */;
+			productName = SwiftUIX;
 		};
 		1573C26D2B18BE36003A18B4 /* FirebaseStorage */ = {
 			isa = XCSwiftPackageProductDependency;

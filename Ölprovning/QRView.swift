@@ -123,9 +123,9 @@ struct QRView: View {
                         )
                     }
                 }
-                .ignoresSafeArea(.keyboard)
 
             }
+            .ignoresSafeArea(.keyboard)
             .navigationTitle("Received Beer")
             .searchable(text: $searchText, prompt: "Search Beer")
             .navigationBarTitleDisplayMode(.inline)
@@ -135,7 +135,7 @@ struct QRView: View {
                 }
     }
 }
-#Preview {
-    QRView()
-}
+/*#Preview {
+    QRView( deletedBeerType: <#Binding<BeerType?>#>)
+}*/
 

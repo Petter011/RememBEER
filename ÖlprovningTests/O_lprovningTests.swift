@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import O_lprovning
+//@testable import O_lprovning
 
 final class O_lprovningTests: XCTestCase {
 

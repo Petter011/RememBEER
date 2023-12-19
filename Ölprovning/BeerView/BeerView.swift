@@ -1,28 +1,40 @@
 //
 //  AddBeer.swift
-//  Beer Tests
+//  RememBEER
 //
 //  Created by Petter Gustafsson on 2023-07-30.
 //
 import SwiftUI
 import CoreData
+import SwiftUIX
 
 struct BeerView: View {
     @EnvironmentObject var beerManager: BeerManager
     @EnvironmentObject var viewModel: BeerViewModel
     @Environment(\.managedObjectContext) var moc
-    
+    //var beer : Beer
     @State private var showingAddBeerView = false
     @State private var selectedBeerType: String? = nil
     @State private var isFirstBeerAdded = UserDefaults.standard.bool(forKey: "isFirstBeerAdded")
+    @State private var searchText = ""
+    
+    var addedBeers: [BeerType] {
+        let uppercaseSearchText = searchText.uppercased()
 
+        if searchText.isEmpty {
+            return beerTypes.filter { $0.isScanned == false }
+        } else {
+            return beerTypes.filter { $0.isScanned == false && $0.name?.uppercased().contains(uppercaseSearchText) == true }
+        }
+    }
+    
     @AppStorage("isBlurOn") private var isBlurOn = false
     @AppStorage("blurRadius") private var blurRadius = 1.0
     
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)]) var beerTypes: FetchedResults<BeerType>
-    
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(key: "name", ascending: true), NSSortDescriptor(key: "isScanned", ascending: false)]) var beerTypes: FetchedResults<BeerType>
+
     var body: some View {
-        NavigationStack {
+        NavigationStack{
             ZStack {
                 Image("BackgroundImageBeer")
                     .resizable()
@@ -32,11 +44,11 @@ struct BeerView: View {
                 VStack(spacing: 20) {
                     ScrollView {
                         LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 20) {
-                            ForEach(beerTypes, id: \.self) { beerType in
+                            ForEach(addedBeers, id: \.self) { addedBeerType in
                                 NavigationLink(
-                                    destination: BeerDetailView(viewModel: viewModel, beerType: beerType),
+                                    destination: BeerDetailView(viewModel: viewModel, beerType: addedBeerType),
                                     label: {
-                                        Text(beerType.name!)
+                                        Text(addedBeerType.name == nil ? "" : addedBeerType.name!)
                                             .padding()
                                             .frame(maxWidth: 150)
                                             .foregroundColor(.orange)
@@ -49,39 +61,16 @@ struct BeerView: View {
                             .cornerRadius(15)
                             .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.white, lineWidth: 1))
                         }
+                        //.padding(.top, 15)
                     }
-                    .safeAreaInset(edge: .top) {
-                        VStack() {
-                            HStack() {
-                                Spacer()
-                                Text("Beer")
-                                    .font(.largeTitle.weight(.bold))
-                                    .foregroundStyle(Color.orange)
-                                Spacer()
-                            }
-                        }
-                        .padding()
-                        .background(LinearGradient(colors: [.black.opacity(0.1), .orange.opacity(0.6)],
-                                                   startPoint: .topLeading, endPoint: .bottomTrailing)
-                            .overlay(.ultraThinMaterial)
-                        )
-                    }
-                    .navigationBarHidden(true)
                     
                     Button(action: {
                         showingAddBeerView.toggle()
-                    }) {
+                    }, label: {
                         Text("Add beer")
-                            .padding()
-                            .frame(maxWidth: 200, maxHeight: 60)
-                            .foregroundColor(.white)
-                            .font(.title3)
-                            .fontWeight(.bold)
-                    }
-                    .background(.linearGradient(colors: [.orange, .black], startPoint: .top, endPoint: .bottomTrailing))
-                    .cornerRadius(15)
-                    .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.white, lineWidth: 1))
-                    .padding(.bottom, 30)
+                            .modifier(buttonColor())
+                    })
+                    .modifier(buttonBackgroundColor())
                     .sheet(isPresented: $showingAddBeerView) {
                         AddBeerView(
                             onSave: { newBeer, beerType in
@@ -89,17 +78,20 @@ struct BeerView: View {
                                 
                                 let fetchRequest: NSFetchRequest<BeerType>
                                 fetchRequest = BeerType.fetchRequest()
-                                fetchRequest.predicate = NSPredicate(format: "name LIKE %@", beerType)
+                                fetchRequest.predicate = NSPredicate(format: "name LIKE %@ AND isScanned == false", beerType)
                                 fetchRequest.fetchLimit = 1
                                 let types = try? moc.fetch(fetchRequest)
-                                let t: BeerType
-                                if types != nil && !types!.isEmpty {
-                                    t = types![0]
+                                let addType: BeerType
+                                if let existingType = types?.first {
+                                    addType = existingType
+                                    addType.isScanned = false
+                                    
                                 } else {
-                                    t = BeerType(context: moc)
-                                    t.id = UUID()
-                                    t.name = beerType
-                                    t.beers = []
+                                    addType = BeerType(context: moc)
+                                    addType.id = UUID()
+                                    addType.name = beerType
+                                    addType.isScanned = false
+                                    addType.beers = []
                                 }
                                 
                                 let beer = Beer(context: moc)
@@ -108,13 +100,13 @@ struct BeerView: View {
                                 beer.name = newBeer.beerName
                                 beer.score = newBeer.beerPoints
                                 beer.note = newBeer.beerNote
-                                beer.beerType = t
+                                beer.beerType = addType
                                 try? moc.save()
                                 
                                 
                                 // Set isFirstBeerAdded to true
-                                isFirstBeerAdded = true
-                                UserDefaults.standard.set(isFirstBeerAdded, forKey: "isFirstBeerAdded")
+                                /*isFirstBeerAdded = true
+                                UserDefaults.standard.set(isFirstBeerAdded, forKey: "isFirstBeerAdded")*/
                                 
                                 isBlurOn = true
                             },
@@ -124,6 +116,22 @@ struct BeerView: View {
                     }
                 }
             }
+            .ignoresSafeArea(.keyboard)
+            .navigationTitle("My Beer")
+            //.background(VisualEffectBlurView(blurStyle: .systemThinMaterial))
+            //.toolbarBackground(.systemThinMaterial, for: .navigationBar)
+            .searchable(text: $searchText, prompt: "Search Beer")
+            .navigationBarTitleDisplayMode(.inline)
         }
+        .onAppear {
+                    navBar()
+                }
     }
 }
+
+#Preview {
+    BeerView()
+}
+
+
+

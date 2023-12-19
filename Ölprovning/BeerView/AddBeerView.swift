@@ -37,6 +37,7 @@ struct AddBeerView: View {
                     TextField("Which type of beer? e.g. IPA, APA", text: $beerType)
                         .textFieldStyle(.roundedBorder)
                         .keyboardType(.default)
+                        .padding(.top, 10)
                         .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardDidHideNotification)) { _ in
                             beerType = beerType.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
                         }
@@ -53,11 +54,11 @@ struct AddBeerView: View {
                     
                     VStack{
                         VStack(alignment: .center) {
-                            Text("Points (0-10)")
+                            Text("Rating (0-10)")
                                 .bold()
                                 .foregroundColor(Color.black)
                                 .underline()
-                            Picker("Points (0-10)", selection: $beerPoints) {
+                            Picker("Rating (0-10)", selection: $beerPoints) {
                                 ForEach(beerPointsOptions, id: \.self) {
                                     Text("\($0)")
                                 }
@@ -70,8 +71,6 @@ struct AddBeerView: View {
                     }
                 }
                 .padding(.horizontal)
-                
-                
                 
                 Button {
                     showingImagePicker.toggle()
@@ -99,7 +98,6 @@ struct AddBeerView: View {
                         .padding(.top,10)
                 }
                     
-                
                 Spacer()
                 
                 Button {
@@ -143,8 +141,3 @@ struct AddBeerView: View {
     }
 }
 
-
-                               
-                    
-                    
-  

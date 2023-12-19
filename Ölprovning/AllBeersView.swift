@@ -1,46 +1,42 @@
 //
-//  BeerDetailView.swift
+//  AllBeerView.swift
 //  RememBEER
 //
-//  Created by Petter Gustafsson on 2023-08-16.
+//  Created by Petter Gustafsson on 2023-12-13.
 //
 
 import SwiftUI
+import CoreData
 
-struct BeerDetailView: View {
+struct AllBeersView: View {
     @EnvironmentObject var beerManager: BeerManager
-    @ObservedObject var viewModel: BeerViewModel
-    var beerType: BeerType
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)]) var DetailBeers: FetchedResults<Beer>
-
-    
-    @State private var isShowingFullScreenImage = false
-    @State private var selectedBeer: Beer? // New state variable for selected beer
-    @State private var isShowingEditView = false
-    @State private var showAlert = false
-    @State private var isShowingGenerateQRView = false
-    @State private var isShowingScannedDetails = false
+    @EnvironmentObject var viewModel: BeerViewModel
+    @Environment(\.managedObjectContext) private var moc
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)]) var allBeers: FetchedResults<Beer>
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)]) var beerTypes: FetchedResults<BeerType>
+    @Environment(\.presentationMode) var presentationMode
     @State private var searchText = ""
-
+    @State private var selectedBeer: Beer? // New state variable for selected beer
+    @State private var isShowingFullScreenImage = false
+    @State private var isShowingEditView = false
+    @State private var isShowingGenerateQRView = false
+    @State private var showAlert = false
     @AppStorage("isBlurOn") private var isBlurOn = false
     @AppStorage("blurRadius") private var blurRadius = 1.0
-    @State private var isFirstBeerAdded = UserDefaults.standard.bool(forKey: "isFirstBeerAdded")
-    @Environment(\.managedObjectContext) var moc
-    @Environment(\.presentationMode) var presentationMode
     
-    var filteredBeer: [Beer] {
-        let filteredBeers = DetailBeers.filter { beer in
-            return beer.beerType == beerType &&
-                   (searchText.isEmpty ||
-                   (beer.name?.localizedCaseInsensitiveContains(searchText) == true) ||
-                   (String(beer.score).localizedCaseInsensitiveContains(searchText)))
+    var filteredBeers: [Beer] {
+        if searchText.isEmpty {
+            return Array(allBeers.sorted(by: { $0.score > $1.score }))
+        } else {
+            return allBeers.filter { beer in
+                let nameMatches = beer.name?.contains(searchText) == true
+                let scoreMatches = String(beer.score).localizedCaseInsensitiveContains(searchText)
+                return nameMatches || scoreMatches
+            }
+            .sorted(by: { $0.score > $1.score })
         }
-
-        return filteredBeers.sorted(by: { $0.score > $1.score })
     }
 
-    
-    
     var body: some View {
         NavigationStack{
             ZStack {
@@ -48,11 +44,11 @@ struct BeerDetailView: View {
                     .resizable()
                     .edgesIgnoringSafeArea(.top)
                     .blur(radius: isBlurOn ? CGFloat(blurRadius) : 0)
-                
+
                 VStack {
                     ScrollView {
                         LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 20) {
-                            ForEach(filteredBeer) { beer in
+                            ForEach(filteredBeers) { beer in
                                 BeerItemView(beer: beer)
                                     .gesture(
                                         TapGesture()
@@ -94,6 +90,11 @@ struct BeerDetailView: View {
                                             Label("Delete", systemImage: "trash")
                                         }
                                     }
+                                    .sheet(isPresented: $isShowingFullScreenImage) {
+                                        if let beer = selectedBeer {
+                                            DetailInfoView(beerType: beer.beerType!, beer: beer)
+                                        }
+                                    }
                                     .sheet(isPresented: $isShowingGenerateQRView) {
                                         if let beer = selectedBeer {
                                             GenerateQRView(beer: beer)
@@ -101,61 +102,49 @@ struct BeerDetailView: View {
                                     }
                                     .sheet(isPresented: $isShowingEditView) {
                                         if let beer = selectedBeer {
-                                            EditBeerView(isShowingEditView: $isShowingEditView, viewModel: viewModel, beer: beer, beerType: beerType)
-                                        }
-                                    }
-                                    .sheet(isPresented: $isShowingFullScreenImage) {
-                                        if let beer = selectedBeer {
-                                            DetailInfoView(beerType: beerType, beer: beer)
+                                            EditBeerView(isShowingEditView: $isShowingEditView, viewModel: viewModel, beer: beer, beerType: beer.beerType!)
                                         }
                                     }
                             }
                         }
                     }
-
-                    //Spacer()
+                    Spacer()
                 }
-                .alert(isPresented: $showAlert) {
-                    Alert(
-                        title: Text("Confirm Delete"),
-                        message: Text("Are you sure you want to delete this beer?"),
-                        primaryButton: .destructive(Text("Delete")) {
+            }
+            .alert(isPresented: $showAlert) {
+                Alert(
+                    title: Text("Confirm Delete"),
+                    message: Text("Are you sure you want to delete this beer?"),
+                    primaryButton: .destructive(Text("Delete")) {
+                        
+                        do {
+                            if let beer = selectedBeer {
+                                moc.delete(beer)
+                            }
                             
-                            do {
-                                if let beer = selectedBeer {
-                                    moc.delete(beer)
-                                }
-                                
-                                if let beers = beerType.beers as? Set<Beer>, beers.count == 1 {
+                            if let beerType = selectedBeer?.beerType, let beers = beerType.beers as? Set<Beer>, beers.count == 1 {
                                     moc.delete(beerType)
                                 }
                                 try moc.save()
-                                
-                            }catch {
-                                print("Error deleting beer: \(error)")
-                            }
                             
-                            let beers = beerType.beers as? Set<Beer>
-                            if beers == nil || beers!.isEmpty {
-                                presentationMode.wrappedValue.dismiss()
-                            }
-                            selectedBeer = nil
-                        },
-                        secondaryButton: .cancel()
-                    )
-                }
+                        }catch {
+                            print("Error deleting beer: \(error)")
+                        }
+                        
+                        selectedBeer = nil
+                    },
+                    secondaryButton: .cancel()
+                )
             }
             .ignoresSafeArea(.keyboard)
-            .navigationTitle(Text(beerType.name == nil ? "" : beerType.name!))
-            .searchable(text: $searchText, prompt: "Search Beer")
+            .navigationTitle("All Beer")
+            .searchable(text: $searchText, prompt: "Search by name or rating")
             .navigationBarTitleDisplayMode(.inline)
         }
         .onAppear {
-            viewModel.setSelectedBeer(nil)
-            
-        }
+                    navBar()
+                }
     }
-    
     // Helper method to encode beer details
     private func encodeBeerDetails() -> String {
         // Create a JSONEncoder and encode beer details
@@ -172,3 +161,10 @@ struct BeerDetailView: View {
     }
 }
 
+
+
+
+
+/*#Preview {
+    AllBeerView()
+}*/

@@ -45,17 +45,7 @@ struct buttonColor: ViewModifier{
     }
 }
 
-struct saveAndCancel: ViewModifier{
-    func body(content: Content) -> some View {
-        content
-            .background(Color.orange)
-            .cornerRadius(40)
-            .shadow(color: .orange, radius: 5, y: 3)
-            .overlay(RoundedRectangle(cornerRadius: 40).stroke(Color.black, lineWidth: 1))
-            .padding(.bottom, 30)
-            .padding(.trailing, 15)
-    }
-}
+
 
 
 struct buttonBackgroundColor: ViewModifier{
@@ -68,6 +58,18 @@ struct buttonBackgroundColor: ViewModifier{
     }
 }
 
+struct saveAndCancel: ViewModifier{
+    func body(content: Content) -> some View {
+        content
+            .background(Color.orange)
+            .cornerRadius(40)
+            .shadow(color: .orange, radius: 5, y: 3)
+            .overlay(RoundedRectangle(cornerRadius: 40).stroke(Color.black, lineWidth: 1))
+            .padding(.bottom, 30)
+            .padding(.trailing, 15)
+    }
+}
+
 struct BeerItemView: View {
     let beer: Beer
 
@@ -77,7 +79,6 @@ struct BeerItemView: View {
             .scaledToFit()
             .frame(height: 130)
             .cornerRadius(10)
-            // Additional styling or gestures if needed
     }
 }
 

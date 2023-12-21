@@ -58,7 +58,6 @@ struct DetailInfoView: View {
                     .padding(.trailing)
             }
             .frame(width: 250, height: 100)
-            .shadow(radius: 10)
             .border(Color.black, width: 1)
             .cornerRadius(15)
             .padding(.top, 20)
@@ -69,7 +68,6 @@ struct DetailInfoView: View {
                 Image(uiImage: image)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    //.edgesIgnoringSafeArea(.top)
                     .cornerRadius(15)
                     //.padding(.bottom, 20)
             }
@@ -115,9 +113,7 @@ struct DetailInfoView: View {
                         .padding(8)
                 })
             }
-            //Spacer()
         }
-        //.background(.linearGradient(colors: [.lightOrange, .lightOrange2], startPoint: .top, endPoint: .bottom))
     }
 }
 

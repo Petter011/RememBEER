@@ -61,9 +61,7 @@ struct BeerView: View {
                             .cornerRadius(15)
                             .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.white, lineWidth: 1))
                         }
-                        //.padding(.top, 15)
                     }
-                    
                     Button(action: {
                         showingAddBeerView.toggle()
                     }, label: {
@@ -103,11 +101,6 @@ struct BeerView: View {
                                 beer.beerType = addType
                                 try? moc.save()
                                 
-                                
-                                // Set isFirstBeerAdded to true
-                                /*isFirstBeerAdded = true
-                                UserDefaults.standard.set(isFirstBeerAdded, forKey: "isFirstBeerAdded")*/
-                                
                                 isBlurOn = true
                             },
                             selectedBeerType: $selectedBeerType,
@@ -118,8 +111,6 @@ struct BeerView: View {
             }
             .ignoresSafeArea(.keyboard)
             .navigationTitle("My Beer")
-            //.background(VisualEffectBlurView(blurStyle: .systemThinMaterial))
-            //.toolbarBackground(.systemThinMaterial, for: .navigationBar)
             .searchable(text: $searchText, prompt: "Search Beer")
             .navigationBarTitleDisplayMode(.inline)
         }

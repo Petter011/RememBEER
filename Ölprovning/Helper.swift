@@ -72,12 +72,12 @@ struct saveAndCancel: ViewModifier{
 
 struct BeerItemView: View {
     let beer: Beer
-
+    let isIpad: Bool
     var body: some View {
         Image(uiImage: beer.getBeerImage() ?? UIImage(systemName: "photo")!)
             .resizable()
             .scaledToFit()
-            .frame(height: 130)
+            .frame(height: isIpad ? 200 : 130)
             .cornerRadius(10)
     }
 }

@@ -6,13 +6,11 @@
 //
 import SwiftUI
 import CoreData
-import SwiftUIX
 
 struct BeerView: View {
     @EnvironmentObject var beerManager: BeerManager
     @EnvironmentObject var viewModel: BeerViewModel
     @Environment(\.managedObjectContext) var moc
-    //var beer : Beer
     @State private var showingAddBeerView = false
     @State private var selectedBeerType: String? = nil
     @State private var isFirstBeerAdded = UserDefaults.standard.bool(forKey: "isFirstBeerAdded")
@@ -34,12 +32,16 @@ struct BeerView: View {
     @FetchRequest(sortDescriptors: [NSSortDescriptor(key: "name", ascending: true), NSSortDescriptor(key: "isScanned", ascending: false)]) var beerTypes: FetchedResults<BeerType>
 
     var body: some View {
-        NavigationStack{
+        NavigationSplitView{
             ZStack {
-                Image("BackgroundImageBeer")
-                    .resizable()
-                    .edgesIgnoringSafeArea(.top)
-                    .blur(radius: isBlurOn ? CGFloat(blurRadius) : 0)
+                if UIDevice.current.userInterfaceIdiom == .pad {
+                    Color.orange.opacity(0.2)
+                }else{
+                    Image("BackgroundImageBeer")
+                        .resizable()
+                        .edgesIgnoringSafeArea(.top)
+                        .blur(radius: isBlurOn ? CGFloat(blurRadius) : 0)
+                }
                 
                 VStack(spacing: 20) {
                     ScrollView {
@@ -113,9 +115,20 @@ struct BeerView: View {
             .navigationTitle("My Beer")
             .searchable(text: $searchText, prompt: "Search Beer")
             .navigationBarTitleDisplayMode(.inline)
+            
+        }detail:{
+            if let selectedBeerType = addedBeers.first {
+                BeerDetailView(viewModel: viewModel, beerType: selectedBeerType)
+            }else {
+                Image("BackgroundImageBeer")
+                    .resizable()
+                    .edgesIgnoringSafeArea(.top)
+                    .blur(radius: isBlurOn ? CGFloat(blurRadius) : 0)
+            }
         }
         .onAppear {
                     navBar()
+        isBlurOn = true
                 }
     }
 }
@@ -125,4 +138,9 @@ struct BeerView: View {
 }
 
 
-
+/*
+ 
+ 
+ 
+ 
+ */

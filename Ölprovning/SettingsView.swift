@@ -35,6 +35,19 @@ struct SettingsView: View {
                         Text("Hints")
                     })
                 }
+               /* Button(action: {
+                    let desktopURL = FileManager.default.urls(for: .desktopDirectory, in: .userDomainMask).first
+                    let destinationURL = desktopURL?.appendingPathComponent("ExportedDatabase.sqlite")
+
+                    do {
+                        try FileManager.default.copyItem(at: storeURL, to: destinationURL)
+                        print("Database exported successfully.")
+                    } catch {
+                        print("Error exporting database: \(error)")
+                    }
+                }, label: {
+                    Text("Export")
+                })*/
             }
             .navigationTitle("Settings")
         }

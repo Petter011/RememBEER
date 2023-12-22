@@ -32,12 +32,16 @@ struct QRView: View {
     @AppStorage("blurRadius") private var blurRadius = 1.0
     
     var body: some View {
-        NavigationStack{
+        NavigationSplitView{
             ZStack{
-                Image("BackgroundImageBeer")
-                    .resizable()
-                    .edgesIgnoringSafeArea(.top)
-                    .blur(radius: isBlurOn ? CGFloat(blurRadius) : 0)
+                if UIDevice.current.userInterfaceIdiom == .pad {
+                    Color.orange.opacity(0.2)
+                }else{
+                    Image("BackgroundImageBeer")
+                        .resizable()
+                        .edgesIgnoringSafeArea(.top)
+                        .blur(radius: isBlurOn ? CGFloat(blurRadius) : 0)
+                }
                 
                 VStack(spacing: 20) {
                     ScrollView {
@@ -129,13 +133,22 @@ struct QRView: View {
             .navigationTitle("Received Beer")
             .searchable(text: $searchText, prompt: "Search Beer")
             .navigationBarTitleDisplayMode(.inline)
+        }detail:{
+            if let scannedBeerType = scannedBeers.first {
+                BeerDetailView(viewModel: viewModel, beerType: scannedBeerType)
+            }else {
+                Image("BackgroundImageBeer")
+                    .resizable()
+                    .edgesIgnoringSafeArea(.top)
+                    .blur(radius: isBlurOn ? CGFloat(blurRadius) : 0)
+            }
         }
         .onAppear {
                     navBar()
                 }
     }
 }
-/*#Preview {
-    QRView( deletedBeerType: <#Binding<BeerType?>#>)
-}*/
+#Preview {
+    QRView()
+}
 

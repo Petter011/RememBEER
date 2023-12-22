@@ -28,7 +28,6 @@ struct O_lprovningApp: App {
     @AppStorage("blurRadius") private var blurRadius = 10.0
     @AppStorage("isFirstBeerAdded") private var isFirstBeerAdded = false
     @AppStorage("isShownWelcome") private var isShownWelcome: Bool = true
-
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
@@ -49,4 +48,11 @@ struct O_lprovningApp: App {
     }
 }
 
+extension UINavigationController {
 
+  open override func viewWillLayoutSubviews() {
+    super.viewWillLayoutSubviews()
+    navigationBar.topItem?.backButtonDisplayMode = .minimal
+  }
+
+}

@@ -21,6 +21,7 @@ struct BeerDetailView: View {
     @State private var isShowingGenerateQRView = false
     @State private var isShowingScannedDetails = false
     @State private var searchText = ""
+    @State private var isIpad: Bool = false
 
     @AppStorage("isBlurOn") private var isBlurOn = false
     @AppStorage("blurRadius") private var blurRadius = 1.0
@@ -51,9 +52,9 @@ struct BeerDetailView: View {
                 
                 VStack {
                     ScrollView {
-                        LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 20) {
+                        LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: isIpad ? 6 : 3), spacing: 20) {
                             ForEach(filteredBeer) { beer in
-                                BeerItemView(beer: beer)
+                                BeerItemView(beer: beer, isIpad: isIpad)
                                     .gesture(
                                         TapGesture()
                                             .onEnded { _ in
@@ -112,8 +113,6 @@ struct BeerDetailView: View {
                             }
                         }
                     }
-
-                    //Spacer()
                 }
                 .alert(isPresented: $showAlert) {
                     Alert(
@@ -152,7 +151,7 @@ struct BeerDetailView: View {
         }
         .onAppear {
             viewModel.setSelectedBeer(nil)
-            
+            isIpad = UIDevice.current.userInterfaceIdiom == .pad
         }
     }
     

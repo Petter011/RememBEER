@@ -94,7 +94,7 @@
 		15F259D22B02A010009F5581 /* GenerateQRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateQRView.swift; sourceTree = "<group>"; };
 		15F259D62B04BF21009F5581 /* QRCodeScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeScannerView.swift; sourceTree = "<group>"; };
 		15F259D82B04BFDD009F5581 /* ScannedQRcodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannedQRcodeView.swift; sourceTree = "<group>"; };
-		15F259E02B04F60B009F5581 /* QRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRView.swift; sourceTree = "<group>"; };
+		15F259E02B04F60B009F5581 /* QRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = QRView.swift; path = ../QRView.swift; sourceTree = "<group>"; };
 		15F259E32B06354B009F5581 /* DetailInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoView.swift; sourceTree = "<group>"; };
 		15F259E52B064F62009F5581 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -194,7 +194,6 @@
 				15901B2B2AE9388200249A93 /* Manager_ViewModel */,
 				152C57C52A9D12F9006FD102 /* BeerView */,
 				15A8F7082A8D1C7300EB3ABE /* ContentView.swift */,
-				15F259E02B04F60B009F5581 /* QRView.swift */,
 				152C57C82A9D24CE006FD102 /* SettingsView.swift */,
 				156212F52B2854BD00B5E617 /* HintView.swift */,
 				156212F72B285C4F00B5E617 /* WelcomeView.swift */,
@@ -234,6 +233,7 @@
 		15F259E22B04FDAD009F5581 /* QRCode */ = {
 			isa = PBXGroup;
 			children = (
+				15F259E02B04F60B009F5581 /* QRView.swift */,
 				15F259D62B04BF21009F5581 /* QRCodeScannerView.swift */,
 				15F259D22B02A010009F5581 /* GenerateQRView.swift */,
 				15F259D82B04BFDD009F5581 /* ScannedQRcodeView.swift */,

@@ -86,7 +86,7 @@ struct AddBeerView: View {
                 .shadow(color: .orange , radius: 5, y: 3)
                 .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.white, lineWidth: 1))
                 .sheet(isPresented: $showingImagePicker) {
-                    ImagePicker(selectedImages: $selectedImages, sourceType: .camera)
+                    ImagePicker(selectedImages: $selectedImages, sourceType: .photoLibrary)
                 }
                 
                 if let selectedImage = selectedImages.last {

@@ -82,6 +82,28 @@ struct QRCodeScannerView: UIViewControllerRepresentable {
                 previewLayer.frame = uiViewController.view.layer.bounds
                 previewLayer.videoGravity = .resizeAspectFill
                 
+                // Set the video orientation based on the device orientation
+                if let connection = previewLayer.connection {
+                    let currentDevice: UIDevice = UIDevice.current
+                    let orientation: UIDeviceOrientation = currentDevice.orientation
+                    let previewLayerConnection: AVCaptureConnection = connection
+                    
+                    if previewLayerConnection.isVideoOrientationSupported {
+                        switch orientation {
+                        case .portrait:
+                            previewLayerConnection.videoOrientation = .portrait
+                        case .landscapeRight:
+                            previewLayerConnection.videoOrientation = .landscapeLeft
+                        case .landscapeLeft:
+                            previewLayerConnection.videoOrientation = .landscapeRight
+                        case .portraitUpsideDown:
+                            previewLayerConnection.videoOrientation = .portraitUpsideDown
+                        default:
+                            previewLayerConnection.videoOrientation = .portrait
+                        }
+                    }
+                }
+                
                 uiViewController.view.layer.addSublayer(previewLayer)
                 
                 // Start running on the background thread
@@ -91,6 +113,7 @@ struct QRCodeScannerView: UIViewControllerRepresentable {
             }
         }
     }
+
 }
 
 

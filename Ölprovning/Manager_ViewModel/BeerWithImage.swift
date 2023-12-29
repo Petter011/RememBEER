@@ -58,7 +58,6 @@ extension Beer: Encodable {
         try container.encode(note, forKey: .note)
         try container.encode(imageUrl, forKey: .imageUrl)
         
-        // Encode the relationship if it exists
         if let beerType = beerType {
             try container.encode(beerType, forKey: .beerType)
         }

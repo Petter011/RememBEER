@@ -18,6 +18,9 @@ struct QRView: View {
     @State private var selectedBeerType: String? = nil
     @State private var searchText = ""
     
+    @AppStorage("isBlurOn") private var isBlurOn = false
+    @AppStorage("blurRadius") private var blurRadius = 1.0
+    
     var scannedBeers: [BeerType] {
         let uppercaseSearchText = searchText.uppercased()
 
@@ -28,17 +31,10 @@ struct QRView: View {
         }
     }
     
-    @AppStorage("isBlurOn") private var isBlurOn = false
-    @AppStorage("blurRadius") private var blurRadius = 1.0
-    
     var body: some View {
-        NavigationStack{
+        NavigationSplitView{
             ZStack{
-                Image("BackgroundImageBeer")
-                    .resizable()
-                    .edgesIgnoringSafeArea(.top)
-                    .blur(radius: isBlurOn ? CGFloat(blurRadius) : 0)
-                
+                BackgroundImageSplitView()
                 VStack(spacing: 20) {
                     ScrollView {
                         LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 20) {
@@ -47,95 +43,99 @@ struct QRView: View {
                                     destination: BeerDetailView(viewModel: viewModel, beerType: scannedBeerType),
                                     label: {
                                         Text(scannedBeerType.name == nil ? "" : scannedBeerType.name!)
-                                            .padding()
-                                            .frame(maxWidth: 150)
-                                            .foregroundColor(.orange)
-                                            .font(.title2)
-                                            .fontWeight(.bold)
                                     }
                                 )
                             }
-                            .background(Color.black)
-                            .cornerRadius(15)
-                            .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.white, lineWidth: 1))
                         }
+                        .buttonStyle(CustomBeerTypeButtonStyle())
                     }
                     Button(action: {
                         showingScannedQRcodeView.toggle()
                     }, label: {
                         Text("Scan QR Code")
-                            .modifier(buttonColor())
                     })
-                    .modifier(buttonBackgroundColor())
+                    .buttonStyle(CustomAddButtonStyle())
                     .sheet(isPresented: $showingScannedQRcodeView) {
                         ScannedQRcodeView(
                             onSave: { newBeer, beerType in
-                                beerManager.addScannedBeer(newBeer, for: beerType)
-                                
-                                let fetchRequest: NSFetchRequest<BeerType> = BeerType.fetchRequest()
-                                fetchRequest.predicate = NSPredicate(format: "name LIKE %@ AND isScanned == true", beerType)
-                                fetchRequest.fetchLimit = 1
-                                
-                                do {
-                                    let existingTypes = try moc.fetch(fetchRequest)
-                                    
-                                    if let existingType = existingTypes.first {
-                                        // Use the existing scanned BeerType
-                                        existingType.isScanned = true
-                                        
-                                        let beer = Beer(context: moc)
-                                        beer.id = UUID()
-                                        beer.name = newBeer.beerName
-                                        beer.score = newBeer.beerPoints
-                                        beer.note = newBeer.beerNote
-                                        beer.image = newBeer.beerImageData!
-                                        beer.beerType = existingType
-                                        
-                                        try? moc.save()
-                                        
-                                        isBlurOn = true
-                                    } else {
-                                        // Create a new BeerType for the scanned beer
-                                        let newType = BeerType(context: moc)
-                                        newType.id = UUID()
-                                        newType.name = beerType
-                                        newType.isScanned = true
-                                        newType.beers = []
-                                        
-                                        let beer = Beer(context: moc)
-                                        beer.id = UUID()
-                                        beer.name = newBeer.beerName
-                                        beer.score = newBeer.beerPoints
-                                        beer.note = newBeer.beerNote
-                                        beer.image = newBeer.beerImageData!
-                                        beer.beerType = newType
-                                        
-                                        try? moc.save()
-                                        
-                                        isBlurOn = true
-                                    }
-                                } catch {
-                                    print("Error fetching BeerTypes: \(error.localizedDescription)")
-                                }
+                                handleScannedQRCode(newBeer: newBeer, beerType: beerType)
                             },
                             selectedBeerType: $selectedBeerType,
                             isPresented: $showingScannedQRcodeView
                         )
                     }
                 }
-
             }
             .ignoresSafeArea(.keyboard)
             .navigationTitle("Received Beer")
             .searchable(text: $searchText, prompt: "Search Beer")
             .navigationBarTitleDisplayMode(.inline)
+        }detail:{
+            if let scannedBeerType = scannedBeers.first {
+                BeerDetailView(viewModel: viewModel, beerType: scannedBeerType)
+            }else {
+                Image("BackgroundImageIpad")
+                    .resizable()
+                    .edgesIgnoringSafeArea(.top)
+                    .blur(radius: isBlurOn ? CGFloat(blurRadius) : 0)
+            }
         }
         .onAppear {
                     navBar()
                 }
     }
+    
+    func handleScannedQRCode(newBeer: BeerWithImage, beerType: String) {
+            beerManager.addScannedBeer(newBeer, for: beerType)
+
+            let fetchRequest: NSFetchRequest<BeerType> = BeerType.fetchRequest()
+            fetchRequest.predicate = NSPredicate(format: "name LIKE %@ AND isScanned == true", beerType)
+            fetchRequest.fetchLimit = 1
+
+            do {
+                let existingTypes = try moc.fetch(fetchRequest)
+
+                if let existingType = existingTypes.first {
+                    // Use the existing scanned BeerType
+                    existingType.isScanned = true
+
+                    let beer = Beer(context: moc)
+                    beer.id = UUID()
+                    beer.name = newBeer.beerName
+                    beer.score = newBeer.beerPoints
+                    beer.note = newBeer.beerNote
+                    beer.image = newBeer.beerImageData!
+                    beer.beerType = existingType
+
+                    try? moc.save()
+
+                    isBlurOn = true
+                } else {
+                    // Create a new BeerType for the scanned beer
+                    let newType = BeerType(context: moc)
+                    newType.id = UUID()
+                    newType.name = beerType
+                    newType.isScanned = true
+                    newType.beers = []
+
+                    let beer = Beer(context: moc)
+                    beer.id = UUID()
+                    beer.name = newBeer.beerName
+                    beer.score = newBeer.beerPoints
+                    beer.note = newBeer.beerNote
+                    beer.image = newBeer.beerImageData!
+                    beer.beerType = newType
+
+                    try? moc.save()
+
+                    isBlurOn = true
+                }
+            } catch {
+                print("Error fetching BeerTypes: \(error.localizedDescription)")
+            }
+        }
 }
-/*#Preview {
-    QRView( deletedBeerType: <#Binding<BeerType?>#>)
-}*/
+#Preview {
+    QRView()
+}
 

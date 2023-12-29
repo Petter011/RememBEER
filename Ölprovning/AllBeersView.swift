@@ -21,6 +21,7 @@ struct AllBeersView: View {
     @State private var isShowingEditView = false
     @State private var isShowingGenerateQRView = false
     @State private var showAlert = false
+    @State private var isIpad: Bool = false
     @AppStorage("isBlurOn") private var isBlurOn = false
     @AppStorage("blurRadius") private var blurRadius = 1.0
     
@@ -40,16 +41,12 @@ struct AllBeersView: View {
     var body: some View {
         NavigationStack{
             ZStack {
-                Image("BackgroundImageBeer")
-                    .resizable()
-                    .edgesIgnoringSafeArea(.top)
-                    .blur(radius: isBlurOn ? CGFloat(blurRadius) : 0)
-
+                BackgroundImageStandard()
                 VStack {
                     ScrollView {
-                        LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 20) {
+                        LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: isIpad ? 6 : 3), spacing: isIpad ? 50 : 20) {
                             ForEach(filteredBeers) { beer in
-                                BeerItemView(beer: beer)
+                                BeerImage(beer: beer, isIpad: isIpad)
                                     .gesture(
                                         TapGesture()
                                             .onEnded { _ in
@@ -143,6 +140,7 @@ struct AllBeersView: View {
         }
         .onAppear {
                     navBar()
+            isIpad = UIDevice.current.userInterfaceIdiom == .pad
                 }
     }
     // Helper method to encode beer details

@@ -41,16 +41,12 @@ struct AllBeersView: View {
     var body: some View {
         NavigationStack{
             ZStack {
-                Image("BackgroundImageBeer")
-                    .resizable()
-                    .edgesIgnoringSafeArea(.top)
-                    .blur(radius: isBlurOn ? CGFloat(blurRadius) : 0)
-
+                BackgroundImageStandard()
                 VStack {
                     ScrollView {
-                        LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: isIpad ? 6 : 3), spacing: 20) {
+                        LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: isIpad ? 6 : 3), spacing: isIpad ? 50 : 20) {
                             ForEach(filteredBeers) { beer in
-                                BeerItemView(beer: beer, isIpad: isIpad)
+                                BeerImage(beer: beer, isIpad: isIpad)
                                     .gesture(
                                         TapGesture()
                                             .onEnded { _ in
@@ -145,7 +141,6 @@ struct AllBeersView: View {
         .onAppear {
                     navBar()
             isIpad = UIDevice.current.userInterfaceIdiom == .pad
-
                 }
     }
     // Helper method to encode beer details

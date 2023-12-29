@@ -14,7 +14,7 @@ struct ScannedQRcodeView: View {
     @State private var scannedBeer: ScannedBeer?
     @State private var shouldScan: Bool = true
     @State private var isLoading = false
-
+    @State private var isIpad: Bool = false
     let onSave: (BeerWithImage, String) -> Void
     
     @Binding var selectedBeerType: String?
@@ -94,17 +94,9 @@ struct ScannedQRcodeView: View {
                         isPresented = false
                     }, label: {
                         Text("Cancel")
-                            .font(.headline)
-                            .fontWeight(.bold)
-                            .foregroundColor(.black)
-                            .frame(maxWidth: 150, maxHeight: 60)
                     })
-                    .background(Color.orange)
-                    .cornerRadius(40)
-                    .shadow(color: .orange, radius: 5, y: 3)
-                    .overlay(RoundedRectangle(cornerRadius: 40).stroke(Color.black, lineWidth: 1))
-                    .padding(.bottom, 30)
-                    .padding(.leading, 15)
+                    .buttonStyle(CustomButtonStyleSaveCancel())
+                    .padding(.leading, isIpad ? 35 : 15)
                     
                     Spacer()
                     
@@ -118,17 +110,9 @@ struct ScannedQRcodeView: View {
                         deleteScannedBeer(urlString: imageUrlString)
                     }, label: {
                         Text("Save")
-                            .font(.headline)
-                            .fontWeight(.bold)
-                            .foregroundColor(.black)
-                            .frame(maxWidth: 150, maxHeight: 60)
                     })
-                    .background(Color.orange)
-                    .cornerRadius(40)
-                    .shadow(color: .orange, radius: 5, y: 3)
-                    .overlay(RoundedRectangle(cornerRadius: 40).stroke(Color.black, lineWidth: 1))
-                    .padding(.bottom, 30)
-                    .padding(.trailing, 15)
+                    .buttonStyle(CustomButtonStyleSaveCancel())
+                    .padding(.trailing, isIpad ? 35 : 15)
                 }
                 
             } else {
@@ -137,12 +121,14 @@ struct ScannedQRcodeView: View {
                     // Handle the scanned code
                     decodeScannedCode(code)
                     
-                    
                     // Stop scanning
                     self.shouldScan = false
                 }, shouldScan: $shouldScan)
                 .edgesIgnoringSafeArea(.all)
             }
+        }
+        .onAppear{
+            isIpad = UIDevice.current.userInterfaceIdiom == .pad
         }
         .onDisappear{
             guard let imageUrlString = scannedBeer?.imageUrl else {

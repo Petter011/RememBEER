@@ -57,7 +57,7 @@ struct DetailInfoView: View {
                     .padding(.leading)
                     .padding(.trailing)
             }
-            .frame(width: 250, height: 100)
+            .frame(width: 300, height: 120)
             .border(Color.black, width: 1)
             .cornerRadius(15)
             .padding(.top, 20)
@@ -69,50 +69,53 @@ struct DetailInfoView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .cornerRadius(15)
-                    //.padding(.bottom, 20)
             }
             
             if beerType.isScanned == true {
                 Button(action: {
-                    // Check for existing BeerType or create a new one
-                    if let existingBeerType = beerTypes.first(where: { $0.name == beerType.name && $0.isScanned == false }) {
-                        // Associate the beer with the existing beerType
-                        beer.beerType = existingBeerType
-                    } else {
-                        // Create a new BeerType only if a similar one doesn't exist
-                        let newBeerType = BeerType(context: moc)
-                        newBeerType.id = UUID()
-                        newBeerType.name = beerType.name
-                        newBeerType.isScanned = false
-                        
-                        beer.beerType = newBeerType
-                    }
-                    do {
-                        try moc.save()
-                        
-                        presentationMode.wrappedValue.dismiss()
-                        // Check if the beerType should be deleted
-                        if let beers = beerType.beers as? Set<Beer>, beers.isEmpty {
-                            moc.delete(beerType)
-                        }
-                        
-                        try moc.save()
-                        presentationMode.wrappedValue.dismiss()
-                    } catch {
-                        print("Error saving to Core Data: \(error.localizedDescription)")
-                        // Handle the error as needed
-                    }
-                    
-                    let beers = beerType.beers as? Set<Beer>
-                    if beers == nil || beers!.isEmpty {
-                        presentationMode.wrappedValue.dismiss()
-                    }
+                    saveMovedBeer()
                 }, label: {
                     Text("Save to My Beer")
                         .foregroundStyle(.orange)
                         .padding(8)
                 })
             }
+        }
+    }
+    
+    private func saveMovedBeer() {
+        // Check for existing BeerType or create a new one
+        if let existingBeerType = beerTypes.first(where: { $0.name == beerType.name && $0.isScanned == false }) {
+            // Associate the beer with the existing beerType
+            beer.beerType = existingBeerType
+        } else {
+            // Create a new BeerType only if a similar one doesn't exist
+            let newBeerType = BeerType(context: moc)
+            newBeerType.id = UUID()
+            newBeerType.name = beerType.name
+            newBeerType.isScanned = false
+            
+            beer.beerType = newBeerType
+        }
+        do {
+            try moc.save()
+            
+            presentationMode.wrappedValue.dismiss()
+            // Check if the beerType should be deleted
+            if let beers = beerType.beers as? Set<Beer>, beers.isEmpty {
+                moc.delete(beerType)
+            }
+            
+            try moc.save()
+            presentationMode.wrappedValue.dismiss()
+        } catch {
+            print("Error saving to Core Data: \(error.localizedDescription)")
+            // Handle the error as needed
+        }
+        
+        let beers = beerType.beers as? Set<Beer>
+        if beers == nil || beers!.isEmpty {
+            presentationMode.wrappedValue.dismiss()
         }
     }
 }

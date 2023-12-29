@@ -31,9 +31,7 @@ struct GenerateQRView: View {
                             .scaledToFit()
                             .cornerRadius(15)
                             .frame(width: 100, height: 100)
-                        
                     )
-                
             } else {
                 if isLoading {
                     // Show activity indicator while loading

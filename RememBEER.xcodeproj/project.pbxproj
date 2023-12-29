@@ -16,7 +16,6 @@
 		155EFD882AFB8767009D37F9 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 155EFD872AFB8767009D37F9 /* Launch Screen.storyboard */; };
 		156212F62B2854BD00B5E617 /* HintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156212F52B2854BD00B5E617 /* HintView.swift */; };
 		156212F82B285C4F00B5E617 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156212F72B285C4F00B5E617 /* WelcomeView.swift */; };
-		157280422B2E360E00CA7872 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 157280412B2E360E00CA7872 /* SwiftUIX */; };
 		1573C26B2B18BBA7003A18B4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1573C26A2B18BBA7003A18B4 /* GoogleService-Info.plist */; };
 		1573C26E2B18BE36003A18B4 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 1573C26D2B18BE36003A18B4 /* FirebaseStorage */; };
 		15901B312AEA341100249A93 /* EditBeerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15901B302AEA341100249A93 /* EditBeerView.swift */; };
@@ -104,7 +103,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				157280422B2E360E00CA7872 /* SwiftUIX in Frameworks */,
 				152C57D02A9DCCBC006FD102 /* CodeScanner in Frameworks */,
 				1573C26E2B18BE36003A18B4 /* FirebaseStorage in Frameworks */,
 			);
@@ -260,7 +258,6 @@
 			packageProductDependencies = (
 				152C57CF2A9DCCBC006FD102 /* CodeScanner */,
 				1573C26D2B18BE36003A18B4 /* FirebaseStorage */,
-				157280412B2E360E00CA7872 /* SwiftUIX */,
 			);
 			productName = "Ölprovning";
 			productReference = 15A8F6CF2A8D1BB700EB3ABE /* RememBEER.app */;
@@ -571,7 +568,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = RememBEER.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Ölprovning/Preview Content\"";
 				DEVELOPMENT_TEAM = BXY9G7CMC3;
 				ENABLE_PREVIEWS = YES;
@@ -584,8 +581,8 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -595,7 +592,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -609,7 +606,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = RememBEER.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Ölprovning/Preview Content\"";
 				DEVELOPMENT_TEAM = BXY9G7CMC3;
 				ENABLE_PREVIEWS = YES;
@@ -622,8 +619,8 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -633,7 +630,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -785,11 +782,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 152C57CE2A9DCCBC006FD102 /* XCRemoteSwiftPackageReference "CodeScanner" */;
 			productName = CodeScanner;
-		};
-		157280412B2E360E00CA7872 /* SwiftUIX */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 157280402B2E360E00CA7872 /* XCRemoteSwiftPackageReference "SwiftUIX" */;
-			productName = SwiftUIX;
 		};
 		1573C26D2B18BE36003A18B4 /* FirebaseStorage */ = {
 			isa = XCSwiftPackageProductDependency;

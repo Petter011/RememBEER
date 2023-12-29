@@ -9,10 +9,10 @@ import SwiftUI
 
 struct BeerDetailView: View {
     @EnvironmentObject var beerManager: BeerManager
+    @Environment(\.managedObjectContext) var moc
+    @Environment(\.presentationMode) var presentationMode
     @ObservedObject var viewModel: BeerViewModel
-    var beerType: BeerType
     @FetchRequest(sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)]) var DetailBeers: FetchedResults<Beer>
-
     
     @State private var isShowingFullScreenImage = false
     @State private var selectedBeer: Beer? // New state variable for selected beer
@@ -22,39 +22,32 @@ struct BeerDetailView: View {
     @State private var isShowingScannedDetails = false
     @State private var searchText = ""
     @State private var isIpad: Bool = false
-
+    @State private var isFirstBeerAdded = UserDefaults.standard.bool(forKey: "isFirstBeerAdded")
+    
     @AppStorage("isBlurOn") private var isBlurOn = false
     @AppStorage("blurRadius") private var blurRadius = 1.0
-    @State private var isFirstBeerAdded = UserDefaults.standard.bool(forKey: "isFirstBeerAdded")
-    @Environment(\.managedObjectContext) var moc
-    @Environment(\.presentationMode) var presentationMode
+    
+    var beerType: BeerType
     
     var filteredBeer: [Beer] {
         let filteredBeers = DetailBeers.filter { beer in
             return beer.beerType == beerType &&
-                   (searchText.isEmpty ||
-                   (beer.name?.localizedCaseInsensitiveContains(searchText) == true) ||
-                   (String(beer.score).localizedCaseInsensitiveContains(searchText)))
+            (searchText.isEmpty ||
+             (beer.name?.localizedCaseInsensitiveContains(searchText) == true) ||
+             (String(beer.score).localizedCaseInsensitiveContains(searchText)))
         }
-
         return filteredBeers.sorted(by: { $0.score > $1.score })
     }
-
-    
     
     var body: some View {
         NavigationStack{
             ZStack {
-                Image("BackgroundImageBeer")
-                    .resizable()
-                    .edgesIgnoringSafeArea(.top)
-                    .blur(radius: isBlurOn ? CGFloat(blurRadius) : 0)
-                
+                BackgroundImageStandard()
                 VStack {
                     ScrollView {
-                        LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: isIpad ? 6 : 3), spacing: 20) {
+                        LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: isIpad ? 6 : 3), spacing: isIpad ? 50 : 20) {
                             ForEach(filteredBeer) { beer in
-                                BeerItemView(beer: beer, isIpad: isIpad)
+                                BeerImage(beer: beer, isIpad: isIpad)
                                     .gesture(
                                         TapGesture()
                                             .onEnded { _ in

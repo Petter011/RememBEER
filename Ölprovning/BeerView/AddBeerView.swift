@@ -7,12 +7,6 @@ import SwiftUI
 import PhotosUI
 import Foundation
 
-extension View {
-    func endEditing() {
-        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-    }
-}
-
 struct AddBeerView: View {
     @State private var beerNote: String = ""
     @State private var beerType: String = ""
@@ -23,7 +17,7 @@ struct AddBeerView: View {
     @State private var selectedImages: [UIImage] = []
     @State private var showingImagePicker = false
     @State private var showError = false
-
+    @State private var isIpad: Bool = false
     
     let onSave: (BeerWithImage, String) -> Void
     
@@ -86,7 +80,7 @@ struct AddBeerView: View {
                 .shadow(color: .orange , radius: 5, y: 3)
                 .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.white, lineWidth: 1))
                 .sheet(isPresented: $showingImagePicker) {
-                    ImagePicker(selectedImages: $selectedImages, sourceType: .photoLibrary)
+                    ImagePicker(selectedImages: $selectedImages, sourceType: .camera)
                 }
                 
                 if let selectedImage = selectedImages.last {
@@ -124,6 +118,7 @@ struct AddBeerView: View {
                 .cornerRadius(40)
                 .shadow(color: .orange, radius: 5, y: 3)
                 .overlay(RoundedRectangle(cornerRadius: 40).stroke(Color.black, lineWidth: 1))
+                .padding(.bottom, isIpad ? 30 : 0)
             }
             .ignoresSafeArea(.keyboard)
             .navigationBarTitle("Add new beer", displayMode: .inline)
@@ -137,6 +132,9 @@ struct AddBeerView: View {
                     dismissButton: .default(Text("OK"))
                 )
             }
+        }
+        .onAppear{
+            isIpad = UIDevice.current.userInterfaceIdiom == .pad
         }
     }
 }

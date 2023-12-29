@@ -37,9 +37,8 @@ struct WelcomeView: View {
                         isShownWelcome = false
                     }) {
                         Text("Cheers")
-                            .modifier(buttonColor())
                     }
-                    .modifier(buttonBackgroundColor())
+                    .buttonStyle(CustomAddButtonStyle())
                     .padding(.bottom, 50)
                     
                 }

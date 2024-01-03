@@ -113,7 +113,6 @@ struct QRCodeScannerView: UIViewControllerRepresentable {
             }
         }
     }
-
 }
 
 

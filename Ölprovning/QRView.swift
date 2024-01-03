@@ -37,7 +37,7 @@ struct QRView: View {
                 BackgroundImageSplitView()
                 VStack(spacing: 20) {
                     ScrollView {
-                        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 20) {
+                        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 30) {
                             ForEach(scannedBeers, id: \.self) { scannedBeerType in
                                 NavigationLink(
                                     destination: BeerDetailView(viewModel: viewModel, beerType: scannedBeerType),

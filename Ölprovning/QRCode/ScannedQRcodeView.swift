@@ -62,8 +62,6 @@ struct ScannedQRcodeView: View {
                     .cornerRadius(15)
                     .padding(.top, 30)
                     
-                    
-                    
                     if let image = scannedBeer.image {
                         Image(uiImage: image)
                             .resizable()
